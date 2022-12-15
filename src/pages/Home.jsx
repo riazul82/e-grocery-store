@@ -1,24 +1,38 @@
 import React from 'react';
 import CategoryLinks from '../components/CategoryLinks';
 import { GoSearch } from 'react-icons/go';
-// import { AiOutlineSend } from 'react-icons/ai';
+import { FiPhoneCall } from 'react-icons/fi';
+import bannarImg from '../images/bannar/img6.jpg';
 
 const Home = () => {
     return (
         <div className="home">
             <div className="homeHeader">
-                <div className="homeTitle">
-                    <p className="homeText">Explore the best grocery shop online</p>
+                <div className="contactInfo">
+                    <FiPhoneCall className="contactIcon"/>
+                    <p className="contactTitle">+88 0123456789 | +88 01298765431 | 24/7</p>
                 </div>
                 <div className="searchBox">
                     <input type="text" className="search" placeholder="Search..." />
                     <GoSearch className="searchIcon" />
-                    {/* <AiOutlineSend className="searchIcon" /> */}
                 </div>
             </div>
 
+            <div className="homeBanner">
+                <div className="homeBannerImage">
+                    <img src={bannarImg} alt="bannar" />
+                </div>
+                <div className="homeBannerTitle">
+                    {/* <h1 className="homeBannerText">Best Dairy Products<br/> Online</h1> */}
+                    <h1 className="homeBannerText animate__animated animate__bounceInLeft">Explore the best</h1>
+                    <h1 className="homeBannerText animate__animated animate__bounceInRight">grocery shop online</h1>
+                    <button className="homeBannerButton animate__animated animate__bounceInLeft">Shop now</button>
+                </div>
+                
+            </div>
+
             <div className="homeCategories">
-                <p><strong>Categories: </strong></p>
+                <p className="homeCategiriesTitle"><strong>Categories </strong></p>
                 <div className="categoryContent">
                     <CategoryLinks path="/products" classBox="categoryAllBox" title="All Products" quantity="200" />
                     <CategoryLinks path="/products" classBox="vegetableBox" title="Vegetables" quantity="60" />

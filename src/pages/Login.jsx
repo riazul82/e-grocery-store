@@ -42,11 +42,11 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                     <input type="email" name="email" value={user.email} onChange={handleChange} placeholder="Enter your email" />
                     <input type="password" name="password" value={user.password} onChange={handleChange} placeholder="Enter your password" />
-                    <span className="forgotPassLink"><Link to="/forgot-password">Forgot password?</Link></span>
+                    <Link to="/forgot-password" className="forgotPassLink link">Forgot password?</Link>
                     <button type="submit" className="loginBtn">Login</button>
                 </form>
                 <p className="signupLinkText">
-                    Don't have an account? <Link to="/signup" className="signupLink">Signup now</Link>
+                    Don't have an account? <Link to="/signup" className="signupLink link">Signup now</Link>
                 </p>
             </div>
         </div>
