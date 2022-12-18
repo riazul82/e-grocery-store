@@ -1,0 +1,16 @@
+.subProducts {
+    margin-top: 3rem;
+
+    .subProductsHeader {
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 1.4rem;
+    }
+
+    .subProductsWrap {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-row-gap: 2rem;
+        grid-column-gap: 1.2rem;
+    }
+}

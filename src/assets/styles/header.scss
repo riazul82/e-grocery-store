@@ -1,0 +1,39 @@
+.header {
+    padding: 1.2rem 0;
+    width: 100%;
+    border-bottom: 2px dashed #333;
+
+    .navbar {
+        margin: 0 auto;
+        display: flex;
+        max-width: 1280px;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .brandName {
+        font-size: 1.6rem;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .navLink {
+        padding: 0 1.4rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .navIconLinks {
+        display: flex;
+        align-items: center;
+
+        .iconLink {
+            margin-left: 1.4rem;
+
+            .navIcon {
+                font-size: 1.4rem;
+            }
+        }
+    }
+}

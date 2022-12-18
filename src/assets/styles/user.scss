@@ -1,0 +1,252 @@
+.userDetails {
+    margin: 2rem auto;
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    
+    .sidebar {
+        flex: 1;
+        height: auto;
+        width: 100%;
+
+        .sidebarItem {
+            padding: 0.6rem 0 0.6rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid #222;
+            border-radius: 0.2rem;
+            cursor: pointer;
+            
+            .sidebarIcon {
+                color: #fff;
+                font-size: 1.2rem;
+            }
+
+            p {
+                color: #fff;
+                font-size: 1.1rem;
+                padding-left: 0.6rem;
+            }
+        }
+
+        .sidebarItem:last-child {
+            border: none;
+        }
+    }
+
+    .detailsInfo {
+        flex: 4;
+        margin-left: 2rem;
+        
+        .myProfile > h2 {
+            padding-bottom: 0.8rem;
+            color: #fff;
+            font-size: 1.6rem;
+            border-bottom: 2px dashed #333;
+        }
+            
+        .profileContent {
+            margin-top: 1.2rem;
+            display: flex;
+            align-items: flex-start;
+
+            .profileHeader {
+                flex: 1;
+
+                .profileImage {
+                    margin-bottom: 1.4rem;
+                    height: 120px;
+                    width: 140px;
+                    border-radius: 0.2rem;
+                    overflow: hidden;
+                    
+    
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .uploadProfileImageInput {
+                    display: inline-block;
+
+                    label {
+                        color: #fff;
+                        font-weight: 500;
+                        background: #333;
+                        text-align: left;
+                        display: inline-block;
+                        padding: 0.4rem 0.8rem 0.5rem;
+                        cursor: pointer;
+                        overflow: hidden;
+                        border-radius: 0.1rem;
+                        box-shadow: 0.1rem 0.1rem 0.3rem #111;
+                    }
+
+                    input[type="file"] {
+                        visibility: hidden;
+                    }
+                }
+            }
+
+            .profileDetails, .profileUpdate {
+                flex: 4;
+                margin-left: 2rem;
+
+                .profileDetailsInfo {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    grid-gap: 1rem;
+    
+                    p {
+                        display: flex;
+                        width: 380px;
+                        align-items: flex-start;
+                        color: #fff;
+                        font-size: 1.2rem;
+                        padding-bottom: 0.4rem;
+    
+                        strong {
+                            width: 25%;
+                            color: seagreen;
+                        }
+
+                        span {
+                            width: 75%;
+                            color: #fff;
+                        }
+                    }
+                }
+
+                .profileUpdateInfo {
+                    width: 100%;
+                    max-width: 380px;
+
+                    .basicInput {
+                        .basicInputField {
+                            width: 100%;
+                            height: auto;
+
+                            input {
+                                padding-left: 1rem;
+                                margin-bottom: 1rem;
+                                color: #fff;
+                                font-size: 1.1rem;
+                                width: 100%;
+                                height: 46px;
+                                border: none;
+                                outline: none;
+                                background: #222;
+                                box-shadow: 0.1rem 0.1rem 0.3rem #111;
+                            }
+                        }
+                    }
+
+                    .genderInput {
+                        height: 2rem;
+                        margin-top: 0.8rem;
+                        display: flex;
+                        align-items: center;
+
+                        p {
+                            margin-right: 1rem;
+                            color: seagreen;
+                            font-size: 1.2rem;
+                            font-weight: 600;
+                        }
+
+                        .genderInputField {
+                            margin-top: 0.4rem;
+                            display: flex;
+                            align-items: center;
+
+                            label {
+                                margin: 0 1.6rem 0.4rem 0;
+                                font-size: 1.2rem;
+                                cursor: pointer;
+
+                                input[type="radio"] {
+                                    transform: scale(1.2);
+                                    margin-right: 0.4rem;
+                                }
+                            }
+                        }
+                    }
+
+                    .addressInput {
+                        margin-top: 1.4rem;
+
+                        p {
+                            color: seagreen;
+                            font-size: 1.2rem;
+                            font-weight: 600;
+                        }
+
+                        .useCurrentAddress {
+                            margin: 1rem 0;
+                            display: flex;
+                            width: 100%;
+                            height: 2rem;
+                            align-items: center;
+
+                            label {
+                                font-size: 1.1rem;
+                                cursor: pointer;
+                                margin-bottom: 0.2rem;
+                            }
+
+                            input[type="checkbox"] {
+                                transform: scale(1.1);
+                                margin-right: 0.4rem;
+                            }
+                        }
+
+                        .addressInputField {
+                            margin-top: 1rem;
+                            width: 100%;
+                            height: auto;
+
+                            input {
+                                padding-left: 1rem;
+                                margin-bottom: 1rem;
+                                color: #fff;
+                                font-size: 1.1rem;
+                                width: 100%;
+                                height: 46px;
+                                border: none;
+                                outline: none;
+                                background: #222;
+                                box-shadow: 0.1rem 0.1rem 0.3rem #111;
+                            }
+                        }
+                    }
+                }
+
+                button {
+                    margin-top: 1.8rem;
+                    padding: 0.1rem 0.4rem 0.3rem;
+                    color: crimson;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    border: none;
+                    outline: none;
+                    background: transparent;
+                    border: 1px solid crimson;
+                    border-radius: 0.2rem;
+                    cursor: pointer;
+                }
+
+                .updateBtn {
+                    margin-top: 1.4rem;
+                    padding: 0.3rem 0.8rem 0.5rem;
+                    background: seagreen;
+                    border: none;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

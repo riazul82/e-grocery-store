@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../context/LoginContextProvider';
-import { AiFillWarning } from 'react-icons/ai';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebase';
+import { doc, setDoc } from "firebase/firestore";
+import { auth, fs } from '../firebase';
+import { AiFillWarning } from 'react-icons/ai'; // icon
 
 const Signup = () => {
     const [user, setUser] = useState({email: '', password: '', confirmPassword: ''});
-    const [error, setError] = useState({flag: false, message: ''});
+    const [error, setError] = useState({flag: false, code: null, message: ''});
 
     const navigate = useNavigate();
     const { dispatch } = useContext(LoginContext);
@@ -16,11 +17,19 @@ const Signup = () => {
         setUser({...user, [e.target.name]: e.target.value});
     }
 
+    const addUserToFireStore = async (colName, docName, data) => {
+        try {
+            await setDoc(doc(fs, colName, docName), data);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (user.password !== user.confirmPassword) {
-            return setError({flag: true, message: `Password don't match!`});
+            return setError({flag: true, code: 400, message: `Password don't match!`});
         }
 
         createUserWithEmailAndPassword(auth, user.email, user.password)
@@ -28,14 +37,16 @@ const Signup = () => {
             const user = userCredential.user;
             console.log(user);
             dispatch({type: 'LOGIN', payload: user});
+            addUserToFireStore('users', userCredential.user.uid, {email: user.email, role: 'user'});
+            setUser({email: '', password: '', confirmPassword: ''});
+            setError({flag: false, code: null, message: ''});
             navigate('/');
         })
         .catch((error) => {
-            // const errorCode = error.code;
+            const errorCode = error.code;
             const errorMessage = error.message;
-            setError({flag: true, message: errorMessage});
+            setError({flag: true, code: errorCode, message: errorMessage});
         });
-
     }
 
     return (
@@ -57,7 +68,7 @@ const Signup = () => {
                     <button type="submit" className="signupBtn">Signup</button>
                 </form>
                 <p className="loginLinkText">
-                    Already have an account? <Link to="/login" className="loginLink link">Login now</Link>
+                    Already have an account? <Link to="/user/login" className="loginLink link">Login now</Link>
                 </p>
             </div>
         </div>

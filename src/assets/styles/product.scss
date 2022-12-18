@@ -1,0 +1,75 @@
+.product {
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    height: 330px;
+    border-radius: 0.2rem;
+    background-image: repeating-radial-gradient(circle at center center, transparent 0px, transparent 13px,rgba(255,255,255,0.05) 13px, rgba(255,255,255,0.05) 26px,transparent 26px, transparent 27px,rgba(255,255,255,0.05) 27px, rgba(255,255,255,0.05) 32px,transparent 32px, transparent 34px,rgba(255,255,255,0.05) 34px, rgba(255,255,255,0.05) 36px),repeating-radial-gradient(circle at center center, rgb(0,0,0) 0px, rgb(0,0,0) 1px,rgb(0,0,0) 1px, rgb(0,0,0) 13px,rgb(0,0,0) 13px, rgb(0,0,0) 24px,rgb(0,0,0) 24px, rgb(0,0,0) 37px,rgb(0,0,0) 37px, rgb(0,0,0) 44px,rgb(0,0,0) 44px, rgb(0,0,0) 48px); 
+    background-size: 88px 88px;
+    background-attachment: fixed;
+    overflow: hidden;
+
+    .productCardTop {
+        height: 55%;
+        width: 100%;
+
+        .productCardImage {
+            height: 100%;
+            width: 100%;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 0.2rem;
+            }
+        }
+    }
+
+    .productCardBottom {
+        height: 45%;
+        width: 100%;
+        position: relative;
+
+        .productInfo {
+            padding: 0.6rem;
+
+            .productName {
+                margin-bottom: 0.6rem;
+                color: #eee;
+                font-size: 1.3rem;
+                font-weight: 600;
+            }
+
+            .productQuantity {
+                margin-bottom: 0.6rem;
+                color: #ddd;
+                font-size: 1rem;
+                font-weight: 400;
+            }
+
+            .productPrice {
+                color: #39db3c;
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+        }
+
+        .addToCartBtn {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 0.4rem;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 500;
+            border: none;
+            outline: none;
+            width: 100%;
+            background: #369837;
+            border-radius: 0.1rem;
+            cursor: pointer;
+        }
+    }
+}

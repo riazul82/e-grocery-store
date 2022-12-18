@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { MdOutlineDashboardCustomize } from 'react-icons/md';
 import { BiUser } from 'react-icons/bi';
+import { LoginContext } from '../context/LoginContextProvider';
 
 const Navbar = () => {
+    const { currentAdmin } = useContext(LoginContext);
+
     return (
         <div className="header">
             <nav className="navbar">
@@ -19,8 +23,9 @@ const Navbar = () => {
                 </div>
                 
                 <div className="navIconLinks">
-                    <Link className="link iconLink"><AiOutlineShoppingCart className="navIcon"/></Link>
-                    <Link to="/profile" className="link iconLink"><BiUser className="navIcon"/></Link>
+                    { currentAdmin && <Link to="/admin/dashboard" className="link iconLink"><MdOutlineDashboardCustomize className="navIcon"/></Link>}
+                    <Link to="/cart" className="link iconLink"><AiOutlineShoppingCart className="navIcon"/></Link>
+                    <Link to="/user/profile" className="link iconLink"><BiUser className="navIcon"/></Link>
                 </div>
             </nav>
         </div>

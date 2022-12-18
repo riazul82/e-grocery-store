@@ -1,0 +1,58 @@
+.formPreviewBtn {
+    padding: 0.4rem 0.8rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: repeating-linear-gradient(135deg, hsla(55,0%,44%,0.09) 0px, hsla(55,0%,44%,0.09) 1px,transparent 1px, transparent 11px),repeating-linear-gradient(45deg, hsla(55,0%,44%,0.09) 0px, hsla(55,0%,44%,0.09) 1px,transparent 1px, transparent 11px),linear-gradient(90deg, hsl(22,0%,8%),hsl(22,0%,8%));
+    box-shadow: 0.1rem 0.1rem 0.4rem #111;
+
+    .previewIcon {
+        color: #fff;
+        font-size: 1.2rem;
+    }
+
+    p {
+        margin-left: 0.4rem;
+    }
+}
+
+.formPreviewBox {
+    padding: 0.6rem;
+    position: absolute;
+    top: 4.8rem;
+    right: 0;
+    height: auto;
+    width: 400px;
+    background-image: repeating-linear-gradient(135deg, hsla(55,0%,44%,0.09) 0px, hsla(55,0%,44%,0.09) 1px,transparent 1px, transparent 11px),repeating-linear-gradient(45deg, hsla(55,0%,44%,0.09) 0px, hsla(55,0%,44%,0.09) 1px,transparent 1px, transparent 11px),linear-gradient(90deg, hsl(22,0%,8%),hsl(22,0%,8%));
+    box-shadow: 0.1rem 0.1rem 0.4rem #000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(40%);
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    .formPreviewText {
+        display: flex;
+        padding: 0.8rem;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #222;
+
+        p:nth-child(1) {
+            color: #369837;
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.formPreviewBox.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+}

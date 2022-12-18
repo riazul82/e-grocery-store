@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import { SlLocationPin } from 'react-icons/sl';
 import { FiCalendar } from 'react-icons/fi';
@@ -6,13 +6,7 @@ import ProfileSidebar from '../components/ProfileSidebar';
 
 import profileImg from '../assets/images/categories/biscuits.jpg';
 
-const Profile = () => {
-    const [checked, setChecked] = useState(true);
-
-    const handleCheckbox = () => {
-        setChecked(true);
-    }
-
+const UpdateProfile = () => {
     return (
         <>
             <Navbar />
@@ -21,7 +15,7 @@ const Profile = () => {
 
                 <div className="detailsInfo">
                     <div className="myProfile">
-                        <h2>My Profile</h2>
+                        <h2>Update Profile</h2>
                         <div className="profileContent">
                             <div className="profileHeader">
                                 <div className="profileImage">
@@ -33,6 +27,14 @@ const Profile = () => {
                                     <p className="joined"><FiCalendar className="locationIcon" /><span>Joined - January, 2022</span></p>
                                 </div>
                             </div>
+
+                            <div className="uploadProfileImageInput">
+                                <div className="fileInputLabel">
+                                    <label htmlFor="profileImgInput">Upload an image</label>
+                                </div>
+                                <input type="file" id="profileImgInput" />
+                            </div>
+
                             <div className="profileDetails">
                                 <div className="profileDetailsInfo">
                                     <div className="inputField">
@@ -67,7 +69,7 @@ const Profile = () => {
                                     <div className="addressInput">
                                         <p>Address:</p>
                                         <div className="useCurrentAddress">
-                                            <input type="checkbox" id="location" value="location" checked={checked} onChange={handleCheckbox} />
+                                            <input type="checkbox" id="location" value="location" />
                                             <label htmlFor="location">
                                                 Current location
                                             </label>
@@ -102,7 +104,7 @@ const Profile = () => {
                                     </div>
 
                                     <div className="buttonField">
-                                        <button className="profileDeleteBtn">Delete account</button>
+                                        <button className="profileUpdateBtn">Update account</button>
                                     </div>
                                 </div>
                             </div>
@@ -114,4 +116,4 @@ const Profile = () => {
     );
 }
 
-export default Profile;
+export default UpdateProfile;

@@ -1,0 +1,36 @@
+.sidebar {
+    flex: 1;
+    height: auto;
+    width: 100%;
+
+    .profileSidebar {
+        
+        box-shadow: 0.1rem 0.1rem 0.4rem #000;
+    
+        .sidebarLink {
+            padding: 0.6rem 0 0.6rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background-image: repeating-linear-gradient(135deg, hsla(55,0%,44%,0.09) 0px, hsla(55,0%,44%,0.09) 1px,transparent 1px, transparent 11px),repeating-linear-gradient(45deg, hsla(55,0%,44%,0.09) 0px, hsla(55,0%,44%,0.09) 1px,transparent 1px, transparent 11px),linear-gradient(90deg, hsl(22,0%,8%),hsl(22,0%,8%));
+            border-bottom: 1px solid #222;
+            border-radius: 0.2rem;
+            cursor: pointer;
+            
+            .sidebarIcon {
+                color: #fff;
+                font-size: 1.2rem;
+            }
+    
+            p {
+                color: #fff;
+                font-size: 1.1rem;
+                padding-left: 0.6rem;
+            }
+        }
+    
+        .sidebarItem:last-child {
+            border: none;
+        }
+    }
+}

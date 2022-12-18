@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../context/LoginContextProvider';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase';
+import { AiFillWarning } from 'react-icons/ai'; // icon
 
 const Login = () => {
     const [user, setUser] = useState({email: '', password: ''});
+    const [error, setError] = useState({flag: false, code: null, message: ''});
 
     const navigate = useNavigate();
     const { dispatch } = useContext(LoginContext);
@@ -22,14 +24,14 @@ const Login = () => {
             const user = userCredential.user;
             console.log(user);
             dispatch({type: 'LOGIN', payload: user});
+            setUser({email: '', password: ''});
+            setError({flag: false, code: null, message: ''});
             navigate('/');
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-
-            console.log(errorCode);
-            console.log(errorMessage);
+            setError({flag: true, code: errorCode, message: errorMessage});
         });
     }
 
@@ -39,6 +41,12 @@ const Login = () => {
                 <div className="loginTitle">
                     <h1>Login</h1>
                 </div>
+                {error.flag && <div className="errorBox">
+                    <div className="errorIcon">
+                        <AiFillWarning className="warning"/>
+                    </div>
+                    <p className="errorMsg">{error.message}</p>
+                </div>}
                 <form onSubmit={handleSubmit}>
                     <input type="email" name="email" value={user.email} onChange={handleChange} placeholder="Enter your email" />
                     <input type="password" name="password" value={user.password} onChange={handleChange} placeholder="Enter your password" />
@@ -46,7 +54,7 @@ const Login = () => {
                     <button type="submit" className="loginBtn">Login</button>
                 </form>
                 <p className="signupLinkText">
-                    Don't have an account? <Link to="/signup" className="signupLink link">Signup now</Link>
+                    Don't have an account? <Link to="/user/signup" className="signupLink link">Signup now</Link>
                 </p>
             </div>
         </div>

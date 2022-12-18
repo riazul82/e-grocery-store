@@ -1,0 +1,28 @@
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+body {
+    color: #fff;
+    background-image: radial-gradient(circle at center center, rgba(46, 46, 46,0.05) 0%, rgba(46, 46, 46,0.05) 22%,rgba(136, 136, 136,0.05) 22%, rgba(136, 136, 136,0.05) 26%,rgba(106, 106, 106,0.05) 26%, rgba(106, 106, 106,0.05) 66%,rgba(196, 196, 196,0.05) 66%, rgba(196, 196, 196,0.05) 77%,rgba(166, 166, 166,0.05) 77%, rgba(166, 166, 166,0.05) 93%,rgba(76, 76, 76,0.05) 93%, rgba(76, 76, 76,0.05) 100%),radial-gradient(circle at center center, rgb(20,20,20) 0%, rgb(20,20,20) 8%,rgb(20,20,20) 8%, rgb(20,20,20) 46%,rgb(20,20,20) 46%, rgb(20,20,20) 60%,rgb(20,20,20) 60%, rgb(20,20,20) 80%,rgb(20,20,20) 80%, rgb(20,20,20) 82%,rgb(20,20,20) 82%, rgb(20,20,20) 100%); 
+    background-size: 43px 43px;
+    background-attachment: fixed;
+}
+
+.link {
+    color: #fff;
+    text-decoration: none;
+}
