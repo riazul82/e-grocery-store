@@ -25,7 +25,7 @@ const AddProductForm = () => {
     });
 
     useEffect(() => {
-        if (selectedImg === null) {
+        if (selectedImg === null || selectedImg === undefined) {
             return;
         }
 
@@ -122,7 +122,10 @@ const AddProductForm = () => {
     }
 
     const handleImageInput = (e) => {
-        setSelectedImg(e.target.files[0]);
+        // fix select file cancelation problem
+        if (e.target.files[0] !== undefined) {
+            setSelectedImg(e.target.files[0]);
+        }
     }
 
     return (
@@ -195,7 +198,7 @@ const AddProductForm = () => {
                             <span>Upload an image</span>
                         </label>
                     </div>
-                    <input type="file" id="productImgInput" onChange={handleImageInput} />
+                    <input type="file" id="productImgInput" onChange={handleImageInput} required />
                 </div>
 
                 <button type="submit" disabled={btnDisabled}>Add Product</button>
