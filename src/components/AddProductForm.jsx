@@ -167,7 +167,6 @@ const AddProductForm = () => {
                 <div className="productInputBox">
                     <label htmlFor="type">Product Type</label>
                     <select name="type" id="type" value={product.type} onChange={handleChange} required>
-                        <option value="">Select Type</option>
                         <option value="regular">Regular</option>
                         <option value="top-product">Top Product</option>
                         <option value="recent-product">Recent Product</option>
@@ -212,43 +211,39 @@ const AddProductForm = () => {
 
             <div className={`formPreviewBox ${previewToggle ? 'active' : null}`}>
                 <div className="formPreviewText">
-                    <p>Product name*:</p>
+                    <p>Product name*</p>
                     <p>{product.name === '' ? '--:--' : product.name}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product price*:</p>
+                    <p>Product price*</p>
                     <p>{product.price === '' ? '--:--' : `${product.price} Tk`}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product discount*:</p>
+                    <p>Product discount*</p>
                     <p>{product.discount === '' ? '0%' : `${product.discount}%`}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product category*:</p>
+                    <p>Product category*</p>
                     <p>{product.category === '' ? '--:--' : product.category}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product Type:</p>
-                    <p>{product.type === '' ? '--:--' : product.type}</p>
+                    <p>Product Type</p>
+                    <p>{product.type}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product weight*:</p>
-                    <p>{product.weight === '' ? '--:--' : product.weight}</p>
+                    <p>Product weight*</p>
+                    <p>{product.weight === '' ? '0 kg' : `${product.weight} ${product.unit}`}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product unit*:</p>
-                    <p>{product.unit === '' ? '--:--' : product.unit}</p>
-                </div>
-                <div className="formPreviewText">
-                    <p>Image name*:</p>
+                    <p>Image name*</p>
                     <p>{selectedImg === null ? '--:--' : selectedImg.name}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Image type*:</p>
+                    <p>Image type*</p>
                     <p>{selectedImg === null ? '--:--' : selectedImg.type}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Image size*:</p>
+                    <p>Image size*</p>
                     <p>{selectedImg === null ? '--:--' : `${(selectedImg.size / 1000).toFixed(2)}KB`}</p>
                 </div>
             </div>

@@ -1,8 +1,6 @@
 import React from 'react';
-// import bannarImg1 from '../images/categories/grapes.svg';
-// import bannarImg2 from '../images/bannar/img2.jpg';
-// import bannarImg3 from '../images/bannar/img3.jpg';
-// import bannarImg4 from '../images/bannar/img4.jpg';
+
+import bannarImg from '../assets/images/bannar/img1.jpg';
 
 const HomeBannar = () => {
 
@@ -17,13 +15,7 @@ const HomeBannar = () => {
     return (
         <div className="homeBanner">
             <div className="homeBannerImage">
-                {/* <img src={
-                    (item === 0) ? bannarImg1 : 
-                    (item === 1) ? bannarImg2 :
-                    (item === 2) ? bannarImg3 :
-                    (item === 3) ? bannarImg4 :
-                    bannarImg1
-                } alt="bannar" /> */}
+                <img src={ bannarImg } alt="bannar" />
             </div>
             <div className="homeBannerTitle">
                 {/* <h1 className="homeBannerText">Best Dairy Products<br/> Online</h1> */}

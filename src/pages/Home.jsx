@@ -26,7 +26,7 @@ const Home = () => {
                 <HomeBannar />
 
                 <div className="homeCategories">
-                    <p className="homeCategiriesTitle"><strong>Categories </strong></p>
+                    <p className="homeCategiriesTitle">Categories</p>
                     <div className="categoryContent">
                         <CategoryLinks path="/products" classBox="categoryAllBox" title="All Products" quantity="200" />
                         <CategoryLinks path="/products" classBox="vegetableBox" title="Vegetables" quantity="60" />
