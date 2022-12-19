@@ -1,38 +1,149 @@
-import React, {useState} from 'react';
-import { BsEye } from 'react-icons/bs';
+import React, { useEffect, useState } from 'react';
+import { MdUpload } from 'react-icons/md';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { fs, storage } from '../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { addDoc, collection } from "firebase/firestore"; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddProductForm = () => {
-    const [previeToggle, setPreviewToggle] = useState(false);
+    const [previewToggle, setPreviewToggle] = useState(false);
+    const [selectedImg, setSelectedImg] = useState(null);
+    const [previewImg, setPreviewImg] = useState(null);
+    const [btnDisabled, setBtnDisabled] = useState(false);
 
     const [product, setProduct] = useState({
         name: '',
         price: '',
+        discount: '',
         category: '',
-        type: '',
+        type: 'regular',
         weight: '',
         unit: 'kg',
         imgUrl: ''
     });
 
+    useEffect(() => {
+        if (selectedImg === null) {
+            return;
+        }
+
+        const objUrl = URL.createObjectURL(selectedImg);
+        setPreviewImg(objUrl);
+
+        // free memory when component is unmounted
+        return (() => URL.revokeObjectURL(objUrl));
+    }, [selectedImg]);
+
     const handleChange = (e) => {
-        setProduct({...product, [e.target.name]: e.target.value});
+        setProduct({ ...product, [e.target.name]: e.target.value });
+    }
+
+    // upload data to firestore
+    const addDataToFireStore = async (product) => {
+        try {
+            await addDoc(collection(fs, "products"), product);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(product);
+
+        if (selectedImg === null) {
+            toast.error('Please select an image!');
+            return;
+        }
+
+        setBtnDisabled(true);
+
+        const storageRef = ref(storage, `images/${product.category}/${selectedImg.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, selectedImg);
+
+        // upload image to storage
+        uploadTask.on('state_changed', (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                    case 'running':
+                        console.log('Upload is running');
+                        break;
+                    default:
+                        console.log('Upload in progress');
+                }
+            },  (error) => {
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        console.log('Unauthorized user');
+                        break;
+                    case 'storage/canceled':
+                        console.log('Upload canceled');
+                        break;
+                
+                    case 'storage/unknown':
+                        console.log('Unknown error!');
+                        break;
+
+                    default:
+                        console.log(`Couldn't upload image!`);
+                }
+
+                setProduct({ name: '', price: '', discount: '', category: '', type: 'regular', weight: '', unit: 'kg', imgUrl: '' });
+                setBtnDisabled(false);
+                setSelectedImg(null);
+                setPreviewImg(null);
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    product.imgUrl = downloadURL;
+                    addDataToFireStore(product);
+                    setProduct({ name: '', price: '', discount: '', category: '', type: 'regular', weight: '', unit: 'kg', imgUrl: '' });
+                    setBtnDisabled(false);
+                    setSelectedImg(null);
+                    setPreviewImg(null);
+                });
+            }
+        );
+
+        toast.promise(uploadTask, {
+            pending: 'Uploading...',
+            success: 'Product uploaded!',
+            error: 'An error occured!'
+        });
     }
 
     const handleClick = () => {
-        setPreviewToggle(!previeToggle);
+        setPreviewToggle(!previewToggle);
+    }
+
+    const handleImageInput = (e) => {
+        setSelectedImg(e.target.files[0]);
     }
 
     return (
         <>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <form onSubmit={handleSubmit} className="addProductForm">
-                <input type="text" name="name" onChange={handleChange} placeholder="Product name" required />
-                <input type="number" name="price" onChange={handleChange} placeholder="Product price" required />
-                
+                <input type="text" name="name" value={product.name} onChange={handleChange} placeholder="Product name" required />
+                <input type="number" name="price" min='0' value={product.price} onChange={handleChange} placeholder="Product price" required />
+                <input type="number" name="discount" min='0' value={product.discount} onChange={handleChange} placeholder="Product discount" required />
+
                 <div className="productInputBox">
                     <label htmlFor="category">Product Category</label>
                     <select name="category" id="category" value={product.category} onChange={handleChange} required>
@@ -52,8 +163,9 @@ const AddProductForm = () => {
 
                 <div className="productInputBox">
                     <label htmlFor="type">Product Type</label>
-                    <select name="type" id="type" onChange={handleChange}>
+                    <select name="type" id="type" value={product.type} onChange={handleChange} required>
                         <option value="">Select Type</option>
+                        <option value="regular">Regular</option>
                         <option value="top-product">Top Product</option>
                         <option value="recent-product">Recent Product</option>
                         <option value="popular-now">Popular now</option>
@@ -61,30 +173,41 @@ const AddProductForm = () => {
                 </div>
 
                 <div className="productWeightInput">
-                    <input type="number" name="weight" onChange={handleChange} placeholder="Product weight/quantity" required />
+                    <input type="number" name="weight" value={product.weight} onChange={handleChange} min="1" placeholder="Product weight/quantity" required />
                     <select name="unit" id="unit" value={product.unit} onChange={handleChange} required>
                         <option value="gram">gram</option>
                         <option value="kg">kg</option>
                         <option value="pcs">pcs</option>
                         <option value="liter">liter</option>
+                        <option value="liter">ml</option>
                     </select>
                 </div>
 
                 <div className="imagePreviewBox">
-                    <p>Image preview</p>
+                    {previewImg === null ? <p>Image preview</p> :
+                        <img src={previewImg} alt="preview" />}
                 </div>
-                
-                <input type="file" />
 
-                <button type="submit">Add Product</button>
+                <div className="uploadProductImageInputField">
+                    <div className="imageUploadInputLabel">
+                        <label htmlFor="productImgInput">
+                            <MdUpload className="uploadIcon" />
+                            <span>Upload an image</span>
+                        </label>
+                    </div>
+                    <input type="file" id="productImgInput" onChange={handleImageInput} />
+                </div>
+
+                <button type="submit" disabled={btnDisabled}>Add Product</button>
             </form>
 
             <div className="formPreviewBtn" onClick={handleClick}>
-                <BsEye className='previewIcon'/>
+                {previewToggle ? <BsEye className='previewIcon' /> :
+                    <BsEyeSlash className='previewIcon' />}
                 <p>Preview</p>
             </div>
 
-            <div className={`formPreviewBox ${previeToggle ? 'active' : null}`}>
+            <div className={`formPreviewBox ${previewToggle ? 'active' : null}`}>
                 <div className="formPreviewText">
                     <p>Product name*:</p>
                     <p>{product.name === '' ? '--:--' : product.name}</p>
@@ -92,6 +215,10 @@ const AddProductForm = () => {
                 <div className="formPreviewText">
                     <p>Product price*:</p>
                     <p>{product.price === '' ? '--:--' : `${product.price} Tk`}</p>
+                </div>
+                <div className="formPreviewText">
+                    <p>Product discount*:</p>
+                    <p>{product.discount === '' ? '0%' : `${product.discount}%`}</p>
                 </div>
                 <div className="formPreviewText">
                     <p>Product category*:</p>
@@ -109,9 +236,20 @@ const AddProductForm = () => {
                     <p>Product unit*:</p>
                     <p>{product.unit === '' ? '--:--' : product.unit}</p>
                 </div>
+                <div className="formPreviewText">
+                    <p>Image name*:</p>
+                    <p>{selectedImg === null ? '--:--' : selectedImg.name}</p>
+                </div>
+                <div className="formPreviewText">
+                    <p>Image type*:</p>
+                    <p>{selectedImg === null ? '--:--' : selectedImg.type}</p>
+                </div>
+                <div className="formPreviewText">
+                    <p>Image size*:</p>
+                    <p>{selectedImg === null ? '--:--' : `${(selectedImg.size / 1000).toFixed(2)}KB`}</p>
+                </div>
             </div>
         </>
-        
     );
 }
 
