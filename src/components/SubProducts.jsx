@@ -1,24 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { RxDoubleArrowRight } from 'react-icons/rx';
 import Product from '../components/Product';
 
-const SubProducts = () => {
-    let arr = [];
-
-    for (let i = 1; i <= 8; i ++) {
-        arr.push(i);
-    }
-
+const SubProducts = ({ title, items }) => {
     return (
         <div className="subProducts">
-            <p className="subProductsHeader">Top products</p>
+            <div className="subProductsHeader">
+                <p className="title">{title}</p>
+                <div className="viewAllLink">
+                    <Link to="/products" className="link viewAll">View all</Link>
+                    <RxDoubleArrowRight className="arrow" />
+                </div>
+            </div>
             <div className="subProductsWrap">
                 {
-                    arr.map(() => {
-                        return <Product/>
+                    items && items.map((item) => {
+                        return <Product key={item.id} data={item} />
                     })
                 }
             </div>
-            
         </div>
     );
 }

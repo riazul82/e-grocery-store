@@ -23,9 +23,6 @@ import UploadProducts from './pages/UploadProducts';
 const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
 
-  console.log(currentUser);
-  console.log('Admin: ', currentAdmin);
-
   const RequireAuth = ({children}) => {
     return currentUser ? (children) : <Navigate to="/user/login" />
   }

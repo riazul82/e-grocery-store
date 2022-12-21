@@ -1,21 +1,51 @@
-import React from 'react';
-import bannarImg4 from '../assets/images/categories/grapes.svg';
+import React, { useContext } from 'react';
+import { HiMinus } from 'react-icons/hi';
+import { HiPlus } from 'react-icons/hi';
 
-const Product = () => {
+import { CartContext } from '../context/CartContextProvider';
+
+const Product = ({ data }) => {
+    const { cartItems, dispatch } = useContext(CartContext);
+
+    // check if cartItem is already exist in shopping cart
+    let cartItem = cartItems.find((elem) => elem.id === data.id)
+    let btnFlag = null;
+
+    if (cartItem !== undefined) {
+        btnFlag = 'active';
+    }
+
+    const handleAddToCart = () => {
+        dispatch({type: 'ADD_PRODUCT', payload: data});
+    }
+
+    const handleIncrement = () => {
+        dispatch({type: 'CONTROL_QUANTITY', payload: {...data, cartQuantity: cartItem.cartQuantity + 1}});
+    }
+
+    const handleDecrement = () => {
+        dispatch({type: 'CONTROL_QUANTITY', payload: {...data, cartQuantity: cartItem.cartQuantity - 1}});
+    }
+
     return (
         <div className="product">
             <div className="productCardTop">
                 <div className="productCardImage">
-                    <img src={bannarImg4} alt="product" />
+                    <img src={data.imgUrl} alt="product" />
                 </div>
             </div>
             <div className="productCardBottom">
                 <div className="productInfo">
-                    <p className="productName">Fresh Cabbage</p>
-                    <p className="productQuantity">1 kg</p>
-                    <p className="productPrice">120 Tk</p>
+                    <p className="productName">{data.name}</p>
+                    <p className="productQuantity">{`${data.weight} ${data.unit}`}</p>
+                    <p className="productPrice">{data.price} Tk</p>
                 </div>
-                <button className="addToCartBtn">Add to Cart</button>
+                <button className={`addToCartBtn ${btnFlag}`} onClick={handleAddToCart}>{btnFlag === 'active' ? 'Added' : 'Add to Cart'}</button>
+                <div className={`quantityControl ${btnFlag}`}>
+                    <button className="btnMinus" onClick={handleDecrement}><HiMinus className="btnIcon" /></button>
+                    <span>{`${(cartItem !== undefined) ? cartItem.cartQuantity : 0}`}</span>
+                    <button className="btnPlus" onClick={handleIncrement}><HiPlus className="btnIcon" /></button>
+                </div>
             </div>
         </div>
     );

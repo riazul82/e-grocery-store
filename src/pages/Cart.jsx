@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import CartProduct from '../components/CartProduct';
 
+import { CartContext } from '../context/CartContextProvider';
+
 const Cart = () => {
+    const { cartItems } = useContext(CartContext);
+
     return (
         <>
             <Navbar />
@@ -19,16 +23,9 @@ const Cart = () => {
 
                 <div className="cartContent">
                     <div className="cartProducts">
-                        <CartProduct />
-                        <CartProduct />
-                        <CartProduct />
-                        <CartProduct />
-                        <CartProduct />
-                        <CartProduct />
-                        <CartProduct />
-                        <CartProduct />
-                        <CartProduct />
-                        <CartProduct />
+                        {cartItems && cartItems.map((item) => {
+                            return <CartProduct key={item.id} cartItem={item} />
+                        })}
                     </div>
                     <div className="cartDetails">
                         <div className="cartTotalPriceBox">
@@ -49,7 +46,6 @@ const Cart = () => {
                 </div>
             </div>
         </>
-        
     );
 }
 

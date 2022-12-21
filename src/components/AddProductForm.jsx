@@ -12,6 +12,16 @@ const AddProductForm = () => {
     const [selectedImg, setSelectedImg] = useState(null);
     const [previewImg, setPreviewImg] = useState(null);
     const [btnDisabled, setBtnDisabled] = useState(false);
+    const [active, setActive] = useState({
+        name: false,
+        price: false,
+        discount: false,
+        category: false,
+        type: false,
+        weight: false,
+        unit: false,
+        img: false
+    });
 
     const [product, setProduct] = useState({
         name: '',
@@ -121,6 +131,30 @@ const AddProductForm = () => {
         setPreviewToggle(!previewToggle);
     }
 
+    const handleFocus = (inputType) => {
+        const myObj = {
+            name: false,
+            price: false,
+            discount: false,
+            category: false,
+            type: false,
+            weight: false,
+            unit: false,
+            img: false
+        };
+
+        for(let key in myObj) {
+            myObj[key] = false;
+
+            if (inputType === key) {
+                myObj[key] = true;
+            }
+        }
+
+        setActive(myObj);
+
+    }
+
     const handleImageInput = (e) => {
         // fix select file cancelation problem
         if (e.target.files[0] !== undefined) {
@@ -143,13 +177,13 @@ const AddProductForm = () => {
                 theme="dark"
             />
             <form onSubmit={handleSubmit} className="addProductForm">
-                <input type="text" name="name" value={product.name} onChange={handleChange} placeholder="Product name" required />
-                <input type="number" name="price" min='0' value={product.price} onChange={handleChange} placeholder="Product price" required />
-                <input type="number" name="discount" min='0' value={product.discount} onChange={handleChange} placeholder="Product discount" required />
+                <input type="text" name="name" value={product.name} onFocus={() => handleFocus('name')} onChange={handleChange} placeholder="Product name" required />
+                <input type="number" name="price" min='0' value={product.price} onFocus={() => handleFocus('price')} onChange={handleChange} placeholder="Product price" required />
+                <input type="number" name="discount" min='0' value={product.discount} onFocus={() => handleFocus('discount')} onChange={handleChange} placeholder="Product discount" required />
 
                 <div className="productInputBox">
                     <label htmlFor="category">Product Category</label>
-                    <select name="category" id="category" value={product.category} onChange={handleChange} required>
+                    <select name="category" id="category" value={product.category} onFocus={() => handleFocus('category')} onChange={handleChange} required>
                         <option value="">Select Category</option>
                         <option value="vegetables">Vegetables</option>
                         <option value="fruits">Fruits</option>
@@ -166,7 +200,7 @@ const AddProductForm = () => {
 
                 <div className="productInputBox">
                     <label htmlFor="type">Product Type</label>
-                    <select name="type" id="type" value={product.type} onChange={handleChange} required>
+                    <select name="type" id="type" value={product.type} onFocus={() => handleFocus('type')} onChange={handleChange} required>
                         <option value="regular">Regular</option>
                         <option value="top-product">Top Product</option>
                         <option value="recent-product">Recent Product</option>
@@ -175,8 +209,8 @@ const AddProductForm = () => {
                 </div>
 
                 <div className="productWeightInput">
-                    <input type="number" name="weight" value={product.weight} onChange={handleChange} min="1" placeholder="Product weight/quantity" required />
-                    <select name="unit" id="unit" value={product.unit} onChange={handleChange} required>
+                    <input type="number" name="weight" value={product.weight} onFocus={() => handleFocus('weight')} onChange={handleChange} min="1" placeholder="Product weight/quantity" required />
+                    <select name="unit" id="unit" value={product.unit} onFocus={() => handleFocus('weight')} onChange={handleChange} required>
                         <option value="gram">gram</option>
                         <option value="kg">kg</option>
                         <option value="pcs">pcs</option>
@@ -197,53 +231,79 @@ const AddProductForm = () => {
                             <span>Upload an image</span>
                         </label>
                     </div>
-                    <input type="file" id="productImgInput" onChange={handleImageInput} required />
+                    <input type="file" id="productImgInput" onFocus={() => handleFocus('img')} onChange={handleImageInput} required />
                 </div>
 
                 <button type="submit" disabled={btnDisabled}>Add Product</button>
             </form>
 
             <div className="formPreviewBtn" onClick={handleClick}>
-                {previewToggle ? <BsEye className='previewIcon' /> :
-                    <BsEyeSlash className='previewIcon' />}
+                {previewToggle ? <BsEye className="previewIcon" /> :
+                    <BsEyeSlash className="previewIcon" />}
                 <p>Preview</p>
             </div>
 
             <div className={`formPreviewBox ${previewToggle ? 'active' : null}`}>
                 <div className="formPreviewText">
-                    <p>Product name*</p>
+                    <div>
+                        <p>Product name<span className={`star ${active.name ? 'active' : null}`}>*</span></p>
+                        <span className={`required ${active.name ? 'active' : null}`}>[required]</span>
+                    </div>
                     <p>{product.name === '' ? '--:--' : product.name}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product price*</p>
+                    <div>
+                        <p>Product price<span className={`star ${active.price ? 'active' : null}`}>*</span></p>
+                        <span className={`required ${active.price ? 'active' : null}`}>[required]</span>
+                    </div>
                     <p>{product.price === '' ? '--:--' : `${product.price} Tk`}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product discount*</p>
+                    <div className="previewDiscount">
+                        <p>Product discount<span className={`star ${active.discount ? 'active' : null}`}>*</span></p>
+                        <span className={`required ${active.discount ? 'active' : null}`}>[required]</span>
+                    </div>
                     <p>{product.discount === '' ? '0%' : `${product.discount}%`}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product category*</p>
+                    <div className="previewCategory">
+                        <p>Product category<span className={`star ${active.category ? 'active' : null}`}>*</span></p>
+                        <span className={`required ${active.category ? 'active' : null}`}>[required]</span>
+                    </div>
                     <p>{product.category === '' ? '--:--' : product.category}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product Type</p>
+                    <div className="previewType">
+                        <p>Product type<span className={`star ${active.type ? 'active' : null}`}>*</span></p>
+                    </div>
                     <p>{product.type}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Product weight*</p>
+                    <div className="previewWeight">
+                        <p>Product weight<span className={`star ${active.weight ? 'active' : null}`}>*</span></p>
+                        <span className={`required ${active.weight ? 'active' : null}`}>[required]</span>
+                    </div>
                     <p>{product.weight === '' ? '0 kg' : `${product.weight} ${product.unit}`}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Image name*</p>
+                    <div className="previewImage">
+                        <p>Image name<span className={`star ${active.img ? 'active' : null}`}>*</span></p>
+                        <span className={`required ${active.img ? 'active' : null}`}>[required]</span>
+                    </div>
                     <p>{selectedImg === null ? '--:--' : selectedImg.name}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Image type*</p>
+                    <div className="previewImage">
+                        <p>Image type<span className={`star ${active.img ? 'active' : null}`}>*</span></p>
+                        <span className={`required ${active.img ? 'active' : null}`}>[required]</span>
+                    </div>
                     <p>{selectedImg === null ? '--:--' : selectedImg.type}</p>
                 </div>
                 <div className="formPreviewText">
-                    <p>Image size*</p>
+                    <div className="previewImage">
+                        <p>Image size<span className={`star ${active.img ? 'active' : null}`}>*</span></p>
+                        <span className={`required ${active.img ? 'active' : null}`}>[required]</span>
+                    </div>
                     <p>{selectedImg === null ? '--:--' : `${(selectedImg.size / 1000).toFixed(2)}KB`}</p>
                 </div>
             </div>
