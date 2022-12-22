@@ -4,6 +4,7 @@ import CategoryLinks from '../components/CategoryLinks';
 import { GoSearch } from 'react-icons/go';
 import { FiPhoneCall } from 'react-icons/fi';
 import HomeBannar from '../components/HomeBannar';
+import VoucherCard from '../components/VoucherCard';
 
 const Home = () => {
     return (
@@ -24,6 +25,11 @@ const Home = () => {
                 </div>
 
                 <HomeBannar />
+
+                <div className="voucherCards">
+                    <VoucherCard />
+                    <VoucherCard />
+                </div>
 
                 <div className="homeCategories">
                     <p className="homeCategiriesTitle">Categories</p>

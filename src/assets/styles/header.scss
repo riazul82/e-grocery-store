@@ -35,9 +35,28 @@
 
         .iconLink {
             margin-left: 1.4rem;
+            position: relative;
 
             .navIcon {
                 font-size: 1.4rem;
+            }
+
+            .cartCounter {
+                position: absolute;
+                top: -0.8rem;
+                right: -0.8rem;
+                display: flex;
+                height: 1.4rem;
+                width: 1.4rem;
+                align-items: center;
+                justify-content: center;
+                background: red;
+                border-radius: 50%;
+
+                span {
+                    color: #fff;
+                    font-size: 0.9rem;
+                }
             }
         }
     }
