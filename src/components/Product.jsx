@@ -24,7 +24,11 @@ const Product = ({ data }) => {
     }
 
     const handleDecrement = () => {
-        dispatch({type: 'CONTROL_QUANTITY', payload: {...data, cartQuantity: cartItem.cartQuantity - 1}});
+        if (cartItem.cartQuantity <= 1) {
+            dispatch({type: 'REMOVE_PRODUCT', payload: cartItem});
+        } else {
+            dispatch({type: 'CONTROL_QUANTITY', payload: {...data, cartQuantity: cartItem.cartQuantity - 1}});
+        }
     }
 
     return (

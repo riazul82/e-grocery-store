@@ -70,7 +70,6 @@
             background: #369837;
             border-radius: 0.1rem;
             cursor: pointer;
-            transition: all 0.2s ease-in-out;
         }
 
         .addToCartBtn.active {
@@ -88,8 +87,6 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: all 0.2s ease;
-            transition-delay: 0.2s;
 
             button {
                 display: flex;

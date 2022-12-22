@@ -15,16 +15,11 @@
             padding: 0.3rem 1rem 0.5rem;
             color: #fff;
             font-size: 1.1rem;
-            background: #222;
             border-radius: 0.2rem;
             box-shadow: 0.1rem 0.1rem 0.4rem #111;
+            background-image: linear-gradient(45deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 50%,rgba(169, 169, 169,0.04) 50%, rgba(169, 169, 169,0.04) 71%,rgba(251, 251, 251,0.04) 71%, rgba(251, 251, 251,0.04) 100%),linear-gradient(45deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 56%,rgba(169, 169, 169,0.04) 56%, rgba(169, 169, 169,0.04) 67%,rgba(251, 251, 251,0.04) 67%, rgba(251, 251, 251,0.04) 100%),linear-gradient(135deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 4%,rgba(169, 169, 169,0.04) 4%, rgba(169, 169, 169,0.04) 75%,rgba(251, 251, 251,0.04) 75%, rgba(251, 251, 251,0.04) 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));
             cursor: pointer;
-            transition: all 0.3s ease;
             z-index: 99;
-
-            &:hover {
-                background: #369837;
-            }
         }
 
         .active {
@@ -72,7 +67,8 @@
                 display: flex;
                 width: 100%;
                 height: 130px;
-                background: #222;
+                background: #222;                
+                background-image: linear-gradient(45deg, transparent 0%, transparent 11%,rgba(156, 156, 156,0.06) 11%, rgba(156, 156, 156,0.06) 81%,transparent 81%, transparent 100%),linear-gradient(45deg, transparent 0%, transparent 18%,rgba(156, 156, 156,0.06) 18%, rgba(156, 156, 156,0.06) 64%,transparent 64%, transparent 100%),linear-gradient(135deg, transparent 0%, transparent 13%,rgba(156, 156, 156,0.06) 13%, rgba(156, 156, 156,0.06) 22%,transparent 22%, transparent 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));
                 border-radius: 0.2rem;
 
                 .cartProductImageBox {
@@ -109,7 +105,7 @@
 
                     .cartProductPrice {
                         margin-top: 1rem;
-                        color: seagreen;
+                        color: #36b86e;
                         font-size: 1.2rem;
                         font-weight: 600;
                     }
@@ -183,6 +179,7 @@
                 height: auto;
                 border-radius: 0.2rem;
                 background: #222;
+                background-image: linear-gradient(45deg, transparent 0%, transparent 11%,rgba(156, 156, 156,0.06) 11%, rgba(156, 156, 156,0.06) 81%,transparent 81%, transparent 100%),linear-gradient(45deg, transparent 0%, transparent 18%,rgba(156, 156, 156,0.06) 18%, rgba(156, 156, 156,0.06) 64%,transparent 64%, transparent 100%),linear-gradient(135deg, transparent 0%, transparent 13%,rgba(156, 156, 156,0.06) 13%, rgba(156, 156, 156,0.06) 22%,transparent 22%, transparent 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));
 
                 .cartPriceBox {
                     padding: 0.6rem 0;
@@ -193,11 +190,76 @@
                     justify-content: space-between;
 
                     p {
-                        font-size: 1.1rem;
+                        color: #ddd;
+                        font-size: 1rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.8px;
                     }
 
                     p:nth-child(1) {
-                        color: #ddd;
+                        color: #36b86e;
+                        font-weight: 500;
+                    }
+                }
+
+                .voucherInputBox {
+                    margin-top: 1rem;
+                    display: flex;
+                    width: 100%;
+                    height: 42px;
+                    align-items: center;
+                    justify-content: space-between;
+                    border: 2px dashed #36b86e;
+                    border-radius: 0.1rem;
+
+                    input {
+                        padding-left: 0.6rem;
+                        // color: #ddd;
+                        font-size: 1.1rem;
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        letter-spacing: 0.8px;
+                        height: 100%;
+                        width: 70%;
+                        border: none;
+                        outline: none;
+                        border-right: 2px dashed #36b86e;
+                        background: transparent;
+                        box-sizing: border-box;
+                        border-radius: 0.1rem;
+                    }
+
+                    ::placeholder {
+                        font-size: 1rem;
+                        font-weight: 500;
+                        letter-spacing: 0.8px;
+                        text-transform: uppercase;
+                    }
+
+                    button {
+                        color: #36b86e;
+                        height: 100%;
+                        width: 30%;
+                        border: none;
+                        outline: none;
+                        font-size: 1.1rem;
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        letter-spacing: 0.8px;
+                        background: transparent;
+                        border-radius: 0.1rem;
+                        cursor: pointer;
+                    }
+                }
+
+                .totalCostBox {
+                    margin-top: 1.4rem;
+                    padding-top: 1rem;
+                    border-top: 1px solid #333;
+
+                    p {
+                        font-size: 1.1rem;
+                        font-weight: 500;
                     }
                 }
             }

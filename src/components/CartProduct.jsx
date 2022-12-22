@@ -16,7 +16,9 @@ const CartProduct = ({ cartItem }) => {
     }
 
     const handleDecrement = () => {
-        dispatch({type: 'CONTROL_QUANTITY', payload: {...cartItem, cartQuantity: cartItem.cartQuantity - 1}});
+        if (cartItem.cartQuantity > 1) {
+            dispatch({type: 'CONTROL_QUANTITY', payload: {...cartItem, cartQuantity: cartItem.cartQuantity - 1}});
+        }
     }
 
     return (
@@ -26,8 +28,8 @@ const CartProduct = ({ cartItem }) => {
             </div>
             <div className="cartProductDetails">
                 <p className="cartProductName">{cartItem.name}</p>
-                <p className="cartProductQuantity">{`${cartItem.weight} ${cartItem.unit}`}</p>
-                <p className="cartProductPrice">{cartItem.price}Tk</p>
+                <p className="cartProductQuantity">{`${cartItem.weight} ${cartItem.unit} * ${cartItem.cartQuantity}`}</p>
+                <p className="cartProductPrice">{cartItem.price * cartItem.cartQuantity}Tk</p>
             </div>
             <div className="productRemoveBtnBox" onClick={handleRemove}>
                 <button className="productRemoveBtn">

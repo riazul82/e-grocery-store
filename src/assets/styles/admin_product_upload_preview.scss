@@ -50,12 +50,12 @@
 
             p:nth-child(1) {
                 margin-right: 0.4rem;
-                color: #46dc49;
+                color: #36b86e;
                 font-size: 1.1rem;
                 font-weight: 500;
 
                 .star {
-                    color: #46dc49;
+                    color: #36b86e;
                     opacity: 0;
                     visibility: hidden;
                     pointer-events: none;
@@ -71,6 +71,7 @@
 
             .required {
                 color: #888;
+                font-size: 1rem;
                 opacity: 0;
                 visibility: hidden;
                 pointer-events: none;
