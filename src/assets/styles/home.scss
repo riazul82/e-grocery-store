@@ -67,7 +67,7 @@
         position: relative;
         height: 400px;
         width: 100%;
-        border-radius: 0.4rem;
+        border-radius: 0.4rem 0.4rem 0 0;
         overflow: hidden;
 
         .homeBannerImage {
@@ -127,18 +127,116 @@
         }
     }
 
+    .callToAction {
+        padding: 1rem;
+        display: flex;
+        height: auto;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        background-image: radial-gradient(circle at 99% 33%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 37%,transparent 37%, transparent 100%),radial-gradient(circle at 46% 16%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 43%,transparent 43%, transparent 100%),radial-gradient(circle at 99% 25%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 22%,transparent 22%, transparent 100%),radial-gradient(circle at 57% 88%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 86%,transparent 86%, transparent 100%),radial-gradient(circle at 82% 78%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 22%,transparent 22%, transparent 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));
+        border-radius: 0 0 0.4rem 0.4rem;
+
+        .callToActionWrap {
+            display: flex;
+            width: 100%;
+            height: auto;
+            align-items: center;
+            justify-content: space-between;
+
+            .serviceBox {
+                padding: 1rem 0;
+                display: flex;
+                flex-direction: column;
+                width: 190px;
+                height: auto;
+                align-items: center;
+                justify-content: center;
+
+                .imageWrap {
+                    width: 80px;
+                    height: 80px;
+
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .serviceTitle {
+                    margin-top: 0.4rem;
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
+
+    .services {
+        .serviceCards {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: 1.2rem;
+            grid-row-gap: 3rem;
+            
+            .serviceCard {
+                background-image: repeating-radial-gradient(circle at center center, transparent 0px, transparent 13px,rgba(255,255,255,0.05) 13px, rgba(255,255,255,0.05) 26px,transparent 26px, transparent 27px,rgba(255,255,255,0.05) 27px, rgba(255,255,255,0.05) 32px,transparent 32px, transparent 34px,rgba(255,255,255,0.05) 34px, rgba(255,255,255,0.05) 36px),repeating-radial-gradient(circle at center center, rgb(0,0,0) 0px, rgb(0,0,0) 1px,rgb(0,0,0) 1px, rgb(0,0,0) 13px,rgb(0,0,0) 13px, rgb(0,0,0) 24px,rgb(0,0,0) 24px, rgb(0,0,0) 37px,rgb(0,0,0) 37px, rgb(0,0,0) 44px,rgb(0,0,0) 44px, rgb(0,0,0) 48px); background-size: 88px 88px;                        
+                background-attachment: fixed;
+                border-radius: 0.2rem;
+                overflow: hidden;
+                width: 100%;
+                height: auto;
+    
+                .serviceCardTitle {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    
+                    .cardNo {
+                        padding: 0.8rem 1rem;
+                        color: #fff;
+                        font-size: 1.4rem;
+                        font-weight: 500;
+                        background: rgba(46, 139, 87, 0.4);
+                        border-radius: 0.2rem 0 1rem 0;
+                    }
+    
+                    .cardTitle {
+                        padding-left: 0.8rem;
+                        color: #4bb96a;
+                        font-size: 1.4rem;
+                        font-weight: 500;
+                    }
+                }
+    
+                .serviceCardDesc {
+                    height: auto;
+    
+                    .descText {
+                        padding: 0.8rem 0 1rem 0;
+                        color: #ddd;
+                        font-size: 1rem;
+                        text-align: left;
+                    }
+    
+                    .readMoreLink {
+                        display: inline-block;
+                        padding: 0.4rem 1.4rem 0.4rem 0.8rem;
+                        background: rgba(46, 139, 87, 0.4);
+                        border-radius: 0 4rem 0 0.2rem;
+                    }
+                }
+            }
+        }
+    }
+
+
     .homeCategories {
         margin-top: 5rem;
-        margin-bottom: 5rem;
-
-        .homeCategiriesTitle {
-            margin-bottom: 1.2rem;
-            font-size: 1.4rem;
-            font-weight: 500;
-        }
 
         .categoryContent {
-            margin-top: 1rem;
+            margin-top: 3rem;
             display: grid;
             grid-gap: 1.2rem;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -162,67 +260,67 @@
             }
     
             .categoryAllBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/shop.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/shop.jpg');
                 background-size: cover;
                 background-position: center;
             }
     
             .vegetableBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/vegetables.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/vegetables.jpg');
                 background-size: cover;
                 background-position: center;
             }
     
             .fruitBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/fruits.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/fruits.jpg');
                 background-size: cover;
                 background-position: center;
             }
               
             .meatFishBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/meat.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/meat.jpg');
                 background-size: cover;
                 background-position: center;
             }
               
             .eggBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/eggs.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/eggs.jpg');
                 background-size: cover;
                 background-position: center;
             }
               
             .teaCoffeBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/tea.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/tea.jpg');
                 background-size: cover;
                 background-position: center;
             }
               
             .spiceBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/spices.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/spices.jpg');
                 background-size: cover;
                 background-position: center;
             }
               
             .dryFruitBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/dry-fruits.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/dry-fruits.jpg');
                 background-size: cover;
                 background-position: center;
             }
               
             .biscuitCakeBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/biscuits.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/biscuits.jpg');
                 background-size: cover;
                 background-position: center;
             }
               
             .jamJellieBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/jams.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/jams.jpg');
                 background-size: cover;
                 background-position: center;
             }
               
             .breadBox {
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../images/categories/breads.jpg');
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/categories/breads.jpg');
                 background-size: cover;
                 background-position: center;
             }

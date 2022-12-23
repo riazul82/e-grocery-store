@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="header">
             <nav className="navbar">
                 <div className="logo">
-                    <Link to="/" className="brandName link">eBazar</Link>
+                    <Link to="/" className="brandName link" style={{color: '#d5fa9e'}}>eBazar</Link>
                 </div>
 
                 <div className="navLinks">

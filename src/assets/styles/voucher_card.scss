@@ -1,120 +1,124 @@
 .voucherCards {
-    margin-top: 5rem;
-    display: flex;
-    width: 100%;
-    height: auto;
-    gap: 2rem;
-    align-items: center;
-    justify-content: space-between;
+    margin-top: 8rem;
 
-    .voucherCardWrap {
-        width: 50%;
+    .voucherCardsContent {
+        margin-top: 3rem;
+        display: flex;
+        width: 100%;
         height: auto;
-        background-image: repeating-radial-gradient(circle at center center, transparent 0px, transparent 13px,rgba(255,255,255,0.05) 13px, rgba(255,255,255,0.05) 26px,transparent 26px, transparent 27px,rgba(255,255,255,0.05) 27px, rgba(255,255,255,0.05) 32px,transparent 32px, transparent 34px,rgba(255,255,255,0.05) 34px, rgba(255,255,255,0.05) 36px),repeating-radial-gradient(circle at center center, rgb(0,0,0) 0px, rgb(0,0,0) 1px,rgb(0,0,0) 1px, rgb(0,0,0) 13px,rgb(0,0,0) 13px, rgb(0,0,0) 24px,rgb(0,0,0) 24px, rgb(0,0,0) 37px,rgb(0,0,0) 37px, rgb(0,0,0) 44px,rgb(0,0,0) 44px, rgb(0,0,0) 48px); background-size: 88px 88px;                        
-        background-attachment: fixed;
-        border-radius: 0.2rem;
-        overflow: hidden;
-
-        .voucherCardTitle {
-            width: 100%;
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 0.8rem 0;
-            background: rgba(54, 184, 110, 0.4);
-        }
-
-        .voucherCardSubTitle {
-            margin-top: 0.8rem;
-            width: 100%;
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            text-align: center;
-            padding: 0.8rem 0;
-        }
-
-        .voucherCodeBox {
-            padding-top: 0.2rem;
-            display: flex;
-            width: 100%;
+        gap: 2rem;
+        align-items: center;
+        justify-content: space-between;
+    
+        .voucherCardWrap {
+            width: 50%;
             height: auto;
-            align-items: center;
-            justify-content: center;
-
-            .codeBox {
-                padding: 0.4rem 0.8rem;
-                font-size: 1.2rem;
+            background-image: repeating-radial-gradient(circle at center center, transparent 0px, transparent 13px,rgba(255,255,255,0.05) 13px, rgba(255,255,255,0.05) 26px,transparent 26px, transparent 27px,rgba(255,255,255,0.05) 27px, rgba(255,255,255,0.05) 32px,transparent 32px, transparent 34px,rgba(255,255,255,0.05) 34px, rgba(255,255,255,0.05) 36px),repeating-radial-gradient(circle at center center, rgb(0,0,0) 0px, rgb(0,0,0) 1px,rgb(0,0,0) 1px, rgb(0,0,0) 13px,rgb(0,0,0) 13px, rgb(0,0,0) 24px,rgb(0,0,0) 24px, rgb(0,0,0) 37px,rgb(0,0,0) 37px, rgb(0,0,0) 44px,rgb(0,0,0) 44px, rgb(0,0,0) 48px); background-size: 88px 88px;                        
+            background-attachment: fixed;
+            border-radius: 0.2rem 1.2rem 0.2rem 1.2rem;
+            overflow: hidden;
+    
+            .voucherCardTitle {
+                width: 100%;
+                color: #fff;
+                font-size: 0.9rem;
                 font-weight: 500;
-                border: 2px dashed #222;
-                border-right: none;
-
-                &:last-child {
-                    border-right: 2px dashed #222;
-                }
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                padding: 0.8rem 0;
+                background: rgba(46, 139, 87, 0.4);
             }
-        }
-
-        .voucherTimer {
-            margin-top: 1.4rem;
-            display: flex;
-            width: 100%;
-            height: auto;
-            gap: 1.2rem;
-            align-items: center;
-            justify-content: center;
-
-            .timerBox {
+    
+            .voucherCardSubTitle {
+                margin-top: 0.8rem;
+                width: 100%;
+                color: #fff;
+                font-size: 1.1rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+    
+            .voucherCodeBox {
+                padding-top: 0.2rem;
                 display: flex;
-                flex-direction: column;
-                height: 85px;
-                width: 85px;
+                width: 100%;
+                height: auto;
                 align-items: center;
                 justify-content: center;
-                background: #222;
-                border-radius: 0.1rem;
-                overflow: hidden;
-
-                .timeCount {
-                    display: flex;
-                    height: 70%;
-                    width: 100%;
-                    align-items: center;
-                    justify-content: center;
-                    color: #fff;
-                    font-size: 1.6rem;
-                    font-weight: 600;
-                    letter-spacing: 1px;
-                }
-
-                .timerText {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #fff;
-                    font-size: 1rem;
-                    text-align: center;
-                    width: 100%;
-                    height: 30%;
-                    padding: 0.2rem 0;
-                    background: rgba(54, 184, 110, 0.4);
+    
+                .codeBox {
+                    padding: 0.4rem 0.8rem;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    border: 2px dashed #222;
+                    border-right: none;
+    
+                    &:last-child {
+                        border-right: 2px dashed #222;
+                    }
                 }
             }
-        }
-
-        .voucherMessage {
-            margin-top: 2.4rem;
-            padding: 0.4rem 0;
-            color: #ddd;
-            font-size: 0.9rem;
-            text-align: center;
-            text-transform: uppercase;
-            background: rgba(54, 184, 110, 0.4);
+    
+            .voucherTimer {
+                margin-top: 1.4rem;
+                display: flex;
+                width: 100%;
+                height: auto;
+                gap: 1.2rem;
+                align-items: center;
+                justify-content: center;
+    
+                .timerBox {
+                    display: flex;
+                    flex-direction: column;
+                    height: 85px;
+                    width: 85px;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 0.1rem;
+                    overflow: hidden;
+    
+                    .timeCount {
+                        display: flex;
+                        height: 70%;
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        color: #fff;
+                        font-size: 1.6rem;
+                        font-weight: 600;
+                        letter-spacing: 1px;
+                        background-image: linear-gradient(12deg, rgba(193, 193, 193,0.05) 0%, rgba(193, 193, 193,0.05) 2%,rgba(129, 129, 129,0.05) 2%, rgba(129, 129, 129,0.05) 27%,rgba(185, 185, 185,0.05) 27%, rgba(185, 185, 185,0.05) 66%,rgba(83, 83, 83,0.05) 66%, rgba(83, 83, 83,0.05) 100%),linear-gradient(321deg, rgba(240, 240, 240,0.05) 0%, rgba(240, 240, 240,0.05) 13%,rgba(231, 231, 231,0.05) 13%, rgba(231, 231, 231,0.05) 34%,rgba(139, 139, 139,0.05) 34%, rgba(139, 139, 139,0.05) 71%,rgba(112, 112, 112,0.05) 71%, rgba(112, 112, 112,0.05) 100%),linear-gradient(236deg, rgba(189, 189, 189,0.05) 0%, rgba(189, 189, 189,0.05) 47%,rgba(138, 138, 138,0.05) 47%, rgba(138, 138, 138,0.05) 58%,rgba(108, 108, 108,0.05) 58%, rgba(108, 108, 108,0.05) 85%,rgba(143, 143, 143,0.05) 85%, rgba(143, 143, 143,0.05) 100%),linear-gradient(96deg, rgba(53, 53, 53,0.05) 0%, rgba(53, 53, 53,0.05) 53%,rgba(44, 44, 44,0.05) 53%, rgba(44, 44, 44,0.05) 82%,rgba(77, 77, 77,0.05) 82%, rgba(77, 77, 77,0.05) 98%,rgba(8, 8, 8,0.05) 98%, rgba(8, 8, 8,0.05) 100%),linear-gradient(334deg, hsl(247,0%,2%),hsl(247,0%,2%));                
+                    }
+    
+                    .timerText {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: #fff;
+                        font-size: 1rem;
+                        text-align: center;
+                        width: 100%;
+                        height: 30%;
+                        padding: 0.2rem 0;
+                        background: rgba(46, 139, 87, 0.4);
+                    }
+                }
+            }
+    
+            .voucherMessage {
+                margin-top: 2.4rem;
+                padding: 0.4rem 0;
+                color: #ddd;
+                font-size: 0.9rem;
+                text-align: center;
+                text-transform: uppercase;
+                background: rgba(46, 139, 87, 0.4);
+            }
         }
     }
 }
