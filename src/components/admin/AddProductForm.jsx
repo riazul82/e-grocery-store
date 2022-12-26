@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { MdUpload } from 'react-icons/md';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { fs, storage } from '../firebase';
+import { fs, storage } from '../../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore"; 
+import { addDoc, collection } from "firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -214,6 +214,7 @@ const AddProductForm = () => {
                         <option value="gram">gram</option>
                         <option value="kg">kg</option>
                         <option value="pcs">pcs</option>
+                        <option value="dzn">dzn</option>
                         <option value="liter">liter</option>
                         <option value="liter">ml</option>
                     </select>

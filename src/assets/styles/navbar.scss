@@ -18,16 +18,21 @@
     }
 
     .brandName {
-        color: #fff;
+        color: #4bb96a;
         font-size: 1.6rem;
         font-weight: bold;
         text-decoration: none;
     }
 
     .navLink {
+        color: #fff;
         padding: 0 1.4rem;
         font-size: 1.2rem;
         font-weight: 500;
+    }
+
+    .navLink.active {
+        color: #4bb96a;
     }
 
     .navIconLinks {

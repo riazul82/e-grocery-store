@@ -5,6 +5,7 @@ import './App.scss';
 
 import Home from './pages/Home';
 import Products from './pages/Products';
+import Category from './pages/Category';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './auth/Login';
@@ -16,9 +17,10 @@ import Payment from './pages/Payment';
 import UpdateProfile from './pages/UpdateProfile';
 import AdminLogin from './auth/AdminLogin';
 import CreateAdmin from './auth/CreateAdmin';
-import AdminDashboard from './pages/AdminDashboard';
-import AdminProducts from './pages/AdminProducts';
-import UploadProducts from './pages/UploadProducts';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminProducts from './pages/admin/AdminProducts';
+import UploadProducts from './pages/admin/UploadProducts';
+import Error404 from './pages/Error404';
 
 const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
@@ -37,6 +39,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/:category" element={<Category />} />
           <Route path="/cart" element={<RequireAuth><Cart/></RequireAuth>} />
           <Route path="/checkout" element={<RequireAuth><Checkout/></RequireAuth>} />
           <Route path="/payment" element={<RequireAuth><Payment/></RequireAuth>} />
@@ -50,6 +53,7 @@ const App = () => {
           <Route path="/admin/dashboard" element={<RequireAdminAuth><AdminDashboard /></RequireAdminAuth>} />
           <Route path="/admin/products" element={<RequireAdminAuth><AdminProducts /></RequireAdminAuth>} />
           <Route path="/admin/products/upload" element={<RequireAdminAuth><UploadProducts /></RequireAdminAuth>} />
+          <Route path="*" element={<Error404/>} />
         </Routes>
       </BrowserRouter>
   );

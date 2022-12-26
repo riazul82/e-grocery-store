@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
-import { LoginContext } from '../context/LoginContextProvider';
+import { auth } from '../../firebase';
+import { LoginContext } from '../../context/LoginContextProvider';
 
 // icons
 import { MdOutlineAdminPanelSettings } from 'react-icons/md';

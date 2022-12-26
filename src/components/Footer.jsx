@@ -17,7 +17,7 @@ const Footer = () => {
             <div className="footerContent">
                 <div className="footerBox fBox1">
                     <div className="logo">
-                        <Link to="/" className="brandName link" style={{color: '#d5fa9e'}}>eBazar</Link>
+                        <Link to="/" className="brandName link">eBazar</Link>
                     </div>
                     <div className="fDesc">
                         <p>Lorem ipsum dolor sit amet consecters adipisicing elit dolores excepturi quas a quaerat consectetur veritatis.</p>

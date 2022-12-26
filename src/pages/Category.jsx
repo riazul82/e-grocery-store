@@ -1,30 +1,50 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { GoSearch } from 'react-icons/go';
-import SubProducts from '../components/SubProducts';
 import Product from '../components/Product';
+import CategoryProducts from '../components/CategoryProducts';
 import Footer from '../components/Footer';
 import { ProductsContext } from '../context/ProductsContextProvider';
 
-
-const Products = () => {
-    const {products, top, recent, popular, vegetables, fruits, meatFish, eggs, teaCoffe, spices, dryFruits, biscuitCake, jamJellie, breads} = useContext(ProductsContext);
+const Category = () => {
+    const {top, recent, popular, vegetables, fruits, meatFish, eggs, teaCoffe, spices, dryFruits, biscuitCake, jamJellie, breads} = useContext(ProductsContext);
     const [searchText, setSearchText] = useState('');
     const [searchTimer, setSearchTimer] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
 
-    const location = useLocation();
-    window.scrollTo(0, 0);
+    const { category } = useParams();
 
+    const currentItems = category === 'top' ?
+    {item: top, title: 'Top Products'} :
+    category === 'recent' ?
+    {item: recent, title: 'Recent Products'} :
+    category === 'popular' ?
+    {item: popular, title: 'Popular now'} :
+    category === 'vegetables' ?
+    {item: vegetables, title: 'Vegetables'} :
+    category === 'fruits' ?
+    {item: fruits, title: 'Fruits'} :
+    category === 'meat-fish' ?
+    {item: meatFish, title: 'Meat & Fish'} :
+    category === 'eggs' ?
+    {item: eggs, title: 'Eggs'} :
+    category === 'tea-coffe' ?
+    {item: teaCoffe, title: 'Tea & Coffe'} :
+    category === 'spices' ?
+    {item: spices, title: 'Spices'} :
+    category === 'dry-fruits' ?
+    {item: dryFruits, title: 'Dry fruits'} :
+    category === 'jam-jellie' ?
+    {item: jamJellie, title: 'Jams & Jellies'} :
+    category === 'biscuit-cake' ?
+    {item: biscuitCake, title: 'Biscuits & Cakes'} :
+    category === 'breads' ?
+    {item: breads, title: 'Breads'} : null;
+
+    
     useEffect(() => {
-        if (location.state !== null) {
-            setSearchText(location.state);
-            document.getElementById('searchInput').value = location.state;
-            location.state = null;
-        }
-
-        const items = searchText !== '' && products && products.filter((item) => {
+        const items = searchText !== '' && currentItems.item && currentItems.item.filter((item) => {
             const mainText = ''.concat(item.name, item.category, item.type, item.weight, item.unit).replace(/[^a-zA-Z0-9@]/g, '').toLowerCase();
             const srchText = searchText.replace(/[^a-zA-Z0-9@]/g, '').toLowerCase();
             
@@ -39,7 +59,7 @@ const Products = () => {
             setFilteredItems(items);
         }
 
-    }, [searchText, products, location.state, location]);
+    }, [searchText, currentItems.item]);
 
     const handleSearch = (e) => {
         clearTimeout(searchTimer);
@@ -60,10 +80,10 @@ const Products = () => {
                         <div className="productSearchIconBox">
                             <GoSearch className="productSearchIcon" />
                         </div>
-                        <input type="text" onChange={handleSearch} id="searchInput" placeholder="Search..." />
+                        <input type="text" onChange={handleSearch} placeholder="Search..." />
                     </div>
                     <div className="productCountBox">
-                        <p className="productCount">{searchText !== '' ? filteredItems.length : products ? products.length : 0}/{products ? products.length : 0} items</p>
+                        <p className="productCount">{searchText !== '' ? filteredItems.length : currentItems.item ? currentItems.item.length : 0}/{currentItems.item ? currentItems.item.length : 0} items</p>
                     </div>
                 </div>
 
@@ -83,19 +103,11 @@ const Products = () => {
                 </div>
 
                 <div className="productItems" style={(searchText === '') ? {display: 'block'} : {display: 'none'}}>
-                    <SubProducts title="Top Products" link="top" items={top} />
-                    <SubProducts title="Recent Products" link="recent" items={recent} />
-                    <SubProducts title="Popular now" link="popular" items={popular} />
-                    <SubProducts title="Vegetables" link="vegetables" items={vegetables} />
-                    <SubProducts title="Fruits" link="fruits" items={fruits} />
-                    <SubProducts title="Meat & Fish" link="meat-fish" items={meatFish} />
-                    <SubProducts title="Eggs" link="eggs" items={eggs} />
-                    <SubProducts title="Tea & Coffe" link="tea-coffe" items={teaCoffe} />
-                    <SubProducts title="Spices" link="spices" items={spices} />
-                    <SubProducts title="Dry fruits" link="dry-fruits" items={dryFruits} />
-                    <SubProducts title="Jams & Jellies" link="jam-jellie" items={jamJellie} />
-                    <SubProducts title="Biscuits & Cakes" link="biscuit-cake" items={biscuitCake} />
-                    <SubProducts title="Breads" link="breads" items={breads} />
+                    {
+                        currentItems === null ? 
+                        null :
+                        <CategoryProducts title={currentItems.title} items={currentItems.item} />
+                    }
                 </div>
             </div>
             <Footer />
@@ -103,4 +115,4 @@ const Products = () => {
     );
 }
 
-export default Products;
+export default Category;

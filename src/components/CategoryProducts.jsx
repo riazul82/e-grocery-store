@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { RxDoubleArrowRight } from 'react-icons/rx';
 import Product from '../components/Product';
 
-const SubProducts = ({ title, link, items }) => {
+const CategoryProducts = ({ title, items }) => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className="subProducts">
             <div className="subProductsHeader">
                 <p className="title">{title}</p>
                 <div className="viewAllLink">
-                    <Link to={`/products/${link}`} className="link viewAll">View all</Link>
+                    <Link to="/products" className="link viewAll">All Products</Link>
                     <RxDoubleArrowRight className="arrow" />
                 </div>
             </div>
@@ -24,4 +28,4 @@ const SubProducts = ({ title, link, items }) => {
     );
 }
 
-export default SubProducts;
+export default CategoryProducts;

@@ -1,25 +1,35 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import CategoryLinks from '../components/CategoryLinks';
 import { GoSearch } from 'react-icons/go';
 import { FiPhoneCall } from 'react-icons/fi';
-import HomeBannar from '../components/HomeBannar';
 import VoucherCard from '../components/VoucherCard';
 import SubProducts from '../components/SubProducts';
+import bannarImg from '../assets/images/bannar/img1.jpg';
 import { ProductsContext } from '../context/ProductsContextProvider';
 import Footer from '../components/Footer';
-
-import vegetables from '../assets/images/icons/img1.png';
-import truck from '../assets/images/icons/img2.png';
-import payment from '../assets/images/icons/img3.png';
-import offers from '../assets/images/icons/img4.png';
-import pricing from '../assets/images/icons/img5.png';
-import support from '../assets/images/icons/img6.png';
 import Title from '../components/Title';
 
 const Home = () => {
     const {top, recent, popular} = useContext(ProductsContext);
+    const [searchText, setSearchText] = useState('');
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+
+        document.onkeydown = (e) => {
+            if(e.keyCode === 13 && searchText !== '') {
+                navigate('/products', {state: searchText});
+            }
+        }
+    }, [searchText, navigate]);
+
+    const handleSearch = (e) => {
+        setSearchText(e.target.value);
+    }
 
     return (
         <>
@@ -31,53 +41,21 @@ const Home = () => {
                         <p className="contactTitle">+88 0123456789 | +88 01298765431 | 24/7</p>
                     </div>
                     <div className="searchBox">
-                        <input type="text" className="search" placeholder="Search..." />
-                        <div className="homeSearchIcon">
+                        <input type="text" value={searchText} onChange={handleSearch} className="search" placeholder="Search..." />
+                        <Link to="/products" state={searchText} className="homeSearchIcon link">
                             <GoSearch className="searchIcon" />
-                        </div>
+                        </Link>
                     </div>
                 </div>
 
-                <HomeBannar />
-
-                <div className="callToAction">
-                    <div className="callToActionWrap">
-                        <div className="serviceBox">
-                            <div className="imageWrap">
-                                <img src={vegetables} alt="" />
-                            </div>
-                            <p className="serviceTitle">Fresh Products</p>
-                        </div>
-                        <div className="serviceBox">
-                            <div className="imageWrap">
-                                <img src={truck} alt="" />
-                            </div>
-                            <p className="serviceTitle">Fast Delevary</p>
-                        </div>
-                        <div className="serviceBox">
-                            <div className="imageWrap">
-                                <img src={payment} alt="" />
-                            </div>
-                            <p className="serviceTitle">Easy payment</p>
-                        </div>
-                        <div className="serviceBox">
-                            <div className="imageWrap">
-                                <img src={offers} alt="" />
-                            </div>
-                            <p className="serviceTitle">Random Offers</p>
-                        </div>
-                        <div className="serviceBox">
-                            <div className="imageWrap">
-                                <img src={pricing} alt="" />
-                            </div>
-                            <p className="serviceTitle">Best Pricing</p>
-                        </div>
-                        <div className="serviceBox">
-                            <div className="imageWrap">
-                                <img src={support} alt="" />
-                            </div>
-                            <p className="serviceTitle">24/7 Support</p>
-                        </div>
+                <div className="homeBanner">
+                    <div className="homeBannerImage">
+                        <img src={ bannarImg } alt="bannar" />
+                    </div>
+                    <div className="homeBannerTitle">
+                        <h1 className="homeBannerText animate__animated animate__bounceInLeft">Explore the best</h1>
+                        <h1 className="homeBannerText animate__animated animate__bounceInRight">grocery shop online</h1>
+                        <button className="homeBannerButton animate__animated animate__bounceInLeft">Shop now</button>
                     </div>
                 </div>
 
@@ -85,16 +63,16 @@ const Home = () => {
                     <Title title="categories" desc="Choose from the best product collections" />
                     <div className="categoryContent">
                         <CategoryLinks path="/products" classBox="categoryAllBox" title="All Products" quantity="200" />
-                        <CategoryLinks path="/products" classBox="vegetableBox" title="Vegetables" quantity="60" />
-                        <CategoryLinks path="/products" classBox="fruitBox" title="Fruits" quantity="60" />
-                        <CategoryLinks path="/products" classBox="meatFishBox" title="Meat & Fish" quantity="60" />
-                        <CategoryLinks path="/products" classBox="eggBox" title="Eggs" quantity="60" />
-                        <CategoryLinks path="/products" classBox="teaCoffeBox" title="Tea & Coffe" quantity="60" />
-                        <CategoryLinks path="/products" classBox="spiceBox" title="Spices" quantity="60" />
-                        <CategoryLinks path="/products" classBox="dryFruitBox" title="Dry Fruits" quantity="60" />
-                        <CategoryLinks path="/products" classBox="biscuitCakeBox" title="Biscuits & Cakes" quantity="60" />
-                        <CategoryLinks path="/products" classBox="jamJellieBox" title="Jams & Jellies" quantity="60" />
-                        <CategoryLinks path="/products" classBox="breadBox" title="Breads" quantity="60" />
+                        <CategoryLinks path="/products/vegetables" classBox="vegetableBox" title="Vegetables" quantity="60" />
+                        <CategoryLinks path="/products/fruits" classBox="fruitBox" title="Fruits" quantity="60" />
+                        <CategoryLinks path="/products/meat-fish" classBox="meatFishBox" title="Meat & Fish" quantity="60" />
+                        <CategoryLinks path="/products/eggs" classBox="eggBox" title="Eggs" quantity="60" />
+                        <CategoryLinks path="/products/tea-coffe" classBox="teaCoffeBox" title="Tea & Coffe" quantity="60" />
+                        <CategoryLinks path="/products/spices" classBox="spiceBox" title="Spices" quantity="60" />
+                        <CategoryLinks path="/products/dry-fruits" classBox="dryFruitBox" title="Dry Fruits" quantity="60" />
+                        <CategoryLinks path="/products/biscuit-cake" classBox="biscuitCakeBox" title="Biscuits & Cakes" quantity="60" />
+                        <CategoryLinks path="/products/jam-jellie" classBox="jamJellieBox" title="Jams & Jellies" quantity="60" />
+                        <CategoryLinks path="/products/breads" classBox="breadBox" title="Breads" quantity="60" />
                     </div>
                 </div>
 
@@ -106,7 +84,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="allProducts">
+                <div className="allProducts" style={{marginTop: '8rem'}}>
                     <Title title="Best Products" desc="Choose the best product collections" />
                     <div style={{marginTop: '5rem'}}></div>
                     <SubProducts title="Top Products" items={top} />

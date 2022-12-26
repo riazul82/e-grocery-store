@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 const CategoryLinks = (props) => {
     return (
         <Link to={props.path} className={`categoryLink link ${props.classBox}`}>
-            <p><strong>{props.title}</strong></p>
-            <p><span>{props.quantity}</span> Items</p>
+            <div className="categoryLinkText">
+                <p><strong>{props.title}</strong></p>
+                <p><span>{props.quantity}</span> Items</p>
+            </div>
         </Link>
     );
 }

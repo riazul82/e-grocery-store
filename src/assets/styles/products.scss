@@ -1,6 +1,37 @@
 .allProducts {
     margin: 0 auto;
-    margin-top: 10rem;
+    margin-top: 3rem;
     max-width: 1280px;
     width: 100%;
+
+    .filteredItems {
+        margin-top: 4rem;
+
+        .filteredItemsTitle {
+            color: #bbb;
+            font-size: 1.4rem;
+            font-weight: 500;
+
+            span {
+                color: #fff;
+                font-style: italic;
+            }
+        }
+
+        .notFoundTxt {
+            margin-top: 2rem;
+            color: #bbb;
+            font-size: 1.2rem;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .filteredItemsWrap {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-row-gap: 2rem;
+            grid-column-gap: 1.2rem;
+        }
+    }
 }

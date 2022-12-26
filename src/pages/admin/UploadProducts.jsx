@@ -1,6 +1,6 @@
 import React from 'react';
-import AdminSidebar from '../components/AdminSidebar';
-import AddProductForm from '../components/AddProductForm';
+import AdminSidebar from '../../components/admin/AdminSidebar';
+import AddProductForm from '../../components/admin/AddProductForm';
 
 const UploadProducts = () => {
 

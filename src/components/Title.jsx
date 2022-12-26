@@ -1,4 +1,5 @@
 import React from 'react';
+// import leaf from '../assets/images/icons/marijuana2.png';
 import leaf from '../assets/images/icons/terpene.png';
 
 const Title = ({title, desc}) => {
