@@ -11,14 +11,16 @@ const UserDetailsProvider = ({ children }) => {
 
     useEffect(() => {
         const getUserData = async () => {
-            onSnapshot(doc(fs, "users", currentUser.uid), (doc) => {
-                setUserDetails({...doc.data(), id: currentUser.uid});
-                localStorage.setItem('userDetails', JSON.stringify(doc.data()));
-            });
+            if (currentUser) {
+                onSnapshot(doc(fs, "users", currentUser.uid), (doc) => {
+                    setUserDetails({...doc.data(), id: currentUser.uid});
+                    localStorage.setItem('userDetails', JSON.stringify(doc.data()));
+                });
+            }
         }
 
         getUserData();
-    }, [currentUser.uid]);
+    }, [currentUser, currentUser.uid]);
 
     return (
         <UserDetailsContext.Provider value={userDetails}>
