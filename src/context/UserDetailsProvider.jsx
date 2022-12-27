@@ -20,7 +20,7 @@ const UserDetailsProvider = ({ children }) => {
         }
 
         getUserData();
-    }, [currentUser, currentUser.uid]);
+    }, [currentUser]);
 
     return (
         <UserDetailsContext.Provider value={userDetails}>
