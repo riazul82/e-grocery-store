@@ -13,8 +13,22 @@ const UserDetailsProvider = ({ children }) => {
         const getUserData = async () => {
             if (currentUser) {
                 onSnapshot(doc(fs, "users", currentUser.uid), (doc) => {
-                    setUserDetails({...doc.data(), id: currentUser.uid});
-                    localStorage.setItem('userDetails', JSON.stringify(doc.data()));
+                    let userObj = {
+                        ...doc.data(),
+                        id: currentUser.uid,
+                        name: 'Unknown',
+                        phone: '',
+                        gender: '',
+                        address: {
+                            street: '',
+                            division: '',
+                            city: '',
+                            postcode: '',
+                            country: 'Bangladesh'
+                        }
+                    }
+                    setUserDetails(userObj);
+                    localStorage.setItem('userDetails', JSON.stringify(userObj));
                 });
             }
         }

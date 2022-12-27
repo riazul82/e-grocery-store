@@ -37,8 +37,8 @@ const Profile = () => {
                                 </div>
                                 <div className="profileDesc">
                                     <p className="name">{userDetails.name ? userDetails.name : 'Unknown'}</p>
-                                    <p className="location"><SlLocationPin className="locationIcon" /><span>{userDetails.address ? `${userDetails.address.division}, ${userDetails.address.country}` : 'Dhaka, Bangladesh'}</span></p>
-                                    <p className="joined"><FiCalendar className="locationIcon" /><span>{`Joined - ${userDetails.joinDate ? userDetails.joinDate : 'Month, YYYY'}`}</span></p>
+                                    <p className="location"><SlLocationPin className="locationIcon" /><span>{userDetails.address ? `${userDetails.address.division}, ${userDetails.address.country}` : 'Bangladesh'}</span></p>
+                                    <p className="joined"><FiCalendar className="locationIcon" /><span>{`Joined - ${userDetails.joinedDate ? userDetails.joinedDate : 'Month, YYYY'}`}</span></p>
                                 </div>
                             </div>
                             <div className="profileDetails">

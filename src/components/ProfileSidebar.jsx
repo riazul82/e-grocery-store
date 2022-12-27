@@ -21,6 +21,8 @@ const ProfileSidebar = () => {
         try {
             await signOut(auth);
             dispatch({type: 'LOGOUT'});
+            localStorage.removeItem('userDetails');
+            localStorage.removeItem("cartItems");
             navigate('/');
         } catch (err) {
             console.log(err.message);

@@ -28,7 +28,7 @@ const UpdateProfile = () => {
             email: userDetails.email,
             phone: '',
             gender: '',
-            joinedDate: '',
+            joinedDate: userDetails.joinedDate,
             address: {
                 street: '',
                 division: '',
@@ -197,8 +197,8 @@ const UpdateProfile = () => {
                                 </div>
                                 <div className="profileDesc">
                                     <p className="name">{user.name}</p>
-                                    <p className="location"><SlLocationPin className="locationIcon" /><span>{`${user.address.division}, ${user.address.country}`}</span></p>
-                                    <p className="joined"><FiCalendar className="locationIcon" /><span>{`Joined - ${user.joinedDate ? user.joinedDate : 'January, 2022'}`}</span></p>
+                                    <p className="location"><SlLocationPin className="locationIcon" /><span>{user.address ? `${user.address.division}, ${user.address.country}` : user.address.country}</span></p>
+                                    <p className="joined"><FiCalendar className="locationIcon" /><span>{`Joined - ${user.joinedDate ? user.joinedDate : 'Month, YYYY'}`}</span></p>
                                 </div>
                             </div>
 
