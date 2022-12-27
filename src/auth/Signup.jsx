@@ -6,6 +6,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, fs } from '../firebase';
 import { AiFillWarning } from 'react-icons/ai'; // icon
 
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 const Signup = () => {
     const [user, setUser] = useState({email: '', password: '', confirmPassword: ''});
     const [error, setError] = useState({flag: false, code: null, message: ''});
@@ -37,7 +39,13 @@ const Signup = () => {
             const user = userCredential.user;
             console.log(user);
             dispatch({type: 'LOGIN', payload: user});
-            addUserToFireStore('users', userCredential.user.uid, {email: user.email, role: 'user'});
+
+            let dt = new Date();
+            let monthIndex = dt.getMonth();
+            let year = dt.getFullYear();
+            let joinedDate = `${monthNames[monthIndex]}, ${year}`;
+
+            addUserToFireStore('users', userCredential.user.uid, {email: user.email, role: 'user', joinedDate });
             setUser({email: '', password: '', confirmPassword: ''});
             setError({flag: false, code: null, message: ''});
             navigate('/');

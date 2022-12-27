@@ -127,10 +127,12 @@ const AddProductForm = () => {
         });
     }
 
+    // preview box show or hide
     const handleClick = () => {
         setPreviewToggle(!previewToggle);
     }
 
+    // show focused input field on preview
     const handleFocus = (inputType) => {
         const myObj = {
             name: false,

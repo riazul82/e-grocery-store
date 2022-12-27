@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { SlLocationPin } from 'react-icons/sl';
 import { FiCalendar } from 'react-icons/fi';
 import ProfileSidebar from '../components/ProfileSidebar';
+import { UserDetailsContext } from '../context/UserDetailsProvider';
 
 import profileImg from '../assets/images/categories/biscuits.jpg';
 
 const Profile = () => {
-    const [checked, setChecked] = useState(true);
+    const userDetails = useContext(UserDetailsContext);
+    const [gender, setGender] = useState(null);
 
-    const handleCheckbox = () => {
-        setChecked(true);
+    const handleRadioInput = () => {
+        setGender(userDetails.gender ? (userDetails.gender === 'male' ? 'male' : 'female') : null);
     }
+
+    useEffect(() => {
+        handleRadioInput();
+    });
+
+    
 
     return (
         <>
@@ -25,40 +33,40 @@ const Profile = () => {
                         <div className="profileContent">
                             <div className="profileHeader">
                                 <div className="profileImage">
-                                    <img src={profileImg} alt="profile" />
+                                    <img src={userDetails.imgUrl || profileImg} alt="profile" />
                                 </div>
                                 <div className="profileDesc">
-                                    <p className="name">Riazul Islam</p>
-                                    <p className="location"><SlLocationPin className="locationIcon" /><span>Sylhet, Bangladesh</span></p>
-                                    <p className="joined"><FiCalendar className="locationIcon" /><span>Joined - January, 2022</span></p>
+                                    <p className="name">{userDetails.name ? userDetails.name : 'Unknown'}</p>
+                                    <p className="location"><SlLocationPin className="locationIcon" /><span>{userDetails.address ? `${userDetails.address.division}, ${userDetails.address.country}` : 'Dhaka, Bangladesh'}</span></p>
+                                    <p className="joined"><FiCalendar className="locationIcon" /><span>{`Joined - ${userDetails.joinDate ? userDetails.joinDate : 'Month, YYYY'}`}</span></p>
                                 </div>
                             </div>
                             <div className="profileDetails">
                                 <div className="profileDetailsInfo">
                                     <div className="inputField">
                                         <label htmlFor="name">Full name</label>
-                                        <input type="text" id="name" placeholder="Full name" />
+                                        <input type="text" id="name" value={userDetails.name ? userDetails.name : null} placeholder="Full name" disabled />
                                     </div>
 
                                     <div className="inputField">
                                         <label htmlFor="email">Email</label>
-                                        <input type="email" id="email" placeholder="Email" />
+                                        <input type="email" id="email" value={userDetails.email ? userDetails.email : null} placeholder="Email" disabled />
                                     </div>
 
                                     <div className="inputField">
                                         <label htmlFor="phone">Phone</label>
-                                        <input type="phone" id="phone" placeholder="Phone" />
+                                        <input type="phone" id="phone" value={userDetails.phone ? userDetails.phone : null} placeholder="Phone" disabled />
                                     </div>
 
                                     <div className="genderInput">
                                         <p>Gender</p>
                                         <div className="genderInputField">
                                             <label htmlFor="male">
-                                                <input type="radio" name="gender" id="male" value="male" /> 
+                                                <input type="radio" name="gender" id="male" value="male" onChange={handleRadioInput} checked={(gender !== null && gender === 'male') ? true : false} /> 
                                                 Male
                                             </label>
                                             <label htmlFor="female">
-                                                <input type="radio" name="gender" id="female" value="female" /> 
+                                                <input type="radio" name="gender" id="female" value="female" onChange={handleRadioInput} checked={(gender !== null && gender === 'female') ? true : false} />
                                                 Female
                                             </label>
                                         </div>
@@ -66,32 +74,26 @@ const Profile = () => {
 
                                     <div className="addressInput">
                                         <p>Address:</p>
-                                        <div className="useCurrentAddress">
-                                            <input type="checkbox" id="location" value="location" checked={checked} onChange={handleCheckbox} />
-                                            <label htmlFor="location">
-                                                Current location
-                                            </label>
-                                        </div>
                                         
                                         <div className="addressInputField">
                                             <div className="inputField">
                                                 <label htmlFor="street">Street</label>
-                                                <input type="text" name="street" id="street" placeholder="Street address" />
+                                                <input type="text" name="street" id="street" value={userDetails.address ? userDetails.address.street : null} placeholder="Street address" disabled />
                                             </div>
 
                                             <div className="inputField">
                                                 <label htmlFor="division">Division</label>
-                                                <input type="text" name="division" id="division" placeholder="Division" />                                        
+                                                <input type="text" name="division" id="division" value={userDetails.address ? userDetails.address.division : null} placeholder="Division" disabled />                                        
                                             </div>
 
                                             <div className="inputField">
                                                 <label htmlFor="city">City</label>
-                                                <input type="text" name="city" id="city" placeholder="City" />                                        
+                                                <input type="text" name="city" id="city" value={userDetails.address ? userDetails.address.city : null} placeholder="City" disabled />                                        
                                             </div>
 
                                             <div className="inputField">
                                                 <label htmlFor="zip">ZIP/Postcode</label>
-                                                <input type="number" name="zip" id="zip" placeholder="ZIP/Postcode" />                                        
+                                                <input type="number" name="zip" id="zip" value={userDetails.address ? userDetails.address.postcode : null} placeholder="ZIP/Postcode" disabled />                                        
                                             </div>
                                             
                                             <div className="inputField">
