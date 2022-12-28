@@ -1,10 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+
+// components
 import Navbar from '../components/Navbar';
-import { GoSearch } from 'react-icons/go';
-import SubProducts from '../components/SubProducts';
-import Product from '../components/Product';
 import Footer from '../components/Footer';
+import Product from '../components/Product';
+import SubProducts from '../components/SubProducts';
+
+// icons
+import { GoSearch } from 'react-icons/go';
 import { ProductsContext } from '../context/ProductsContextProvider';
 
 
@@ -72,13 +76,10 @@ const Products = () => {
                     {
                         filteredItems.length ?
                         <div className="filteredItemsWrap">
-                            {
-                                filteredItems.map((item) => {
-                                    return <Product key={item.id} data={item} />
-                                })
-                            }
-                        </div> :
-                        <p className="notFoundTxt">No items found!</p>
+                            {filteredItems.map((item) => {
+                                return <Product key={item.id} data={item} />
+                            })}
+                        </div> : <p className="notFoundTxt">No items found!</p>
                     }
                 </div>
 
