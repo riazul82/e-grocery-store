@@ -170,6 +170,129 @@
             }
         }
 
+        .checkoutForm {
+            flex: 2;
+
+            .inputField {
+                margin-bottom: 2rem;
+                display: flex;
+                width: 100%;
+                height: auto;
+                align-items: center;
+
+                label {
+                    width: 200px;
+                    color: #ddd;
+                    font-size: 1.2rem;
+                }
+
+                input {
+                    padding-left: 1rem;
+                    color: #ddd;
+                    font-size: 1.1rem;
+                    height: 2.4rem;
+                    width: 410px;
+                    border: none;
+                    outline: none;
+                    background: #222;
+                    border-radius: 0.1rem;
+                    box-shadow: 0.1rem 0.1rem 0.2rem #111;
+                }
+            }
+
+            .addressInput {
+                margin-top: 3rem;
+
+                p {
+                    color: seagreen;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    margin-bottom: 2rem;
+                }
+            }
+
+            .buttonField {
+                margin-top: 2rem;
+
+                .checkoutSubmitBtn {
+                    margin-top: 1.4rem;
+                    padding: 0.3rem 0.8rem 0.5rem;
+                    color: #fff;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    border: none;
+                    outline: none;
+                    background: seagreen;
+                    border-radius: 0.2rem;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .paymentMethods {
+            flex: 2;
+
+            .selectPaymentTitle {
+                color: #ddd;
+                font-size: 1.2rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+            }
+
+            .selectPaymentMethod {
+                margin-top: 1.4rem;
+                display: block;
+
+                label {
+                    margin-bottom: 1rem;
+                    padding: 0 1rem;
+                    display: flex;
+                    width: 380px;
+                    height: 4rem;
+                    align-items: center;
+                    justify-content: space-between;
+                    background-image: linear-gradient(12deg, rgba(193, 193, 193,0.05) 0%, rgba(193, 193, 193,0.05) 2%,rgba(129, 129, 129,0.05) 2%, rgba(129, 129, 129,0.05) 27%,rgba(185, 185, 185,0.05) 27%, rgba(185, 185, 185,0.05) 66%,rgba(83, 83, 83,0.05) 66%, rgba(83, 83, 83,0.05) 100%),linear-gradient(321deg, rgba(240, 240, 240,0.05) 0%, rgba(240, 240, 240,0.05) 13%,rgba(231, 231, 231,0.05) 13%, rgba(231, 231, 231,0.05) 34%,rgba(139, 139, 139,0.05) 34%, rgba(139, 139, 139,0.05) 71%,rgba(112, 112, 112,0.05) 71%, rgba(112, 112, 112,0.05) 100%),linear-gradient(236deg, rgba(189, 189, 189,0.05) 0%, rgba(189, 189, 189,0.05) 47%,rgba(138, 138, 138,0.05) 47%, rgba(138, 138, 138,0.05) 58%,rgba(108, 108, 108,0.05) 58%, rgba(108, 108, 108,0.05) 85%,rgba(143, 143, 143,0.05) 85%, rgba(143, 143, 143,0.05) 100%),linear-gradient(96deg, rgba(53, 53, 53,0.05) 0%, rgba(53, 53, 53,0.05) 53%,rgba(44, 44, 44,0.05) 53%, rgba(44, 44, 44,0.05) 82%,rgba(77, 77, 77,0.05) 82%, rgba(77, 77, 77,0.05) 98%,rgba(8, 8, 8,0.05) 98%, rgba(8, 8, 8,0.05) 100%),linear-gradient(334deg, hsl(247,0%,2%),hsl(247,0%,2%));                        
+                    border-radius: 0.2rem;
+                    cursor: pointer;
+
+                    input[type="radio"] {
+                        transform: scale(1.2);
+                    }
+
+                    .paymentMethod {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+
+                        .paymentIcon {
+                            color: #888;
+                            font-size: 1.6rem;
+                        }
+
+                        p {
+                            color: #eee;
+                            margin-left: 0.6rem;
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+
+                .paymentConfirmBtn {
+                    margin-top: 0.4rem;
+                    padding: 0.3rem 0.8rem 0.5rem;
+                    color: #fff;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    border: none;
+                    outline: none;
+                    background: seagreen;
+                    border-radius: 0.2rem;
+                    cursor: pointer;
+                }
+            }
+        }
+
         .cartDetails {
             flex: 1;
             
@@ -197,7 +320,7 @@
                     }
 
                     p:nth-child(1) {
-                        color: #36b86e;
+                        color: #4bb96a;
                         font-weight: 500;
                     }
                 }
@@ -209,7 +332,7 @@
                     height: 42px;
                     align-items: center;
                     justify-content: space-between;
-                    border: 2px dashed #36b86e;
+                    border: 2px dashed #4bb96a;
                     border-radius: 0.1rem;
 
                     input {
@@ -222,7 +345,7 @@
                         width: 70%;
                         border: none;
                         outline: none;
-                        border-right: 2px dashed #36b86e;
+                        border-right: 2px dashed #4bb96a;
                         background: transparent;
                         box-sizing: border-box;
                         border-radius: 0.1rem;
@@ -236,7 +359,7 @@
                     }
 
                     button {
-                        color: #36b86e;
+                        color: #4bb96a;
                         height: 100%;
                         width: 30%;
                         border: none;

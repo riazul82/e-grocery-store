@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import CartProduct from '../components/CartProduct';
 import { ToastContainer, toast } from 'react-toastify';
@@ -65,7 +66,7 @@ const Cart = () => {
                     <Link to="/cart" className="cartLink link active">1. Cart</Link>
                     <Link to="/checkout" className="cartLink link">2. Details</Link>
                     <Link to="/payment" className="cartLink link">3. Payment</Link>
-                    <Link to="/profile" className="cartLink link">4. Review</Link>
+                    <Link to="/review" className="cartLink link">4. Review</Link>
                     <div className="darkLine"></div>
                     <div className="redLine" style={{width: '0%'}}></div>
                 </div>
@@ -104,6 +105,7 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
             <ToastContainer
                 position="top-right"
                 autoClose={5000}

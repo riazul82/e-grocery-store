@@ -21,6 +21,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import UploadProducts from './pages/admin/UploadProducts';
 import Error404 from './pages/Error404';
+import Review from './pages/Review';
 
 const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/cart" element={<RequireAuth><Cart/></RequireAuth>} />
           <Route path="/checkout" element={<RequireAuth><Checkout/></RequireAuth>} />
           <Route path="/payment" element={<RequireAuth><Payment/></RequireAuth>} />
+          <Route path="/review" element={<RequireAuth><Review/></RequireAuth>} />
           <Route path="/contact" element={<RequireAuth><Contact /></RequireAuth>} />
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/signup" element={<Signup />} />

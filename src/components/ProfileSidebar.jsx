@@ -23,6 +23,8 @@ const ProfileSidebar = () => {
             dispatch({type: 'LOGOUT'});
             localStorage.removeItem('userDetails');
             localStorage.removeItem("cartItems");
+            localStorage.removeItem('checkoutFormFilled');
+            localStorage.removeItem('checkoutUserDetails');
             navigate('/');
         } catch (err) {
             console.log(err.message);

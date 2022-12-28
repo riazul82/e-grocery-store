@@ -26,7 +26,7 @@ const reducer = (state, action) => {
                 return elem.id !== action.payload.id;
             });
 
-            return {...state, cartItems: [...cartItems]}
+            return {...state, cartItems: [...cartItems]};
 
         case 'CONTROL_QUANTITY':
             let updatedItems = state.cartItems.map((elem) => {
