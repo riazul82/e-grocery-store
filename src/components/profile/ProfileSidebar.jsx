@@ -19,15 +19,30 @@ const ProfileSidebar = () => {
 
     const navigate = useNavigate();
 
+    const removeLocalStorageData = () => {
+        localStorage.removeItem("userDetails");
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("checkoutFormFilled");
+        localStorage.removeItem("checkoutUserDetails");
+    }
+
     const handleLogout = async () => {
         try {
             await signOut(auth);
             dispatch({type: 'LOGOUT'});
-            localStorage.removeItem("userDetails");
-            localStorage.removeItem("cartItems");
-            localStorage.removeItem("checkoutFormFilled");
-            localStorage.removeItem("checkoutUserDetails");
+            removeLocalStorageData();
             navigate('/');
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+    const handleRedirectAdmin = async () => {
+        try {
+            await signOut(auth);
+            dispatch({type: 'LOGOUT'});
+            removeLocalStorageData();
+            navigate('/admin/login');
         } catch (err) {
             console.log(err.message);
         }
@@ -52,11 +67,11 @@ const ProfileSidebar = () => {
                     <CgList className="sidebarIcon"/>
                     <p>My Orders</p>
                 </Link>
-                <Link to="/admin/login" className="link sidebarLink">
+                <div className="sidebarLink" onClick={handleRedirectAdmin}>
                     <MdOutlineSwitchAccount className="sidebarIcon"/>
                     <p>Switch to Admin</p>
-                </Link>
-                <div className="link sidebarLink" onClick={handleLogout}>
+                </div>
+                <div className="sidebarLink" onClick={handleLogout}>
                     <MdOutlineExitToApp className="sidebarIcon"/>
                     <p>Log out</p>
                 </div>
