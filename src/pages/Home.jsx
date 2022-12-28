@@ -4,10 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 // components
 import Navbar from '../components/Navbar';
 import Title from '../components/Title';
-import CategoryLinks from '../components/CategoryLinks';
-import VoucherCard from '../components/VoucherCard';
-import SubProducts from '../components/SubProducts';
-import ServiceCard from '../components/ServiceCard';
+import CategoryLinks from '../components/home/CategoryLinks';
+import VoucherCard from '../components/home/VoucherCard';
+import SubProducts from '../components/products/SubProducts';
+import ServiceCard from '../components/home/ServiceCard';
 import Footer from '../components/Footer';
 
 // icons
@@ -16,7 +16,7 @@ import { FiPhoneCall } from 'react-icons/fi';
 import { ProductsContext } from '../context/ProductsContextProvider';
 
 // image
-import bannarImg from '../assets/images/bannar/img1.jpg';
+import bannarImg from '../assets/images/project/bannar.jpg';
 
 const serviceCardData = [
     {title: 'Fresh Products', desc: 'Illum qutem optio alias ducimus dignissimos conseture undeiurer sapiente explicabo dolore pariatur eligendite amet asperiores lorem ipsum dolor sit amet consect adipisicing elit.'},

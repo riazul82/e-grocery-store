@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 // components
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Product from '../components/Product';
-import SubProducts from '../components/SubProducts';
+import Product from '../components/products/Product';
+import SubProducts from '../components/products/SubProducts';
 
 // icons
 import { GoSearch } from 'react-icons/go';

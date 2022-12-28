@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
+
+// firebase
+import { fs, storage } from '../../firebase';
+import { addDoc, collection } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+// icons
 import { MdUpload } from 'react-icons/md';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { fs, storage } from '../../firebase';
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
+
+// toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -46,11 +52,12 @@ const AddProductForm = () => {
         return (() => URL.revokeObjectURL(objUrl));
     }, [selectedImg]);
 
+    // handle input change
     const handleChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     }
 
-    // upload data to firestore
+    // upload product data to firestore
     const addDataToFireStore = async (product) => {
         try {
             await addDoc(collection(fs, "products"), product);
@@ -59,6 +66,7 @@ const AddProductForm = () => {
         }
     }
 
+    // submit product data
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -145,6 +153,7 @@ const AddProductForm = () => {
             img: false
         };
 
+        // set active input field
         for(let key in myObj) {
             myObj[key] = false;
 
@@ -166,18 +175,7 @@ const AddProductForm = () => {
 
     return (
         <>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-            />
+            {/* product upload form */}
             <form onSubmit={handleSubmit} className="addProductForm">
                 <input type="text" name="name" value={product.name} onFocus={() => handleFocus('name')} onChange={handleChange} placeholder="Product name" required />
                 <input type="number" name="price" min='0' value={product.price} onFocus={() => handleFocus('price')} onChange={handleChange} placeholder="Product price" required />
@@ -240,12 +238,14 @@ const AddProductForm = () => {
                 <button type="submit" disabled={btnDisabled}>Add Product</button>
             </form>
 
+            {/* form preview button */}
             <div className="formPreviewBtn" onClick={handleClick}>
                 {previewToggle ? <BsEye className="previewIcon" /> :
                     <BsEyeSlash className="previewIcon" />}
                 <p>Preview</p>
             </div>
 
+            {/* form preview box */}
             <div className={`formPreviewBox ${previewToggle ? 'active' : null}`}>
                 <div className="formPreviewText">
                     <div>
@@ -310,6 +310,18 @@ const AddProductForm = () => {
                     <p>{selectedImg === null ? '--:--' : `${(selectedImg.size / 1000).toFixed(2)}KB`}</p>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </>
     );
 }

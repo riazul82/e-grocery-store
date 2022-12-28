@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+// components
+import Product from './Product';
+
+// icons
 import { RxDoubleArrowRight } from 'react-icons/rx';
-import Product from '../components/Product';
 
 const CategoryProducts = ({ title, items }) => {
     useEffect(() => {
@@ -18,11 +22,9 @@ const CategoryProducts = ({ title, items }) => {
                 </div>
             </div>
             <div className="subProductsWrap">
-                {
-                    items && items.map((item) => {
-                        return <Product key={item.id} data={item} />
-                    })
-                }
+                {items && items.map((item) => {
+                    return <Product key={item.id} data={item} />
+                })}
             </div>
         </div>
     );

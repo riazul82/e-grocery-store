@@ -1,28 +1,38 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+// components
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import { GoCreditCard } from 'react-icons/go';
-import { IoWalletOutline } from 'react-icons/io5';
-import 'react-toastify/dist/ReactToastify.css';
 
-import { fs } from '../../firebase';
-import { doc, setDoc } from "firebase/firestore";
-import { collection, addDoc } from "firebase/firestore"; 
-
+// context
 import { CartContext } from '../../context/CartContextProvider';
 import { UserDetailsContext } from '../../context/UserDetailsProvider';
 
+// firebase
+import { fs } from '../../firebase';
+import { doc, setDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+
+// icons
+import { GoCreditCard } from 'react-icons/go';
+import { IoWalletOutline } from 'react-icons/io5';
+
+// toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Payment = () => {
-    const { cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, dispatch } = useContext(CartContext);
+    const { cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, NEW_USER_VOUCHER, WINTER_VOUCHER, dispatch } = useContext(CartContext);
+    
+    // states
     const userDetails = useContext(UserDetailsContext);
     const [voucherCode, setVoucherCode] = useState(
         localStorage.getItem("voucherCode") || ''
     );
     const [paymentMethod, setPaymentMethod] = useState('');
-
+    
+    // track active voucher
     const [disableFlag, setDisableFlag] = useState(
         Boolean(localStorage.getItem("winterVoucher")) || 
         Boolean(localStorage.getItem("newUserVoucher")) || false
@@ -31,6 +41,7 @@ const Payment = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // if purchase amount < 500, then remove voucher
         if (Boolean(localStorage.getItem("newUserVoucher")) && subTotal + shippingCost < 500) {
             dispatch({type: 'REMOVE_DISCOUNT'});
             localStorage.removeItem("voucherCode");
@@ -39,26 +50,27 @@ const Payment = () => {
         }
     }, [voucherCode, disableFlag, shippingCost, subTotal, dispatch]);
 
+    // handle voucher input
     const handleVoucherCode = (e) => {
-        setVoucherCode(e.target.value);
+        setVoucherCode((e.target.value).split(' ').join('').toUpperCase());
     }
 
+    // apply or remove voucher
     const handleVoucher = (e) => {
         e.preventDefault();
-
         if (disableFlag === true) {
             dispatch({type: 'REMOVE_DISCOUNT'});
             localStorage.removeItem("voucherCode");
             setDisableFlag(false);
             setVoucherCode('');
-        } else if (voucherCode === 'AZ8Y69' && totalCost < 500) {
+        } else if (voucherCode === NEW_USER_VOUCHER && totalCost < 500) {
             toast.error('Error! Purchase above Rs.500!');
-        } else if (voucherCode === 'AZ8Y69') {
+        } else if (voucherCode === NEW_USER_VOUCHER) {
             dispatch({type: 'NEWUSER_DISCOUNT'});
             toast.success('NEW USER DISCOUNT ADDED!');
             localStorage.setItem("voucherCode", voucherCode);
             setDisableFlag(true);
-        } else if (voucherCode === 'K6PZ8X') {
+        } else if (voucherCode === WINTER_VOUCHER) {
             dispatch({type: 'WINTER_DISCOUNT'});
             toast.success('WINTER DISCOUNT ADDED!');
             localStorage.setItem("voucherCode", voucherCode);
@@ -74,6 +86,7 @@ const Payment = () => {
         setPaymentMethod(e.target.value);
     }
 
+    // store order details to firestore
     const storeOrderDetails = async (orderDetails) => {
         console.log(orderDetails);
         try {
@@ -88,7 +101,11 @@ const Payment = () => {
             }
             
             const userRef = doc(fs, 'users', userDetails.id);
-            setDoc(userRef, {orderList}, { merge: true });
+            setDoc(userRef, {
+                orderList,
+                isWinterVoucherAdded: Boolean(localStorage.getItem("winterVoucher")) || false,
+                isNewUserVoucherAdded: Boolean(localStorage.getItem("newUserVoucher")) || false,
+            }, {merge: true});
             toast.success('Order placed successful!');
             setTimeout(() => {
                 navigate('/review');
@@ -98,10 +115,9 @@ const Payment = () => {
         }
     }
 
+    // confirm order
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Hello');
-
         if (paymentMethod === 'cashon') {
             const orderDetails = {
                 orderItems: cartItems,
@@ -112,6 +128,8 @@ const Payment = () => {
                 totalCost: totalCost,
                 time: new Date().toUTCString(),
                 paymentStatus: 'unpaid',
+                isWinterVoucherAdded: Boolean(localStorage.getItem("winterVoucher")) || false,
+                isNewUserVoucherAdded: Boolean(localStorage.getItem("newUserVoucher")) || false,
                 shippingInfo: JSON.parse(localStorage.getItem('checkoutUserDetails'))
             }
             storeOrderDetails(orderDetails);
@@ -154,6 +172,7 @@ const Payment = () => {
                             <button className="paymentConfirmBtn">Confirm Order</button>
                         </form>
                     </div>
+                    
                     <div className="cartDetails">
                         <div className="cartTotalPriceBox">
                             <div className="cartPriceBox subTotalBox">
@@ -166,7 +185,7 @@ const Payment = () => {
                             </div>
                             <div className="cartPriceBox shippingCostBox">
                                 <p>Discuont </p>
-                                <p>{`${newUserDiscount ? `${discount}+${newUserDiscount}` : winterDiscount ? `${discount}+${winterDiscount}` : discount}`}Tk</p>
+                                <p>{`${newUserDiscount ? `${discount}+${newUserDiscount.toFixed(1)}` : winterDiscount ? `${discount}+${winterDiscount.toFixed(1)}` : discount}`}Tk</p>
                             </div>
 
                             <div className="voucherInputBox">

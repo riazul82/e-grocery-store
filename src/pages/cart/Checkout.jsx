@@ -1,15 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+// components
 import Navbar from '../../components/Navbar';
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../../components/Footer';
 
+// context
 import { CartContext } from '../../context/CartContextProvider';
 
+// toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const Checkout = () => {
-    const { subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, dispatch } = useContext(CartContext);
+    const { subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, NEW_USER_VOUCHER, WINTER_VOUCHER, dispatch } = useContext(CartContext);
+    
+    // states
     const [voucherCode, setVoucherCode] = useState(
         localStorage.getItem("voucherCode") || ''
     );
@@ -29,15 +36,17 @@ const Checkout = () => {
             }
         }
     );
-
-    const navigate = useNavigate();
-
+    
+    // track active voucher
     const [disableFlag, setDisableFlag] = useState(
         Boolean(localStorage.getItem("winterVoucher")) || 
         Boolean(localStorage.getItem("newUserVoucher")) || false
     );
 
+    const navigate = useNavigate();
+
     useEffect(() => {
+        // if purchase amount < 500, then remove voucher
         if (Boolean(localStorage.getItem("newUserVoucher")) && subTotal + shippingCost < 500) {
             dispatch({type: 'REMOVE_DISCOUNT'});
             localStorage.removeItem("voucherCode");
@@ -46,26 +55,27 @@ const Checkout = () => {
         }
     }, [voucherCode, disableFlag, shippingCost, subTotal, dispatch]);
 
+    // handle voucher input
     const handleVoucherCode = (e) => {
-        setVoucherCode(e.target.value);
+        setVoucherCode((e.target.value).split(' ').join('').toUpperCase());
     }
 
+    // apply or remove voucher
     const handleVoucher = (e) => {
         e.preventDefault();
-
         if (disableFlag === true) {
             dispatch({type: 'REMOVE_DISCOUNT'});
             localStorage.removeItem("voucherCode");
             setDisableFlag(false);
             setVoucherCode('');
-        } else if (voucherCode === 'AZ8Y69' && totalCost < 500) {
+        } else if (voucherCode === NEW_USER_VOUCHER && totalCost < 500) {
             toast.error('Error! Purchase above Rs.500!');
-        } else if (voucherCode === 'AZ8Y69') {
+        } else if (voucherCode === NEW_USER_VOUCHER) {
             dispatch({type: 'NEWUSER_DISCOUNT'});
             toast.success('NEW USER DISCOUNT ADDED!');
             localStorage.setItem("voucherCode", voucherCode);
             setDisableFlag(true);
-        } else if (voucherCode === 'K6PZ8X') {
+        } else if (voucherCode === WINTER_VOUCHER) {
             dispatch({type: 'WINTER_DISCOUNT'});
             toast.success('WINTER DISCOUNT ADDED!');
             localStorage.setItem("voucherCode", voucherCode);
@@ -76,6 +86,7 @@ const Checkout = () => {
         }
     }
 
+    // handle checkout input change
     const handleChange = (e) => {
         let name = e.target.name;
 
@@ -106,6 +117,7 @@ const Checkout = () => {
         }
     }
 
+    // submit checkout form
     const handleSubmit = (e) => {
         e.preventDefault();
         localStorage.setItem('checkoutUserDetails', JSON.stringify(user));
@@ -190,7 +202,7 @@ const Checkout = () => {
                             </div>
                             <div className="cartPriceBox shippingCostBox">
                                 <p>Discuont </p>
-                                <p>{`${newUserDiscount ? `${discount}+${newUserDiscount}` : winterDiscount ? `${discount}+${winterDiscount}` : discount}`}Tk</p>
+                                <p>{`${newUserDiscount ? `${discount}+${newUserDiscount.toFixed(1)}` : winterDiscount ? `${discount}+${winterDiscount.toFixed(1)}` : discount}`}Tk</p>
                             </div>
 
                             <div className="voucherInputBox">

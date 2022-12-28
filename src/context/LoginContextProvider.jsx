@@ -9,8 +9,10 @@ const reducer = (state, action) => {
         case 'ADMIN_LOGIN':
             return {currentAdmin: action.payload, currentUser: null}
         case 'LOGOUT':
+            document.location.reload();
             return {currentUser: null, currentAdmin: null}
         case 'ADMIN_LOGOUT':
+            document.location.reload();
             return {currentUser: null, currentAdmin: null}
         default:
             return state;
@@ -32,6 +34,11 @@ const LoginContextProvider = ({ children }) => {
 
         if (state.currentUser === null) {
             localStorage.removeItem("user");
+            localStorage.removeItem("userDetails");
+            localStorage.removeItem("newUserVoucher");
+            localStorage.removeItem("winterVoucher");
+            localStorage.removeItem("voucherCode");
+            localStorage.removeItem("checkoutFormFilled");
         } 
 
         if (state.currentAdmin) {

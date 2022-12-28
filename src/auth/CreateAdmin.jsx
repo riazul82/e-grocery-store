@@ -1,10 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../context/LoginContextProvider';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+
+// firebase
 import { auth, fs } from '../firebase';
-import { AiFillWarning } from 'react-icons/ai'; // icon
+import { doc, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+// icons
+import { AiFillWarning } from 'react-icons/ai';
 
 const CreateAdmin = () => {
     const [admin, setUser] = useState({email: '', password: '', confirmPassword: ''});
@@ -13,10 +17,12 @@ const CreateAdmin = () => {
     const navigate = useNavigate();
     const { dispatch } = useContext(LoginContext);
 
+    // handle input change
     const handleChange = (e) => {
         setUser({...admin, [e.target.name]: e.target.value});
     }
 
+    // save admin info to firestore
     const addUserToFireStore = async (colName, docName, data) => {
         try {
             await setDoc(doc(fs, colName, docName), data);
@@ -35,7 +41,6 @@ const CreateAdmin = () => {
         createUserWithEmailAndPassword(auth, admin.email, admin.password)
         .then((userCredential) => {
             const admin = userCredential.user;
-            console.log(admin);
             dispatch({type: 'ADMIN_LOGIN', payload: admin});
             addUserToFireStore('users', userCredential.user.uid, {email: admin.email, role: 'admin'});
             setUser({email: '', password: '', confirmPassword: ''});
@@ -76,4 +81,4 @@ const CreateAdmin = () => {
     );
 }
 
-export default CreateAdmin
+export default CreateAdmin;

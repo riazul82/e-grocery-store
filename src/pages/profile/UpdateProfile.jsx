@@ -1,25 +1,33 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Navbar from '../../components/Navbar';
-import { SlLocationPin } from 'react-icons/sl';
-import { FiCalendar } from 'react-icons/fi';
-import ProfileSidebar from '../../components/ProfileSidebar';
 import { UserDetailsContext } from '../../context/UserDetailsProvider';
 
+// components
+import Navbar from '../../components/Navbar';
+import ProfileSidebar from '../../components/profile/ProfileSidebar';
+
+// icons
+import { SlLocationPin } from 'react-icons/sl';
+import { FiCalendar } from 'react-icons/fi';
+
+// firebase
 import { fs, storage } from '../../firebase';
+import { doc, setDoc } from "firebase/firestore";
 import { deleteObject } from "firebase/storage";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+
+// toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import profileImg from '../../assets/images/categories/biscuits.jpg';
+import profileImg from '../../assets/images/project/shopping.png';
 
 const UpdateProfile = () => {
     const userDetails = useContext(UserDetailsContext);
+
+    // states
     const [profileImage, setProfileImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [btnDisabled, setBtnDisabled] = useState(false);
-
     const [user, setUser] = useState(
         JSON.parse(localStorage.getItem('userDetails')) ||
         {
@@ -51,6 +59,7 @@ const UpdateProfile = () => {
         return (() => URL.revokeObjectURL(objUrl));
     }, [profileImage]);
 
+    // handle form input change
     const handleChange = (e) => {
         let name = e.target.name;
 
@@ -71,6 +80,7 @@ const UpdateProfile = () => {
         }
     }
 
+    // store profile details to firestore
     const updateProfileData = async (user, hasImg) => {
         try {
             await setDoc(doc(fs, "users", userDetails.id), user);
@@ -86,6 +96,7 @@ const UpdateProfile = () => {
         }
     }
 
+    // update profile
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -96,11 +107,10 @@ const UpdateProfile = () => {
             updateProfileData(user, false);
             setBtnDisabled(false);
         } else {
-            // delete previous image
+            // delete previous image from storage
             if (userDetails.imgUrl) {
                 const desertRef = ref(storage, userDetails.imgUrl);
 
-                // Delete the file
                 deleteObject(desertRef).then(() => {
                     console.log('Previous image deleted!');
                 }).catch((error) => {
@@ -164,7 +174,6 @@ const UpdateProfile = () => {
                 success: 'Profile updated!',
                 error: 'An error occured!'
             });
-
         }
     }
 
@@ -173,7 +182,6 @@ const UpdateProfile = () => {
             <Navbar />
             <div className="userDetails">
                 <ProfileSidebar />
-
                 <div className="detailsInfo">
                     <div className="myProfile">
                         <h2>Update Profile</h2>
@@ -202,17 +210,14 @@ const UpdateProfile = () => {
                                         <label htmlFor="name">Full name</label>
                                         <input type="text" name="name" id="name" value={user.name} onChange={handleChange} placeholder="Full name" required />
                                     </div>
-
                                     <div className="inputField">
                                         <label htmlFor="email">Email</label>
                                         <input type="email" name="email" id="email" value={user.email} onChange={handleChange} placeholder="Email" disabled />
                                     </div>
-
                                     <div className="inputField">
                                         <label htmlFor="phone">Phone</label>
                                         <input type="number" name="phone" id="phone" value={user.phone} onChange={handleChange} placeholder="Phone" required />
                                     </div>
-
                                     <div className="genderInput">
                                         <p>Gender</p>
                                         <div className="genderInputField">
@@ -226,38 +231,31 @@ const UpdateProfile = () => {
                                             </label>
                                         </div>
                                     </div>
-
                                     <div className="addressInput">
                                         <p>Address:</p>
-                                        
                                         <div className="addressInputField">
                                             <div className="inputField">                
                                                 <label htmlFor="street">Street</label>
                                                 <input type="text" name="street" id="street" value={user.address.street} onChange={handleChange} placeholder="Street address" required />                                        
                                             </div>
-
                                             <div className="inputField">
                                                 <label htmlFor="division">Division</label>
                                                 <input type="text" name="division" id="division" value={user.address.division} onChange={handleChange} placeholder="Division" required />                                        
                                             </div>
-
                                             <div className="inputField">
                                                 <label htmlFor="city">City</label>
                                                 <input type="text" name="city" id="city" value={user.address.city} onChange={handleChange} placeholder="City" required />                                        
                                             </div>
-
                                             <div className="inputField">
                                                 <label htmlFor="postcode">ZIP/Postcode</label>
                                                 <input type="number" name="postcode" id="postcode" value={user.address.postcode} onChange={handleChange} placeholder="ZIP/Postcode" required />                                        
                                             </div>
-                                            
                                             <div className="inputField">
                                                 <label htmlFor="country">Country</label>
                                                 <input type="text" name="country" value={user.address.country} placeholder="Country" disabled />                                        
                                             </div>
                                         </div>
                                     </div>
-
                                     <div className="buttonField">
                                         <button type="submit" className="profileUpdateBtn" disabled={btnDisabled}>Update account</button>
                                     </div>

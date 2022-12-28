@@ -1,20 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import { GoSearch } from 'react-icons/go';
-import Product from '../components/Product';
-import CategoryProducts from '../components/CategoryProducts';
-import Footer from '../components/Footer';
 import { ProductsContext } from '../context/ProductsContextProvider';
+
+// components
+import Navbar from '../components/Navbar';
+import Product from '../components/products/Product';
+import CategoryProducts from '../components/products/CategoryProducts';
+import Footer from '../components/Footer';
+
+// icons
+import { GoSearch } from 'react-icons/go';
 
 const Category = () => {
     const {top, recent, popular, vegetables, fruits, meatFish, eggs, teaCoffe, spices, dryFruits, biscuitCake, jamJellie, breads} = useContext(ProductsContext);
+    
+    // states
     const [searchText, setSearchText] = useState('');
     const [searchTimer, setSearchTimer] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
 
     const { category } = useParams();
 
+    // set current category
     const currentItems = category === 'top' ?
     {item: top, title: 'Top Products'} :
     category === 'recent' ?
@@ -41,9 +48,9 @@ const Category = () => {
     {item: biscuitCake, title: 'Biscuits & Cakes'} :
     category === 'breads' ?
     {item: breads, title: 'Breads'} : null;
-
     
     useEffect(() => {
+        // search products
         const items = searchText !== '' && currentItems.item && currentItems.item.filter((item) => {
             const mainText = ''.concat(item.name, item.category, item.type, item.weight, item.unit).replace(/[^a-zA-Z0-9@]/g, '').toLowerCase();
             const srchText = searchText.replace(/[^a-zA-Z0-9@]/g, '').toLowerCase();
@@ -61,6 +68,7 @@ const Category = () => {
 
     }, [searchText, currentItems.item]);
 
+    // handle search input
     const handleSearch = (e) => {
         clearTimeout(searchTimer);
 
@@ -92,21 +100,17 @@ const Category = () => {
                     {
                         filteredItems.length ?
                         <div className="filteredItemsWrap">
-                            {
-                                filteredItems.map((item) => {
-                                    return <Product key={item.id} data={item} />
-                                })
-                            }
-                        </div> :
-                        <p className="notFoundTxt">No items found!</p>
+                            {filteredItems.map((item) => {
+                                return <Product key={item.id} data={item} />
+                            })}
+                        </div> : <p className="notFoundTxt">No items found!</p>
                     }
                 </div>
 
                 <div className="productItems" style={(searchText === '') ? {display: 'block'} : {display: 'none'}}>
                     {
-                        currentItems === null ? 
-                        null :
-                        <CategoryProducts title={currentItems.title} items={currentItems.item} />
+                        currentItems === null ?
+                        null : <CategoryProducts title={currentItems.title} items={currentItems.item} />
                     }
                 </div>
             </div>

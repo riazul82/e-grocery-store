@@ -1,4 +1,6 @@
 import React from 'react';
+
+// components
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import AddProductForm from '../../components/admin/AddProductForm';
 

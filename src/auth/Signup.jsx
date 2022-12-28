@@ -1,10 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../context/LoginContextProvider';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+
+// firebase
 import { auth, fs } from '../firebase';
-import { AiFillWarning } from 'react-icons/ai'; // icon
+import { doc, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+// icons
+import { AiFillWarning } from 'react-icons/ai';
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -15,10 +19,12 @@ const Signup = () => {
     const navigate = useNavigate();
     const { dispatch } = useContext(LoginContext);
 
+    // handle input change
     const handleChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value});
     }
 
+    // save user info to firestore
     const addUserToFireStore = async (colName, docName, data) => {
         try {
             await setDoc(doc(fs, colName, docName), data);
@@ -37,7 +43,6 @@ const Signup = () => {
         createUserWithEmailAndPassword(auth, user.email, user.password)
         .then((userCredential) => {
             const user = userCredential.user;
-            console.log(user);
             dispatch({type: 'LOGIN', payload: user});
 
             let dt = new Date();

@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../firebase';
-import { LoginContext } from '../context/LoginContextProvider';
+import { LoginContext } from '../../context/LoginContextProvider';
+
+// firebase
+import { auth } from '../../firebase';
+import { signOut } from 'firebase/auth';
 
 // icons
 import { BiUser } from 'react-icons/bi';
@@ -10,7 +13,6 @@ import { RxDashboard } from 'react-icons/rx';
 import { CgList } from 'react-icons/cg';
 import { MdOutlineExitToApp } from 'react-icons/md';
 import { MdOutlineSwitchAccount } from 'react-icons/md';
-import { signOut } from 'firebase/auth';
 
 const ProfileSidebar = () => {
     const { dispatch } = useContext(LoginContext);
@@ -21,10 +23,10 @@ const ProfileSidebar = () => {
         try {
             await signOut(auth);
             dispatch({type: 'LOGOUT'});
-            localStorage.removeItem('userDetails');
+            localStorage.removeItem("userDetails");
             localStorage.removeItem("cartItems");
-            localStorage.removeItem('checkoutFormFilled');
-            localStorage.removeItem('checkoutUserDetails');
+            localStorage.removeItem("checkoutFormFilled");
+            localStorage.removeItem("checkoutUserDetails");
             navigate('/');
         } catch (err) {
             console.log(err.message);

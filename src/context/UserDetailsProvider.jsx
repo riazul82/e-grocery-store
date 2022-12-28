@@ -1,5 +1,7 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
 import { LoginContext } from './LoginContextProvider';
+
+// firebase
 import { doc, onSnapshot } from "firebase/firestore";
 import { fs } from "../firebase";
 
@@ -10,6 +12,7 @@ const UserDetailsProvider = ({ children }) => {
     const [userDetails, setUserDetails] = useState(JSON.parse(localStorage.getItem('userDetails')) || currentUser);
 
     useEffect(() => {
+        // get user data from firestore
         const getUserData = async () => {
             if (currentUser) {
                 onSnapshot(doc(fs, "users", currentUser.uid), (doc) => {

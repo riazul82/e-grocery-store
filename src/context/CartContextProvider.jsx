@@ -4,6 +4,8 @@ export const CartContext = createContext();
 
 const INITIAL_STATE = {
     cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
+    winterVoucherCode: 'WINTER01',
+    newUserVoucherCode: 'NEWUSER23',
     winterVoucherActive: Boolean(localStorage.getItem("winterVoucher")) || false,
     newUserVoucherActive: Boolean(localStorage.getItem("newUserVoucher")) || false
 }
@@ -62,12 +64,14 @@ const CartContextProvider = ({ children }) => {
     let newUserDiscount = 0;
     let winterDiscount = 0;
 
+    // calculate total amounts
     for (let i = 0; i < state.cartItems.length; i ++) {
         let elem = state.cartItems[i];
         subTotal += (elem.price - (elem.price * (elem.discount) / 100)) * elem.cartQuantity;
         discount += elem.price * (elem.discount) / 100;
     }
 
+    // apply voucher discount
     if (state.newUserVoucherActive && shippingCost + subTotal >= 500) {
         newUserDiscount = 250;
         totalCost = shippingCost + subTotal - newUserDiscount;
@@ -96,7 +100,7 @@ const CartContextProvider = ({ children }) => {
     });
 
     return (
-        <CartContext.Provider value={{cartItems: state.cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, dispatch}}>
+        <CartContext.Provider value={{cartItems: state.cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, NEW_USER_VOUCHER: state.newUserVoucherCode, WINTER_VOUCHER: state.winterVoucherCode, dispatch}}>
             {children}
         </CartContext.Provider>
     );

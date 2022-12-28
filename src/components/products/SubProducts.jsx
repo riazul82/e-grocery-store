@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Product from '../components/Product';
+
+// components
+import Product from './Product';
+
+// icons
 import { RxDoubleArrowRight } from 'react-icons/rx';
 
 const SubProducts = ({ title, link, items }) => {

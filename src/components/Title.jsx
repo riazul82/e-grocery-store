@@ -1,5 +1,5 @@
 import React from 'react';
-import leaf from '../assets/images/icons/terpene.png';
+import leaf from '../assets/images/project/terpene.png';
 
 const Title = ({ title, desc }) => {
     return (

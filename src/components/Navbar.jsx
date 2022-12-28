@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { MdOutlineDashboardCustomize } from 'react-icons/md';
-import { BiUser } from 'react-icons/bi';
+
+// context
 import { LoginContext } from '../context/LoginContextProvider';
 import { CartContext } from '../context/CartContextProvider';
+
+// icons
+import { BiUser } from 'react-icons/bi';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { MdOutlineDashboardCustomize } from 'react-icons/md';
 
 const Navbar = () => {
     const { currentAdmin } = useContext(LoginContext);

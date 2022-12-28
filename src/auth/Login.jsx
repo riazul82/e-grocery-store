@@ -1,9 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../context/LoginContextProvider';
-import { signInWithEmailAndPassword } from "firebase/auth";
+
+// firebase
 import { auth } from '../firebase';
-import { AiFillWarning } from 'react-icons/ai'; // icon
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+// icons
+import { AiFillWarning } from 'react-icons/ai';
 
 const Login = () => {
     const [user, setUser] = useState({email: '', password: ''});

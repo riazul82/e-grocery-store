@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CartContext } from '../context/CartContextProvider';
+import { CartContext } from '../../context/CartContextProvider';
 
 // icons
 import { HiMinus } from 'react-icons/hi';

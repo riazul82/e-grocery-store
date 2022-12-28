@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase';
 import { LoginContext } from '../../context/LoginContextProvider';
+
+// firebase
+import { auth } from '../../firebase';
+import { signOut } from 'firebase/auth';
 
 // icons
 import { MdOutlineAdminPanelSettings } from 'react-icons/md';
@@ -20,6 +22,7 @@ const AdminSidebar = () => {
 
     const navigate = useNavigate();
 
+    // logout function
     const handleLogout = async () => {
         try {
             await signOut(auth);
