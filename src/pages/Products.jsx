@@ -11,9 +11,10 @@ import SubProducts from '../components/SubProducts';
 import { GoSearch } from 'react-icons/go';
 import { ProductsContext } from '../context/ProductsContextProvider';
 
-
 const Products = () => {
     const {products, top, recent, popular, vegetables, fruits, meatFish, eggs, teaCoffe, spices, dryFruits, biscuitCake, jamJellie, breads} = useContext(ProductsContext);
+    
+    // states
     const [searchText, setSearchText] = useState('');
     const [searchTimer, setSearchTimer] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
@@ -22,12 +23,14 @@ const Products = () => {
     window.scrollTo(0, 0);
 
     useEffect(() => {
+        // get home page search text
         if (location.state !== null) {
             setSearchText(location.state);
             document.getElementById('searchInput').value = location.state;
             location.state = null;
         }
 
+        // search products
         const items = searchText !== '' && products && products.filter((item) => {
             const mainText = ''.concat(item.name, item.category, item.type, item.weight, item.unit).replace(/[^a-zA-Z0-9@]/g, '').toLowerCase();
             const srchText = searchText.replace(/[^a-zA-Z0-9@]/g, '').toLowerCase();
@@ -45,6 +48,7 @@ const Products = () => {
 
     }, [searchText, products, location.state, location]);
 
+    // handle search input
     const handleSearch = (e) => {
         clearTimeout(searchTimer);
 

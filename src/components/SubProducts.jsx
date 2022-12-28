@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RxDoubleArrowRight } from 'react-icons/rx';
 import Product from '../components/Product';
+import { RxDoubleArrowRight } from 'react-icons/rx';
 
 const SubProducts = ({ title, link, items }) => {
     return (
@@ -14,11 +14,9 @@ const SubProducts = ({ title, link, items }) => {
                 </div>
             </div>
             <div className="subProductsWrap">
-                {
-                    items && items.map((item) => {
-                        return <Product key={item.id} data={item} />
-                    })
-                }
+                {items && items.map((item) => {
+                    return <Product key={item.id} data={item} />
+                })}
             </div>
         </div>
     );

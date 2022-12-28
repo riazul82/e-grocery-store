@@ -1,8 +1,7 @@
 import React from 'react';
-// import leaf from '../assets/images/icons/marijuana2.png';
 import leaf from '../assets/images/icons/terpene.png';
 
-const Title = ({title, desc}) => {
+const Title = ({ title, desc }) => {
     return (
         <div className="titleWrap">
             <div className="titleBox">
@@ -19,4 +18,4 @@ const Title = ({title, desc}) => {
     );
 }
 
-export default Title
+export default Title;

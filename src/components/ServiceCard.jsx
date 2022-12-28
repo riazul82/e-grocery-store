@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ServiceCard = ({cardNo, data}) => {
+const ServiceCard = ({ cardNo, data }) => {
     return (
         <div className="serviceCard">
             <div className="serviceCardTitle">

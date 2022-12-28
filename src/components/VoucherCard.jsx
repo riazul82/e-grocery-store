@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const VoucherCard = ({data}) => {
+const VoucherCard = ({ data }) => {
     const [days, setDays] = useState('00');
     const [hours, setHours] = useState('00');
     const [minutes, setMinutes] = useState('00');

@@ -16,14 +16,17 @@ const Product = ({ data }) => {
         btnFlag = 'active';
     }
 
+    // add product to cart
     const handleAddToCart = () => {
         dispatch({type: 'ADD_PRODUCT', payload: data});
     }
 
+    // increase product quantity
     const handleIncrement = () => {
         dispatch({type: 'CONTROL_QUANTITY', payload: {...data, cartQuantity: cartItem.cartQuantity + 1}});
     }
 
+    // decrease product quantity
     const handleDecrement = () => {
         if (cartItem.cartQuantity <= 1) {
             dispatch({type: 'REMOVE_PRODUCT', payload: cartItem});
