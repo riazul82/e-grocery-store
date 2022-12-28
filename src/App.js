@@ -3,33 +3,44 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LoginContext } from './context/LoginContextProvider';
 import './App.scss';
 
+// pages
 import Home from './pages/Home';
-import Products from './pages/Products';
-import Category from './pages/Category';
 import About from './pages/About';
+import Category from './pages/Category';
+import Products from './pages/Products';
 import Contact from './pages/Contact';
+import Error404 from './pages/Error404';
+
+// auth
 import Login from './auth/Login';
 import Signup from './auth/Signup';
-import Profile from './pages/Profile';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import Payment from './pages/Payment';
-import UpdateProfile from './pages/UpdateProfile';
 import AdminLogin from './auth/AdminLogin';
 import CreateAdmin from './auth/CreateAdmin';
+
+// user profile
+import Profile from './pages/profile/Profile';
+import UpdateProfile from './pages/profile/UpdateProfile';
+
+// shopping cart
+import Cart from './pages/cart/Cart';
+import Checkout from './pages/cart/Checkout';
+import Payment from './pages/cart/Payment';
+import Review from './pages/cart/Review';
+
+// admin dashboard
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import UploadProducts from './pages/admin/UploadProducts';
-import Error404 from './pages/Error404';
-import Review from './pages/Review';
 
 const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
 
+  // protect user login require routes
   const RequireAuth = ({children}) => {
     return currentUser ? (children) : <Navigate to="/user/login" />
   }
 
+  // protect admin login require routes
   const RequireAdminAuth = ({children}) => {
     return currentAdmin ? (children) : <Navigate to="/admin/login" />
   }
@@ -41,20 +52,25 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:category" element={<Category />} />
+          <Route path="/contact" element={<Contact />} />
+
           <Route path="/cart" element={<RequireAuth><Cart/></RequireAuth>} />
           <Route path="/checkout" element={<RequireAuth><Checkout/></RequireAuth>} />
           <Route path="/payment" element={<RequireAuth><Payment/></RequireAuth>} />
           <Route path="/review" element={<RequireAuth><Review/></RequireAuth>} />
-          <Route path="/contact" element={<RequireAuth><Contact /></RequireAuth>} />
+
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/signup" element={<Signup />} />
-          <Route path="/user/profile" element={<RequireAuth><Profile /></RequireAuth>} />
-          <Route path="/user/update-profile" element={<RequireAuth><UpdateProfile /></RequireAuth>} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/create" element={<CreateAdmin />} />
+
+          <Route path="/user/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+          <Route path="/user/update-profile" element={<RequireAuth><UpdateProfile /></RequireAuth>} />
+          
           <Route path="/admin/dashboard" element={<RequireAdminAuth><AdminDashboard /></RequireAdminAuth>} />
           <Route path="/admin/products" element={<RequireAdminAuth><AdminProducts /></RequireAdminAuth>} />
           <Route path="/admin/products/upload" element={<RequireAdminAuth><UploadProducts /></RequireAdminAuth>} />
+          
           <Route path="*" element={<Error404/>} />
         </Routes>
       </BrowserRouter>

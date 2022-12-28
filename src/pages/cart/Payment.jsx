@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { GoCreditCard } from 'react-icons/go';
 import { IoWalletOutline } from 'react-icons/io5';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { fs } from '../firebase';
+import { fs } from '../../firebase';
 import { doc, setDoc } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore"; 
 
-import { CartContext } from '../context/CartContextProvider';
-import { UserDetailsContext } from '../context/UserDetailsProvider';
+import { CartContext } from '../../context/CartContextProvider';
+import { UserDetailsContext } from '../../context/UserDetailsProvider';
 
 const Payment = () => {
     const { cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, dispatch } = useContext(CartContext);

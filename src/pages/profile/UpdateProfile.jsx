@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
 import { SlLocationPin } from 'react-icons/sl';
 import { FiCalendar } from 'react-icons/fi';
-import ProfileSidebar from '../components/ProfileSidebar';
-import { UserDetailsContext } from '../context/UserDetailsProvider';
+import ProfileSidebar from '../../components/ProfileSidebar';
+import { UserDetailsContext } from '../../context/UserDetailsProvider';
 
-import { fs, storage } from '../firebase';
+import { fs, storage } from '../../firebase';
 import { deleteObject } from "firebase/storage";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import profileImg from '../assets/images/categories/biscuits.jpg';
+import profileImg from '../../assets/images/categories/biscuits.jpg';
 
 const UpdateProfile = () => {
     const userDetails = useContext(UserDetailsContext);

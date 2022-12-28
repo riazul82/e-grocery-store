@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
-import CartProduct from '../components/CartProduct';
+import CartProduct from '../../components/CartProduct';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { CartContext } from '../context/CartContextProvider';
+import { CartContext } from '../../context/CartContextProvider';
 
 const Cart = () => {
     const { cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, dispatch } = useContext(CartContext);

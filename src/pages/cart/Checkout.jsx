@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Footer from '../components/Footer';
+import Footer from '../../components/Footer';
 
-import { CartContext } from '../context/CartContextProvider';
+import { CartContext } from '../../context/CartContextProvider';
 
 const Checkout = () => {
     const { subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, dispatch } = useContext(CartContext);

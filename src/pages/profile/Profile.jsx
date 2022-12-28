@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
 import { SlLocationPin } from 'react-icons/sl';
 import { FiCalendar } from 'react-icons/fi';
-import ProfileSidebar from '../components/ProfileSidebar';
-import { UserDetailsContext } from '../context/UserDetailsProvider';
+import ProfileSidebar from '../../components/ProfileSidebar';
+import { UserDetailsContext } from '../../context/UserDetailsProvider';
 
-import profileImg from '../assets/images/categories/biscuits.jpg';
+import profileImg from '../../assets/images/categories/biscuits.jpg';
 
 const Profile = () => {
     const userDetails = useContext(UserDetailsContext);
