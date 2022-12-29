@@ -12,7 +12,7 @@ const UserOrdersContextProvider = ({children}) => {
 
     useEffect(() => {
         const tempAra = [];
-        userDetails.orderList.forEach((elem) => {
+        userDetails && userDetails.orderList.forEach((elem) => {
             onSnapshot(doc(fs, "orders", elem), (doc) => {
                 tempAra.push({orderId: elem, ...doc.data()});
             });
