@@ -134,6 +134,7 @@ const Payment = () => {
                 discount: discount,
                 totalCost: totalCost,
                 time: new Date().toUTCString(),
+                paymentMethod: paymentMethod,
                 paymentStatus: 'unpaid',
                 isWinterVoucherAdded: JSON.parse(localStorage.getItem("winterVoucher")) || false,
                 isNewUserVoucherAdded: JSON.parse(localStorage.getItem("newUserVoucher")) || false,
