@@ -1,0 +1,45 @@
+.myOrders > h2 {
+    padding-bottom: 0.8rem;
+    color: #fff;
+    font-size: 1.6rem;
+    border-bottom: 2px dashed #333;
+}
+
+#myOrdersTable {
+    margin-top: 1rem;
+    width: 100%;
+    border-collapse: collapse;
+
+    thead > tr {
+        background: rgba(46, 139, 87, 0.4);
+    }
+
+    tbody > tr {
+        border-bottom: 1px solid #333;
+    }
+
+    thead > tr > th,
+    tbody > tr > td {
+        border: none;
+        padding: 0.6rem 0;
+        text-align: center;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    tbody > tr > td > span {
+        margin-bottom: 0.15rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .orderListDetailsBtn {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        color: #4bb96a;
+        font-size: 1rem;
+    }
+}
