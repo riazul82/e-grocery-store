@@ -8,6 +8,7 @@ import CartProduct from '../../components/cart/CartProduct';
 
 // context
 import { CartContext } from '../../context/CartContextProvider';
+import { UserDetailsContext } from '../../context/UserDetailsProvider';
 
 // toast
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,7 +16,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = () => {
     const { cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, NEW_USER_VOUCHER, WINTER_VOUCHER, dispatch } = useContext(CartContext);
-    
+    const userDetails = useContext(UserDetailsContext);
+
     // states
     const [voucherCode, setVoucherCode] = useState(
         localStorage.getItem("voucherCode") || ''
@@ -23,19 +25,23 @@ const Cart = () => {
     
     // track active voucher
     const [disableFlag, setDisableFlag] = useState(
-        Boolean(localStorage.getItem("winterVoucher")) || 
-        Boolean(localStorage.getItem("newUserVoucher")) || false
+        JSON.parse(localStorage.getItem("winterVoucher")) || 
+        JSON.parse(localStorage.getItem("newUserVoucher")) || false
     );
 
     useEffect(() => {
         // if purchase amount < 500, then remove voucher
-        if (Boolean(localStorage.getItem("newUserVoucher")) && subTotal + shippingCost < 500) {
+        if (JSON.parse(localStorage.getItem("newUserVoucher")) && subTotal + shippingCost < 500) {
             dispatch({type: 'REMOVE_DISCOUNT'});
             localStorage.removeItem("voucherCode");
             setDisableFlag(false);
             setVoucherCode('');
         }
+        
+        setDisableFlag(JSON.parse(localStorage.getItem("winterVoucher")) || JSON.parse(localStorage.getItem("newUserVoucher")) || false);
+
     }, [voucherCode, disableFlag, shippingCost, subTotal, dispatch]);
+
 
     // handle voucher input
     const handleVoucherCode = (e) => {
@@ -48,20 +54,25 @@ const Cart = () => {
         if (disableFlag === true) {
             dispatch({type: 'REMOVE_DISCOUNT'});
             localStorage.removeItem("voucherCode");
-            setDisableFlag(false);
             setVoucherCode('');
         } else if (voucherCode === NEW_USER_VOUCHER && totalCost < 500) {
             toast.error('Error! Purchase above Rs.500!');
+        } else if (voucherCode === NEW_USER_VOUCHER && userDetails.isNewUserVoucherUsed) {
+            toast.error('You have already used this voucher!');
         } else if (voucherCode === NEW_USER_VOUCHER) {
             dispatch({type: 'NEWUSER_DISCOUNT'});
-            toast.success('NEW USER DISCOUNT ADDED!');
             localStorage.setItem("voucherCode", voucherCode);
-            setDisableFlag(true);
+            setTimeout(() => {
+                toast.success('NEW USER DISCOUNT ADDED!');
+            }, 200);
+        } else if (voucherCode === WINTER_VOUCHER && userDetails.isWinterVoucherUsed) {
+            toast.error('You have already used this voucher!');
         } else if (voucherCode === WINTER_VOUCHER) {
             dispatch({type: 'WINTER_DISCOUNT'});
-            toast.success('WINTER DISCOUNT ADDED!');
             localStorage.setItem("voucherCode", voucherCode);
-            setDisableFlag(true);
+            setTimeout(() => {
+                toast.success('WINTER DISCOUNT ADDED!');
+            }, 200);
         } else {
             toast.error('Invalid Voucher Code!');
             setVoucherCode('');
@@ -71,12 +82,13 @@ const Cart = () => {
     return (
         <>
             <Navbar />
+            {console.log('disable_flag: ', disableFlag)}
             <div className="cart">
                 <div className="cartHeader">
                     <Link to="/cart" className="cartLink link active">1. Cart</Link>
                     <Link to="/checkout" className="cartLink link">2. Details</Link>
-                    <Link to="/payment" className="cartLink link">3. Payment</Link>
-                    <Link to="/review" className="cartLink link">4. Review</Link>
+                    <Link to="/checkout" className="cartLink link">3. Payment</Link>
+                    <Link to="/checkout" className="cartLink link">4. Review</Link>
                     <div className="darkLine"></div>
                     <div className="redLine" style={{width: '0%'}}></div>
                 </div>
@@ -84,7 +96,7 @@ const Cart = () => {
                 <div className="cartContent">
                     <div className="cartProducts">
                         {cartItems && cartItems.map((item) => {
-                            return <CartProduct key={item.id} cartItem={item} setDisableFlag={setDisableFlag} />
+                            return <CartProduct key={item.id} cartItem={item} />
                         })}
                     </div>
 

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LoginContext } from './context/LoginContextProvider';
+import { CartContext } from './context/CartContextProvider';
 import './App.scss';
 
 // pages
@@ -26,6 +27,7 @@ import Cart from './pages/cart/Cart';
 import Checkout from './pages/cart/Checkout';
 import Payment from './pages/cart/Payment';
 import Review from './pages/cart/Review';
+import EmptyCart from './pages/cart/EmptyCart';
 
 // admin dashboard
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -34,6 +36,7 @@ import UploadProducts from './pages/admin/UploadProducts';
 
 const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
+  const { cartItems, checkoutFormFilled, orderConfirmed } = useContext(CartContext);
 
   // protect user login require routes
   const RequireAuth = ({children}) => {
@@ -45,8 +48,21 @@ const App = () => {
     return currentAdmin ? (children) : <Navigate to="/admin/login" />
   }
 
+  const RequireCart = ({children}) => {
+    return cartItems.length >= 1 ? (children) : <Navigate to="/empty-cart" />
+  }
+
+  const RequirePayment = ({children}) => {
+    return checkoutFormFilled ? (children) : <Navigate to="/checkout" />
+  }
+
+  const RequireCartReview = ({children}) => {
+    return orderConfirmed ? (children) : <Navigate to="/payment" />
+  }
+
   return (
       <BrowserRouter>
+        {console.log(checkoutFormFilled)}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -54,10 +70,11 @@ const App = () => {
           <Route path="/products/:category" element={<Category />} />
           <Route path="/contact" element={<Contact />} />
 
-          <Route path="/cart" element={<RequireAuth><Cart/></RequireAuth>} />
+          <Route path="/cart" element={<RequireCart><Cart/></RequireCart>} />
           <Route path="/checkout" element={<RequireAuth><Checkout/></RequireAuth>} />
-          <Route path="/payment" element={<RequireAuth><Payment/></RequireAuth>} />
-          <Route path="/review" element={<RequireAuth><Review/></RequireAuth>} />
+          <Route path="/payment" element={<RequirePayment><Payment/></RequirePayment>} />
+          <Route path="/review" element={<RequireCartReview><Review/></RequireCartReview>} />
+          <Route path="/empty-cart" element={<EmptyCart/>} />
 
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/signup" element={<Signup />} />

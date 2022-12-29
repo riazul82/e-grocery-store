@@ -1,0 +1,12 @@
+.emptyCart {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 100%;
+    height: calc(100vh - 10rem);
+
+    .title {
+        margin-top: 2rem;
+        color: #eee;
+        font-size: 2rem;
+    }
+}

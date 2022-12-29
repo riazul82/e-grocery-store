@@ -20,7 +20,6 @@ const Products = () => {
     const [filteredItems, setFilteredItems] = useState([]);
 
     const location = useLocation();
-    window.scrollTo(0, 0);
 
     useEffect(() => {
         // get home page search text

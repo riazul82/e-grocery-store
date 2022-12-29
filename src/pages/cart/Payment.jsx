@@ -34,20 +34,23 @@ const Payment = () => {
     
     // track active voucher
     const [disableFlag, setDisableFlag] = useState(
-        Boolean(localStorage.getItem("winterVoucher")) || 
-        Boolean(localStorage.getItem("newUserVoucher")) || false
+        JSON.parse(localStorage.getItem("winterVoucher")) || 
+        JSON.parse(localStorage.getItem("newUserVoucher")) || false
     );
 
     const navigate = useNavigate();
 
     useEffect(() => {
         // if purchase amount < 500, then remove voucher
-        if (Boolean(localStorage.getItem("newUserVoucher")) && subTotal + shippingCost < 500) {
+        if (JSON.parse(localStorage.getItem("newUserVoucher")) && subTotal + shippingCost < 500) {
             dispatch({type: 'REMOVE_DISCOUNT'});
             localStorage.removeItem("voucherCode");
             setDisableFlag(false);
             setVoucherCode('');
         }
+        
+        setDisableFlag(JSON.parse(localStorage.getItem("winterVoucher")) || JSON.parse(localStorage.getItem("newUserVoucher")) || false);
+
     }, [voucherCode, disableFlag, shippingCost, subTotal, dispatch]);
 
     // handle voucher input
@@ -61,20 +64,21 @@ const Payment = () => {
         if (disableFlag === true) {
             dispatch({type: 'REMOVE_DISCOUNT'});
             localStorage.removeItem("voucherCode");
-            setDisableFlag(false);
             setVoucherCode('');
         } else if (voucherCode === NEW_USER_VOUCHER && totalCost < 500) {
             toast.error('Error! Purchase above Rs.500!');
         } else if (voucherCode === NEW_USER_VOUCHER) {
             dispatch({type: 'NEWUSER_DISCOUNT'});
-            toast.success('NEW USER DISCOUNT ADDED!');
             localStorage.setItem("voucherCode", voucherCode);
-            setDisableFlag(true);
+            setTimeout(() => {
+                toast.success('NEW USER DISCOUNT ADDED!');
+            }, 200);
         } else if (voucherCode === WINTER_VOUCHER) {
             dispatch({type: 'WINTER_DISCOUNT'});
-            toast.success('WINTER DISCOUNT ADDED!');
             localStorage.setItem("voucherCode", voucherCode);
-            setDisableFlag(true);
+            setTimeout(() => {
+                toast.success('WINTER DISCOUNT ADDED!');
+            }, 200);
         } else {
             toast.error('Invalid Voucher Code!');
             setVoucherCode('');
@@ -88,7 +92,6 @@ const Payment = () => {
 
     // store order details to firestore
     const storeOrderDetails = async (orderDetails) => {
-        console.log(orderDetails);
         try {
             const docRef = await addDoc(collection(fs, "orders"), orderDetails);
             
@@ -103,10 +106,14 @@ const Payment = () => {
             const userRef = doc(fs, 'users', userDetails.id);
             setDoc(userRef, {
                 orderList,
-                isWinterVoucherAdded: Boolean(localStorage.getItem("winterVoucher")) || false,
-                isNewUserVoucherAdded: Boolean(localStorage.getItem("newUserVoucher")) || false,
+                isWinterVoucherUsed: JSON.parse(localStorage.getItem("winterVoucher")) || false,
+                isNewUserVoucherUsed: JSON.parse(localStorage.getItem("newUserVoucher")) || false,
             }, {merge: true});
-            toast.success('Order placed successful!');
+            setTimeout(() => {
+                toast.success('Order placed successfully!');
+            }, 100);
+            localStorage.setItem("orderConfirmed", true);
+            dispatch({type: 'ORDER_CONFIRMED'});
             setTimeout(() => {
                 navigate('/review');
             }, 3000);
@@ -128,14 +135,18 @@ const Payment = () => {
                 totalCost: totalCost,
                 time: new Date().toUTCString(),
                 paymentStatus: 'unpaid',
-                isWinterVoucherAdded: Boolean(localStorage.getItem("winterVoucher")) || false,
-                isNewUserVoucherAdded: Boolean(localStorage.getItem("newUserVoucher")) || false,
+                isWinterVoucherAdded: JSON.parse(localStorage.getItem("winterVoucher")) || false,
+                isNewUserVoucherAdded: JSON.parse(localStorage.getItem("newUserVoucher")) || false,
                 shippingInfo: JSON.parse(localStorage.getItem('checkoutUserDetails'))
             }
             storeOrderDetails(orderDetails);
         } else if (paymentMethod === 'stripe') {
             toast.error('Sorry! Payment method not included yet!');
         }
+    }
+
+    const handleRedirectReview = () => {
+        toast.error('Please confirm order!');
     }
 
     return (
@@ -146,7 +157,7 @@ const Payment = () => {
                     <Link to="/cart" className="cartLink link active">1. Cart</Link>
                     <Link to="/checkout" className="cartLink link active">2. Details</Link>
                     <Link to="/payment" className="cartLink link active">3. Payment</Link>
-                    <Link to="/review" className="cartLink link">4. Review</Link>
+                    <div onClick={handleRedirectReview} className="cartLink">4. Review</div>
                     <div className="darkLine"></div>
                     <div className="redLine" style={{width: '70%'}}></div>
                 </div>

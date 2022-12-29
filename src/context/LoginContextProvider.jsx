@@ -39,6 +39,7 @@ const LoginContextProvider = ({ children }) => {
             localStorage.removeItem("winterVoucher");
             localStorage.removeItem("voucherCode");
             localStorage.removeItem("checkoutFormFilled");
+            localStorage.removeItem("orderConfirmed");
         } 
 
         if (state.currentAdmin) {

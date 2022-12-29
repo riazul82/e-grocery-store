@@ -46,7 +46,7 @@ const Product = ({ data }) => {
                 <div className="productInfo">
                     <p className="productName">{data.name}</p>
                     <p className="productQuantity">{`${data.weight} ${data.unit}`}</p>
-                    <p className="productPrice">{data.discount === '0' ? `${data.price} Tk` : <><del style={{color: '#888'}}>{data.price} Tk</del><ins style={{marginLeft: '0.4rem'}}>{parseInt(data.price - (data.price * data.discount) / 100)} Tk</ins></>}</p>
+                    <p className="productPrice">{data.discount === '0' ? `${data.price} Tk` : <><del style={{color: '#888'}}>{data.price} Tk</del><ins style={{marginLeft: '0.4rem', textDecoration: 'none'}}>{parseInt(data.price - (data.price * data.discount) / 100)} Tk</ins></>}</p>
                 </div>
                 <button className={`addToCartBtn ${btnFlag}`} onClick={handleAddToCart}>{btnFlag === 'active' ? 'Added' : 'Add to Cart'}</button>
                 <div className={`quantityControl ${btnFlag}`}>

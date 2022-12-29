@@ -6,8 +6,10 @@ const INITIAL_STATE = {
     cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
     winterVoucherCode: 'WINTER01',
     newUserVoucherCode: 'NEWUSER23',
-    winterVoucherActive: Boolean(localStorage.getItem("winterVoucher")) || false,
-    newUserVoucherActive: Boolean(localStorage.getItem("newUserVoucher")) || false
+    winterVoucherActive: JSON.parse(localStorage.getItem("winterVoucher")) || false,
+    newUserVoucherActive: JSON.parse(localStorage.getItem("newUserVoucher")) || false,
+    checkoutFormFilled: JSON.parse(localStorage.getItem("checkoutFormFilled")) || false,
+    orderConfirmed: JSON.parse(localStorage.getItem("orderConfirmed")) || false
 }
 
 const reducer = (state, action) => {
@@ -48,7 +50,13 @@ const reducer = (state, action) => {
 
         case 'REMOVE_DISCOUNT':
             return {...state, winterVoucherActive: false, newUserVoucherActive: false};
+        
+        case 'CHECKOUT_FORM_FILLED':
+            return {...state, checkoutFormFilled: true};
 
+        case 'ORDER_CONFIRMED':
+            return {...state, orderConfirmed: true};
+        
         default:
             return state;
     }
@@ -57,6 +65,7 @@ const reducer = (state, action) => {
 const CartContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
+    // calculate cart total
     let subTotal = 0;
     let discount = 0;
     let shippingCost = 60;
@@ -90,9 +99,9 @@ const CartContextProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         if (state.newUserVoucherActive && shippingCost + subTotal >= 500) {
-            localStorage.setItem("newUserVoucher", true.toString());
+            localStorage.setItem("newUserVoucher", true);
         } else if (state.winterVoucherActive) {
-            localStorage.setItem("winterVoucher", true.toString());
+            localStorage.setItem("winterVoucher", true);
         } else {
             localStorage.removeItem("winterVoucher");
             localStorage.removeItem("newUserVoucher");
@@ -100,7 +109,7 @@ const CartContextProvider = ({ children }) => {
     });
 
     return (
-        <CartContext.Provider value={{cartItems: state.cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, NEW_USER_VOUCHER: state.newUserVoucherCode, WINTER_VOUCHER: state.winterVoucherCode, dispatch}}>
+        <CartContext.Provider value={{cartItems: state.cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, NEW_USER_VOUCHER: state.newUserVoucherCode, WINTER_VOUCHER: state.winterVoucherCode, checkoutFormFilled: state.checkoutFormFilled, orderConfirmed: state.orderConfirmed, dispatch}}>
             {children}
         </CartContext.Provider>
     );
