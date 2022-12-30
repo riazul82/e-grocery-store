@@ -21,6 +21,7 @@ import CreateAdmin from './auth/CreateAdmin';
 // user profile
 import Profile from './pages/profile/Profile';
 import UpdateProfile from './pages/profile/UpdateProfile';
+import UserDashboard from './pages/profile/UserDashboard';
 import MyOrders from './pages/profile/MyOrders';
 import OrderDetails from './pages/profile/OrderDetails';
 
@@ -84,6 +85,7 @@ const App = () => {
 
           <Route path="/user/profile" element={<RequireAuth><Profile /></RequireAuth>} />
           <Route path="/user/update-profile" element={<RequireAuth><UpdateProfile /></RequireAuth>} />
+          <Route path="/user/dashboard" element={<RequireAuth><UserDashboard /></RequireAuth>} />
           <Route path="/user/orders" element={<RequireAuth><MyOrders /></RequireAuth>} />
           <Route path="/user/orders/:id" element={<RequireAuth><OrderDetails /></RequireAuth>} />
           
