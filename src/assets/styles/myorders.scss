@@ -43,3 +43,88 @@
         font-size: 1rem;
     }
 }
+
+.orderInfoBox {
+    margin: 1rem 0 2rem 0;
+
+    .orderInfoHeader {
+        padding: 0.4rem 0.2rem;
+        width: 100%;
+        background: rgb(46, 139, 87, 0.4);
+        border-radius: 0.1rem 0.1rem 0 0;
+
+        p {
+            color: #fff;
+            font-size: 1.1rem;
+            padding-left: 0.4rem;
+        }
+    }
+
+    .orderInfo {
+        padding: 0.4rem;
+        border: 1px solid #222;
+        border-top: none;
+        border-radius: 0 0 0.1rem 0.1rem;
+
+        p {
+            padding: 0.2rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            span {
+                color: #ddd;
+            }
+
+            span:nth-child(1) {
+                color: #4bb96a;
+                width: 120px;
+                font-weight: 500;
+            }
+        }
+
+        .orderItem {
+            padding-bottom: 0.4rem;
+            margin: 0.8rem 0;
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: space-between;
+            border-bottom: 1px solid #222;
+
+            .orderItemDetails {
+                p {
+                    padding: 0 0 0.4rem 0.2rem;
+                }
+            }
+
+            .orderItemImage {
+                height: 100px;
+                width: 100px;
+                
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 0.1rem;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.cancelOrderBtn {
+    padding: 0.3rem 0.8rem;
+    color: #fff;
+    font-size: 1rem;
+    background: crimson;
+    border: none;
+    outline: none;
+    border-radius: 0.1rem;
+    cursor: pointer;
+}

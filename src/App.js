@@ -22,6 +22,7 @@ import CreateAdmin from './auth/CreateAdmin';
 import Profile from './pages/profile/Profile';
 import UpdateProfile from './pages/profile/UpdateProfile';
 import MyOrders from './pages/profile/MyOrders';
+import OrderDetails from './pages/profile/OrderDetails';
 
 // shopping cart
 import Cart from './pages/cart/Cart';
@@ -84,6 +85,7 @@ const App = () => {
           <Route path="/user/profile" element={<RequireAuth><Profile /></RequireAuth>} />
           <Route path="/user/update-profile" element={<RequireAuth><UpdateProfile /></RequireAuth>} />
           <Route path="/user/orders" element={<RequireAuth><MyOrders /></RequireAuth>} />
+          <Route path="/user/orders/:id" element={<RequireAuth><OrderDetails /></RequireAuth>} />
           
           <Route path="/admin/dashboard" element={<RequireAdminAuth><AdminDashboard /></RequireAdminAuth>} />
           <Route path="/admin/products" element={<RequireAdminAuth><AdminProducts /></RequireAdminAuth>} />

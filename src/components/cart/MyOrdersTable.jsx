@@ -1,7 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// icons
 import { RxDoubleArrowRight } from 'react-icons/rx';
 
 const MyOrdersTable = ({ orderList }) => {
+
+    const navigate = useNavigate();
+
+    const handleViewDetails = (orderDetails) => {
+        navigate(`/user/orders/${orderDetails.orderId}`, {state: orderDetails});
+    }
+
     return (
         <table id="myOrdersTable">
             <thead>
@@ -22,7 +32,7 @@ const MyOrdersTable = ({ orderList }) => {
                                 <td>{elem.time.split(' ').slice(1, 4).join(' ')}</td>
                                 <td>{elem.totalCost} Tk</td>
                                 <td>{elem.status}</td>
-                                <td className="orderListDetailsBtn">
+                                <td className="orderListDetailsBtn" onClick={() => handleViewDetails(elem)}>
                                     <span style={{}}>view details</span>
                                     <RxDoubleArrowRight className="arrow" />
                                 </td>
@@ -35,4 +45,4 @@ const MyOrdersTable = ({ orderList }) => {
     );
 }
 
-export default MyOrdersTable
+export default MyOrdersTable;
