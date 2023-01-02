@@ -25,20 +25,20 @@ const UserDashboard = () => {
                     <h2>Dashboard</h2>
                 </div>
 
-                <div className="userDashboardCards">
-                    <div className="userDahsboardCard">
+                <div className="dashboardCards">
+                    <div className="dahsboardCard">
                         <p className="cardCounter">{orderList.length < 10 ? `0${orderList.length}` : orderList.length}</p>
                         <p className="cardText">Total Orders</p>
                     </div>
-                    <div className="userDahsboardCard">
+                    <div className="dahsboardCard">
                         <p className="cardCounter">{orderList.length < 10 ? `0${orderList.length}` : orderList.length}</p>
                         <p className="cardText">Pending Orders</p>
                     </div>
-                    <div className="userDahsboardCard">
+                    <div className="dahsboardCard">
                         <p className="cardCounter">00</p>
                         <p className="cardText">Shipped Orders</p>
                     </div>
-                    <div className="userDahsboardCard">
+                    <div className="dahsboardCard">
                         <p className="cardCounter">{orderList.length < 10 ? `0${orderList.length}` : orderList.length}</p>
                         <p className="cardText">Payment Deu</p>
                     </div>

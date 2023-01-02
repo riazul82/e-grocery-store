@@ -13,7 +13,7 @@ const MyOrdersTable = ({ orderList }) => {
     }
 
     return (
-        <table id="myOrdersTable">
+        <table id="ordersTable">
             <thead>
                 <tr>
                     <th>Order Id</th>

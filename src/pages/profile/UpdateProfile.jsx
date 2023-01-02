@@ -100,6 +100,19 @@ const UpdateProfile = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const phoneRegex = /^(\+88)?-?01[1-9]\d{8}$/;
+        const zipRegex = /^\d{4}$/;
+
+        if (!phoneRegex.test(user.phone)) {
+            toast.error('Phone is not valid!');
+            return;
+        }
+
+        if (!zipRegex.test(user.address.postcode)) {
+            toast.error('Postcode can contain only 4 digits');
+            return;
+        }
+
         setBtnDisabled(true);
 
         if (profileImage === null || profileImage === undefined) {
@@ -216,7 +229,7 @@ const UpdateProfile = () => {
                                     </div>
                                     <div className="inputField">
                                         <label htmlFor="phone">Phone</label>
-                                        <input type="number" name="phone" id="phone" value={user.phone} onChange={handleChange} placeholder="Phone" required />
+                                        <input type="text" name="phone" id="phone" value={user.phone} onChange={handleChange} placeholder="Phone (e.g +88-01XXXXXXXXX)" required />
                                     </div>
                                     <div className="genderInput">
                                         <p>Gender</p>
@@ -248,7 +261,7 @@ const UpdateProfile = () => {
                                             </div>
                                             <div className="inputField">
                                                 <label htmlFor="postcode">ZIP/Postcode</label>
-                                                <input type="number" name="postcode" id="postcode" value={user.address.postcode} onChange={handleChange} placeholder="ZIP/Postcode" required />                                        
+                                                <input type="text" name="postcode" id="postcode" value={user.address.postcode} onChange={handleChange} placeholder="ZIP/Postcode" required />                                        
                                             </div>
                                             <div className="inputField">
                                                 <label htmlFor="country">Country</label>

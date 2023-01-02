@@ -16,9 +16,9 @@ input[type=number] {
 }
 
 body {
-    color: #fff;
-    background-image: repeating-linear-gradient(0deg, rgb(17, 17, 17) 0px, rgb(17, 17, 17) 1px,transparent 1px, transparent 51px),repeating-linear-gradient(90deg, rgb(17, 17, 17) 0px, rgb(17, 17, 17) 1px,transparent 1px, transparent 51px),linear-gradient(90deg, hsl(49,0%,3%),hsl(49,0%,3%));
-    background-attachment: fixed;
+  color: #fff;
+  background-image: repeating-linear-gradient(0deg, rgb(17, 17, 17) 0px, rgb(17, 17, 17) 1px,transparent 1px, transparent 51px),repeating-linear-gradient(90deg, rgb(17, 17, 17) 0px, rgb(17, 17, 17) 1px,transparent 1px, transparent 51px),linear-gradient(90deg, hsl(49,0%,3%),hsl(49,0%,3%));
+  background-attachment: fixed;
 }
 
 .titleWrap {
@@ -65,6 +65,6 @@ body {
 }
 
 .link {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }

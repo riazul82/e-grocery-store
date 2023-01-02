@@ -56,7 +56,7 @@ const Profile = () => {
                                     </div>
                                     <div className="inputField">
                                         <label htmlFor="phone">Phone</label>
-                                        <input type="phone" id="phone" value={userDetails.phone ? userDetails.phone : null} placeholder="Phone" disabled />
+                                        <input type="text" id="phone" value={userDetails.phone ? userDetails.phone : null} placeholder="Phone" disabled />
                                     </div>
                                     <div className="genderInput">
                                         <p>Gender</p>
@@ -88,7 +88,7 @@ const Profile = () => {
                                             </div>
                                             <div className="inputField">
                                                 <label htmlFor="zip">ZIP/Postcode</label>
-                                                <input type="number" name="zip" id="zip" value={userDetails.address ? userDetails.address.postcode : null} placeholder="ZIP/Postcode" disabled />                                        
+                                                <input type="text" name="zip" id="zip" value={userDetails.address ? userDetails.address.postcode : null} placeholder="ZIP/Postcode" disabled />                                        
                                             </div>
                                             <div className="inputField">
                                                 <label htmlFor="country">Country</label>

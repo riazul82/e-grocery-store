@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom';
 // components
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import ProfileSidebar from '../../components/profile/ProfileSidebar';
+import AdminSidebar from '../../components/admin/AdminSidebar';
 
-const OrderDetails = () => {
+const AdminOrderDetails = () => {
     const location = useLocation();
     const orderDetails = location.state;
 
@@ -14,7 +14,7 @@ const OrderDetails = () => {
         <>
         <Navbar />
         <div className="userDetails">
-            <ProfileSidebar />
+            <AdminSidebar />
             <div className="detailsInfo">
                 <div className="myOrders">
                     <h2>Order Details</h2>
@@ -115,8 +115,6 @@ const OrderDetails = () => {
                         <p><span>Method</span><span>COD</span></p>
                     </div>
                 </div>
-
-                <button className="cancelOrderBtn">Cancel Order</button>
             </div>
         </div>
         <Footer />
@@ -124,4 +122,4 @@ const OrderDetails = () => {
     );
 }
 
-export default OrderDetails;
+export default AdminOrderDetails;

@@ -36,6 +36,9 @@ import EmptyCart from './pages/cart/EmptyCart';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import UploadProducts from './pages/admin/UploadProducts';
+import AdminOrdersList from './pages/admin/AdminOrdersList';
+import AdminOrderDetails from './components/admin/AdminOrderDetails';
+import AdminUsers from './pages/admin/AdminUsers';
 
 const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
@@ -43,24 +46,24 @@ const App = () => {
 
   // protect user login require routes
   const RequireAuth = ({children}) => {
-    return currentUser ? (children) : <Navigate to="/user/login" />
+    return currentUser ? (children) : <Navigate to="/user/login" replace />
   }
 
   // protect admin login require routes
   const RequireAdminAuth = ({children}) => {
-    return currentAdmin ? (children) : <Navigate to="/admin/login" />
+    return currentAdmin ? (children) : <Navigate to="/admin/login" replace />
   }
 
   const RequireCart = ({children}) => {
-    return cartItems.length >= 1 ? (children) : <Navigate to="/empty-cart" />
+    return cartItems.length >= 1 ? (children) : <Navigate to="/empty-cart" replace />
   }
 
   const RequirePayment = ({children}) => {
-    return checkoutFormFilled ? (children) : <Navigate to="/checkout" />
+    return checkoutFormFilled ? (children) : <Navigate to="/checkout" replace />
   }
 
   const RequireCartReview = ({children}) => {
-    return orderConfirmed ? (children) : <Navigate to="/payment" />
+    return orderConfirmed ? (children) : <Navigate to="/payment" replace />
   }
 
   return (
@@ -90,8 +93,11 @@ const App = () => {
           <Route path="/user/orders/:id" element={<RequireAuth><OrderDetails /></RequireAuth>} />
           
           <Route path="/admin/dashboard" element={<RequireAdminAuth><AdminDashboard /></RequireAdminAuth>} />
+          <Route path="/admin/users" element={<RequireAdminAuth><AdminUsers /></RequireAdminAuth>} />
           <Route path="/admin/products" element={<RequireAdminAuth><AdminProducts /></RequireAdminAuth>} />
           <Route path="/admin/products/upload" element={<RequireAdminAuth><UploadProducts /></RequireAdminAuth>} />
+          <Route path="/admin/orders" element={<RequireAdminAuth><AdminOrdersList /></RequireAdminAuth>} />
+          <Route path="/admin/orders/:id" element={<RequireAdminAuth><AdminOrderDetails /></RequireAdminAuth>} />
           
           <Route path="*" element={<Error404/>} />
         </Routes>
