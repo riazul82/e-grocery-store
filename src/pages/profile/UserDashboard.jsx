@@ -5,7 +5,7 @@ import { UserOrderContext } from '../../context/UserOrdersContextProvider';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import ProfileSidebar from '../../components/profile/ProfileSidebar';
-import MyOrdersTable from '../../components/cart/MyOrdersTable';
+import MyOrdersTable from '../../components/profile/MyOrdersTable';
 
 const UserDashboard = () => {
     const orderList = useContext(UserOrderContext);
