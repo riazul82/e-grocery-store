@@ -100,7 +100,7 @@ const Payment = () => {
                     <Link to="/payment" className="cartLink link active">3. Payment</Link>
                     <div onClick={handleRedirectReview} className="cartLink">4. Review</div>
                     <div className="darkLine"></div>
-                    <div className="redLine" style={{width: '70%'}}></div>
+                    <div className="greenLine" style={{width: '70%'}}></div>
                 </div>
 
                 <div className="cartContent">

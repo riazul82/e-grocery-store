@@ -22,7 +22,7 @@ const Cart = () => {
                     <Link to="/checkout" className="cartLink link">3. Payment</Link>
                     <Link to="/checkout" className="cartLink link">4. Review</Link>
                     <div className="darkLine"></div>
-                    <div className="redLine" style={{width: '0%'}}></div>
+                    <div className="greenLine" style={{width: '0%'}}></div>
                 </div>
 
                 <div className="cartContent">

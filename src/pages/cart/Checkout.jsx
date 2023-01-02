@@ -65,13 +65,13 @@ const Checkout = () => {
         <>
             <Navbar />
             <div className="cart">
-            <div className="cartHeader">
+                <div className="cartHeader">
                     <Link to="/cart" className="cartLink link active">1. Cart</Link>
                     <Link to="/checkout" className="cartLink link active">2. Details</Link>
                     <div onClick={handleRedirectPayment} className="cartLink">3. Payment</div>
                     <div className="cartLink">4. Review</div>
                     <div className="darkLine"></div>
-                    <div className="redLine" style={{width: '35%'}}></div>
+                    <div className="greenLine" style={{width: '35%'}}></div>
                 </div>
 
                 <div className="cartContent">
@@ -149,6 +149,7 @@ const Checkout = () => {
                     </div>
                 </div>
             </div>
+            
             <Footer />
             <ToastContainer
                 position="top-right"

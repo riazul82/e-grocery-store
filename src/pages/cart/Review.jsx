@@ -39,28 +39,28 @@ const Review = () => {
 
     return (
         <>
-        <Navbar />
-        <div className="cart">
-            <div className="cartHeader">
-                <Link to="/cart" className="cartLink link active">1. Cart</Link>
-                <Link to="/checkout" className="cartLink link active">2. Details</Link>
-                <Link to="/payment" className="cartLink link active">3. Payment</Link>
-                <Link to="/review" className="cartLink link active">4. Review</Link>
-                <div className="darkLine"></div>
-                <div className="redLine" style={{width: '90%'}}></div>
-            </div>
-
-            <div className="reviewContent">
-                <div className="greetingBox">
-                    <div className="greetingImageWrap">
-                        <img src={celetrationImg} alt="greeting" />
-                    </div>
-                    <p className="greetings">Thank you <strong>{checkoutUser.name}</strong>!! Your order have been receieved!</p>
+            <Navbar />
+            <div className="cart">
+                <div className="cartHeader">
+                    <Link to="/cart" className="cartLink link active">1. Cart</Link>
+                    <Link to="/checkout" className="cartLink link active">2. Details</Link>
+                    <Link to="/payment" className="cartLink link active">3. Payment</Link>
+                    <Link to="/review" className="cartLink link active">4. Review</Link>
+                    <div className="darkLine"></div>
+                    <div className="greenLine" style={{width: '90%'}}></div>
                 </div>
-                <p className="redirectMsg">You will be redirected to home in {countdown}s</p>
+
+                <div className="reviewContent">
+                    <div className="greetingBox">
+                        <div className="greetingImageWrap">
+                            <img src={celetrationImg} alt="greeting" />
+                        </div>
+                        <p className="greetings">Thank you <strong>{checkoutUser.name}</strong>!! Your order have been receieved!</p>
+                    </div>
+                    <p className="redirectMsg">You will be redirected to home in {countdown}s</p>
+                </div>
             </div>
-        </div>
-        <Footer />
+            <Footer />
         </>
     );
 }
