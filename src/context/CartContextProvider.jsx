@@ -23,8 +23,8 @@ const reducer = (state, action) => {
                 return state;
             }
 
-            return {...state, cartItems: state.cartItems.push({...action.payload, cartQuantity: 1})};
-        
+            return {...state, cartItems: [...state.cartItems, {...action.payload, cartQuantity: 1}]};
+                    
         case 'REMOVE_PRODUCT':
             let cartItems = state.cartItems.filter((elem) => {
                 return elem.id !== action.payload.id;
