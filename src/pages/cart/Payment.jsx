@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // components
@@ -23,67 +23,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Payment = () => {
-    const { cartItems, subTotal, shippingCost, discount, newUserDiscount, winterDiscount, totalCost, NEW_USER_VOUCHER, WINTER_VOUCHER, dispatch } = useContext(CartContext);
+    const { cartItems, subTotal, shippingCost, discount, totalCost, dispatch } = useContext(CartContext);
     
     // states
     const userDetails = useContext(UserDetailsContext);
-    const [voucherCode, setVoucherCode] = useState(
-        localStorage.getItem("voucherCode") || ''
-    );
     const [paymentMethod, setPaymentMethod] = useState('');
-    
-    // track active voucher
-    const [disableFlag, setDisableFlag] = useState(
-        JSON.parse(localStorage.getItem("winterVoucher")) || 
-        JSON.parse(localStorage.getItem("newUserVoucher")) || false
-    );
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        // if purchase amount < 500, then remove voucher
-        if (JSON.parse(localStorage.getItem("newUserVoucher")) && subTotal + shippingCost < 500) {
-            dispatch({type: 'REMOVE_DISCOUNT'});
-            localStorage.removeItem("voucherCode");
-            setDisableFlag(false);
-            setVoucherCode('');
-        }
-        
-        setDisableFlag(JSON.parse(localStorage.getItem("winterVoucher")) || JSON.parse(localStorage.getItem("newUserVoucher")) || false);
-
-    }, [voucherCode, disableFlag, shippingCost, subTotal, dispatch]);
-
-    // handle voucher input
-    const handleVoucherCode = (e) => {
-        setVoucherCode((e.target.value).split(' ').join('').toUpperCase());
-    }
-
-    // apply or remove voucher
-    const handleVoucher = (e) => {
-        e.preventDefault();
-        if (disableFlag === true) {
-            dispatch({type: 'REMOVE_DISCOUNT'});
-            localStorage.removeItem("voucherCode");
-            setVoucherCode('');
-        } else if (voucherCode === NEW_USER_VOUCHER && totalCost < 500) {
-            toast.error('Error! Purchase above Rs.500!');
-        } else if (voucherCode === NEW_USER_VOUCHER) {
-            dispatch({type: 'NEWUSER_DISCOUNT'});
-            localStorage.setItem("voucherCode", voucherCode);
-            setTimeout(() => {
-                toast.success('NEW USER DISCOUNT ADDED!');
-            }, 200);
-        } else if (voucherCode === WINTER_VOUCHER) {
-            dispatch({type: 'WINTER_DISCOUNT'});
-            localStorage.setItem("voucherCode", voucherCode);
-            setTimeout(() => {
-                toast.success('WINTER DISCOUNT ADDED!');
-            }, 200);
-        } else {
-            toast.error('Invalid Voucher Code!');
-            setVoucherCode('');
-        }
-    }
 
     // handle payment method input
     const handleChange = (e) => {
@@ -104,11 +50,7 @@ const Payment = () => {
             }
             
             const userRef = doc(fs, 'users', userDetails.id);
-            setDoc(userRef, {
-                orderList,
-                isWinterVoucherUsed: JSON.parse(localStorage.getItem("winterVoucher")) || false,
-                isNewUserVoucherUsed: JSON.parse(localStorage.getItem("newUserVoucher")) || false,
-            }, {merge: true});
+            setDoc(userRef, {orderList}, {merge: true});
             setTimeout(() => {
                 toast.success('Order placed successfully!');
             }, 100);
@@ -136,8 +78,6 @@ const Payment = () => {
                 time: new Date().toUTCString(),
                 paymentMethod: paymentMethod,
                 paymentStatus: 'unpaid',
-                isWinterVoucherAdded: JSON.parse(localStorage.getItem("winterVoucher")) || false,
-                isNewUserVoucherAdded: JSON.parse(localStorage.getItem("newUserVoucher")) || false,
                 shippingInfo: JSON.parse(localStorage.getItem('checkoutUserDetails'))
             }
             storeOrderDetails(orderDetails);
@@ -197,14 +137,8 @@ const Payment = () => {
                             </div>
                             <div className="cartPriceBox shippingCostBox">
                                 <p>Discuont </p>
-                                <p>{`${newUserDiscount ? `${discount}+${newUserDiscount.toFixed(1)}` : winterDiscount ? `${discount}+${winterDiscount.toFixed(1)}` : discount}`}Tk</p>
+                                <p>{discount}Tk</p>                          
                             </div>
-
-                            <div className="voucherInputBox">
-                                <input type="text" placeholder="Voucher (If any)" style={disableFlag ? {color: '#999'} : {color: '#ddd'}} value={voucherCode} onChange={handleVoucherCode} disabled={disableFlag} />
-                                <button onClick={handleVoucher}>{disableFlag ? 'Applied' : 'Apply'}</button>
-                            </div>
-
                             <div className="cartPriceBox totalCostBox">
                                 <p>TOTAL COST </p>
                                 <p>{totalCost}Tk</p>

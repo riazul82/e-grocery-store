@@ -19,9 +19,6 @@ const Review = () => {
         }, 1000);
 
         const removeLocalStorageData = () => {
-            localStorage.removeItem("voucherCode");
-            localStorage.removeItem("newUserVoucher");
-            localStorage.removeItem("winterVoucher");
             localStorage.removeItem("checkoutUserDetails");
             localStorage.removeItem("checkoutFormFilled");
             localStorage.removeItem("orderConfirmed");
