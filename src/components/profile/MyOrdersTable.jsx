@@ -1,12 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useOrderDetails from '../../hooks/useOrderDetails';
+
 // icons
 import { RxDoubleArrowRight } from 'react-icons/rx';
 
-const MyOrdersTable = ({ orderList }) => {
-
+const MyOrdersTable = () => {
     const navigate = useNavigate();
+    
+    const orderList = useOrderDetails();
 
     const handleViewDetails = (orderDetails) => {
         navigate(`/user/orders/${orderDetails.orderId}`, {state: orderDetails});
@@ -33,7 +36,7 @@ const MyOrdersTable = ({ orderList }) => {
                                 <td>{elem.totalCost} Tk</td>
                                 <td>{elem.status}</td>
                                 <td className="orderListDetailsBtn" onClick={() => handleViewDetails(elem)}>
-                                    <span style={{}}>view details</span>
+                                    <span>view details</span>
                                     <RxDoubleArrowRight className="arrow" />
                                 </td>
                             </tr>

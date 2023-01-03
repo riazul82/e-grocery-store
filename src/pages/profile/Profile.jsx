@@ -4,6 +4,7 @@ import { UserDetailsContext } from '../../context/UserDetailsProvider';
 // components
 import Navbar from '../../components/Navbar';
 import ProfileSidebar from '../../components/profile/ProfileSidebar';
+import Footer from '../../components/Footer';
 
 // icons
 import { SlLocationPin } from 'react-icons/sl';
@@ -105,6 +106,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

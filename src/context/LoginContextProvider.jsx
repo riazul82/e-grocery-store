@@ -35,9 +35,6 @@ const LoginContextProvider = ({ children }) => {
         if (state.currentUser === null) {
             localStorage.removeItem("user");
             localStorage.removeItem("userDetails");
-            localStorage.removeItem("newUserVoucher");
-            localStorage.removeItem("winterVoucher");
-            localStorage.removeItem("voucherCode");
             localStorage.removeItem("checkoutFormFilled");
             localStorage.removeItem("orderConfirmed");
         } 
