@@ -50,7 +50,7 @@ const ProfileSidebar = () => {
 
     return (
         <div className="sidebar">
-            <div className="profileSidebar">
+            <div className="sidebarItems">
                 <Link to="/user/profile" className="link sidebarLink">
                     <BiUser className="sidebarIcon"/>
                     <p>My Profile</p>

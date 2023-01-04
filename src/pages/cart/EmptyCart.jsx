@@ -1,16 +1,13 @@
 import React from 'react';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
+import AppLayout from '../../layouts/AppLayout';
 
 const EmptyCart = () => {
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div className="emptyCart">
                 <h1 className="title">Cart is Empty!</h1>
             </div>
-            <Footer />
-        </>
+        </AppLayout>
     );
 }
 

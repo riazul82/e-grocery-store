@@ -35,7 +35,7 @@ const AdminSidebar = () => {
 
     return (
         <div className="sidebar">
-            <div className="profileSidebar">
+            <div className="sidebarItems">
                 <Link to="/admin/dashboard" className="link sidebarLink">
                     <TbLayoutDashboard className="sidebarIcon"/>
                     <p>Dashboard</p>

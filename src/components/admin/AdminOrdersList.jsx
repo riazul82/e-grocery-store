@@ -39,7 +39,7 @@ const AdminOrdersList = () => {
     }
 
     return (
-        <table id="ordersTable">
+        <table className="dashboardList">
             <thead>
                 <tr>
                     <th>Order Id</th>
@@ -66,7 +66,7 @@ const AdminOrdersList = () => {
                                         <option value="canceled">canceled</option>
                                     </select>
                                 </td>
-                                <td className="orderListDetailsBtn" onClick={() => handleViewDetails(elem)}>
+                                <td className="listDetailsBtn" onClick={() => handleViewDetails(elem)}>
                                     <span>view details</span>
                                     <RxDoubleArrowRight className="arrow" />
                                 </td>

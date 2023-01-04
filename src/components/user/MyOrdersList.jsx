@@ -6,7 +6,7 @@ import useOrderDetails from '../../hooks/useOrderDetails';
 // icons
 import { RxDoubleArrowRight } from 'react-icons/rx';
 
-const MyOrdersTable = () => {
+const MyOrdersList = () => {
     const navigate = useNavigate();
     
     const orderList = useOrderDetails();
@@ -16,7 +16,7 @@ const MyOrdersTable = () => {
     }
 
     return (
-        <table id="ordersTable">
+        <table className="dashboardList">
             <thead>
                 <tr>
                     <th>Order Id</th>
@@ -35,7 +35,7 @@ const MyOrdersTable = () => {
                                 <td>{elem.time.split(' ').slice(1, 4).join(' ')}</td>
                                 <td>{elem.totalCost} Tk</td>
                                 <td>{elem.status}</td>
-                                <td className="orderListDetailsBtn" onClick={() => handleViewDetails(elem)}>
+                                <td className="listDetailsBtn" onClick={() => handleViewDetails(elem)}>
                                     <span>view details</span>
                                     <RxDoubleArrowRight className="arrow" />
                                 </td>
@@ -48,4 +48,4 @@ const MyOrdersTable = () => {
     );
 }
 
-export default MyOrdersTable;
+export default MyOrdersList;

@@ -1,15 +1,13 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import AppLayout from '../layouts/AppLayout';
 
 const About = () => {
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div>
                 <h1>About</h1>
             </div>
-        </>
-        
+        </AppLayout>
     );
 }
 

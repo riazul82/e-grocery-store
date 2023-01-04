@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // components
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
+import AppLayout from '../../layouts/AppLayout';
 import CartProduct from '../../components/cart/CartProduct';
+import CartAmountDetails from '../../components/cart/CartAmountDetails';
 
 // context
 import { CartContext } from '../../context/CartContextProvider';
@@ -13,8 +13,7 @@ const Cart = () => {
     const { cartItems, subTotal, shippingCost, discount, totalCost } = useContext(CartContext);
     
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div className="cart">
                 <div className="cartHeader">
                     <Link to="/cart" className="cartLink link active">1. Cart</Link>
@@ -26,36 +25,17 @@ const Cart = () => {
                 </div>
 
                 <div className="cartContent">
-                    <div className="cartProducts">
+                    <div className="cartLeftContent cartProducts">
                         {cartItems && cartItems.map((item) => {
                             return <CartProduct key={item.id} cartItem={item} />
                         })}
                     </div>
-
-                    <div className="cartDetails">
-                        <div className="cartTotalPriceBox">
-                            <div className="cartPriceBox subTotalBox">
-                                <p>Sub total</p>
-                                <p>{subTotal}Tk</p>
-                            </div>
-                            <div className="cartPriceBox shippingCostBox">
-                                <p>Shipping Cost</p>
-                                <p>{shippingCost}Tk</p>
-                            </div>
-                            <div className="cartPriceBox shippingCostBox">
-                                <p>Discuont</p>
-                                <p>{discount}Tk</p>
-                            </div>
-                            <div className="cartPriceBox totalCostBox">
-                                <p>TOTAL COST </p>
-                                <p>{totalCost}Tk</p>
-                            </div>
-                        </div>
+                    <div className="cartRightContent cartAmountDetails">
+                        <CartAmountDetails subTotal={subTotal} shippingCost={shippingCost} discount={discount} totalCost={totalCost} />
                     </div>
                 </div>
             </div>
-            <Footer />
-        </>
+        </AppLayout>
     );
 }
 

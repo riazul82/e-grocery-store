@@ -3,7 +3,7 @@
     height: auto;
     width: 100%;
 
-    .profileSidebar {
+    .sidebarItems {
         
         box-shadow: 0.1rem 0.1rem 0.4rem #000;
     
@@ -29,7 +29,7 @@
             }
         }
     
-        .sidebarItem:last-child {
+        .sidebarLink:last-child {
             border: none;
         }
     }

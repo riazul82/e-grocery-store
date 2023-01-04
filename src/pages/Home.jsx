@@ -2,13 +2,12 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // components
-import Navbar from '../components/Navbar';
+import AppLayout from '../layouts/AppLayout';
 import Title from '../components/Title';
 import CategoryLinks from '../components/home/CategoryLinks';
 import VoucherCard from '../components/home/VoucherCard';
 import SubProducts from '../components/products/SubProducts';
 import ServiceCard from '../components/home/ServiceCard';
-import Footer from '../components/Footer';
 
 // icons
 import { GoSearch } from 'react-icons/go';
@@ -61,8 +60,7 @@ const Home = () => {
     }
 
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div className="home">
                 <div className="homeHeader">
                     <div className="contactInfo">
@@ -131,8 +129,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
-        </>
+        </AppLayout>
     );
 }
 

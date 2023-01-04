@@ -1,25 +1,18 @@
-.dashboardDetails {
+.dashboardLayout {
     margin: 2rem auto;
-    margin-bottom: 5rem;
     max-width: 1280px;
     width: 100%;
     display: flex;
 
-    .detailsInfo {
+    .dashboardDetails {
         flex: 4;
         margin-left: 2rem;
-        position: relative;
-        overflow: hidden;
 
         .dashboardTitle > h2 {
             padding-bottom: 0.8rem;
             color: #fff;
             font-size: 1.6rem;
             border-bottom: 2px dashed #333;
-        }
-
-        .dashboardContent {
-            margin-top: 1.2rem;
         }
     }
 }

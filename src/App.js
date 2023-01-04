@@ -19,11 +19,11 @@ import AdminLogin from './auth/AdminLogin';
 import CreateAdmin from './auth/CreateAdmin';
 
 // user profile
-import Profile from './pages/profile/Profile';
-import UpdateProfile from './pages/profile/UpdateProfile';
-import UserDashboard from './pages/profile/UserDashboard';
-import MyOrders from './pages/profile/MyOrders';
-import OrderDetails from './pages/profile/OrderDetails';
+import Profile from './pages/user/Profile';
+import UpdateProfile from './pages/user/UpdateProfile';
+import UserDashboard from './pages/user/UserDashboard';
+import MyOrders from './pages/user/MyOrders';
+import OrderDetails from './pages/user/OrderDetails';
 
 // shopping cart
 import Cart from './pages/cart/Cart';
@@ -36,9 +36,10 @@ import EmptyCart from './pages/cart/EmptyCart';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import UploadProducts from './pages/admin/UploadProducts';
-import AdminOrdersList from './pages/admin/AdminOrdersList';
-import AdminOrderDetails from './components/admin/AdminOrderDetails';
+// import AdminOrdersList from './components/admin/AdminOrdersList';
+import AdminOrderDetails from './pages/admin/AdminOrderDetails';
 import AdminUsers from './pages/admin/AdminUsers';
+import AdminUserDetails from './pages/admin/AdminUserDetails';
 
 const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
@@ -94,9 +95,10 @@ const App = () => {
           
           <Route path="/admin/dashboard" element={<RequireAdminAuth><AdminDashboard /></RequireAdminAuth>} />
           <Route path="/admin/users" element={<RequireAdminAuth><AdminUsers /></RequireAdminAuth>} />
+          <Route path="/admin/users/:id" element={<RequireAdminAuth><AdminUserDetails /></RequireAdminAuth>} />
           <Route path="/admin/products" element={<RequireAdminAuth><AdminProducts /></RequireAdminAuth>} />
           <Route path="/admin/products/upload" element={<RequireAdminAuth><UploadProducts /></RequireAdminAuth>} />
-          <Route path="/admin/orders" element={<RequireAdminAuth><AdminOrdersList /></RequireAdminAuth>} />
+          {/* <Route path="/admin/orders" element={<RequireAdminAuth><AdminOrdersList /></RequireAdminAuth>} /> */}
           <Route path="/admin/orders/:id" element={<RequireAdminAuth><AdminOrderDetails /></RequireAdminAuth>} />
           
           <Route path="*" element={<Error404/>} />

@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // components
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import AppLayout from '../layouts/AppLayout';
 import Product from '../components/products/Product';
 import SubProducts from '../components/products/SubProducts';
 
@@ -59,8 +58,7 @@ const Products = () => {
     }
 
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div className="allProducts">
                 <div className="productsHeader">
                     <div className="searchBar">
@@ -102,8 +100,7 @@ const Products = () => {
                     <SubProducts title="Breads" link="breads" items={breads} />
                 </div>
             </div>
-            <Footer />
-        </>
+        </AppLayout>
     );
 }
 

@@ -1,41 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-// firebase
-import { fs } from '../../firebase';
-import { collection, query, onSnapshot } from "firebase/firestore";
 
 // icons
 import { RxDoubleArrowRight } from 'react-icons/rx';
+import useAdminUsersList from '../../hooks/useAdminUsersList';
 
 const AdminUsersList = () => {
-    const [usersList, setUsersList] = useState([]);
-
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const q = query(collection(fs, "users"));
-        onSnapshot(q, (querySnapshot) => {
-            const users = [];
-            querySnapshot.forEach((doc) => {
-                users.push({userId: doc.id, ...doc.data()});
-            });
-            setUsersList(users);
-        });
-    }, []);
+    const usersList = useAdminUsersList();
 
     const handleViewDetails = (userDetails) => {
-        navigate(`/admin/orders/${userDetails.orderId}`, {state: userDetails});
+        navigate(`/admin/users/${userDetails.userId}`, {state: userDetails});
     }
 
     return (
-        <table id="ordersTable">
+        <table className="dashboardList">
             <thead>
                 <tr>
                     <th>User Id</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Action</th>
+                    <th>Role</th>
                     <th>Details</th>
                 </tr>
             </thead>
@@ -44,12 +30,11 @@ const AdminUsersList = () => {
                     usersList.map((elem) => {
                         return (
                             <tr className="ordersTableItem" key={elem.userId}>
-                                {console.log(elem.userId)}
                                 <td>{`#${elem.userId.slice(0, 6)}`}</td>
-                                <td>{elem.name}</td>
+                                <td>{elem.name ? elem.name : '--:--'}</td>
                                 <td>{elem.email}</td>
                                 <td>{elem.role}</td>
-                                <td className="orderListDetailsBtn" onClick={() => handleViewDetails(elem)}>
+                                <td className="listDetailsBtn" onClick={() => handleViewDetails(elem)}>
                                     <span>view details</span>
                                     <RxDoubleArrowRight className="arrow" />
                                 </td>

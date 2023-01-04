@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // components
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
+import AppLayout from '../../layouts/AppLayout';
+import CartAmountDetails from '../../components/cart/CartAmountDetails';
 
 // context
 import { CartContext } from '../../context/CartContextProvider';
@@ -62,8 +62,7 @@ const Checkout = () => {
     }
 
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div className="cart">
                 <div className="cartHeader">
                     <Link to="/cart" className="cartLink link active">1. Cart</Link>
@@ -75,7 +74,7 @@ const Checkout = () => {
                 </div>
 
                 <div className="cartContent">
-                    <form className="checkoutForm" onSubmit={handleSubmit}>
+                    <form className="cartLeftContent checkoutForm" onSubmit={handleSubmit}>
                         <div className="inputField">
                             <label htmlFor="name">Full name</label>
                             <input type="text" name="name" id="name" value={user.name} onChange={handleChange} placeholder="Full name" required />
@@ -127,30 +126,12 @@ const Checkout = () => {
                         </div>
                     </form>
 
-                    <div className="cartDetails">
-                        <div className="cartTotalPriceBox">
-                            <div className="cartPriceBox subTotalBox">
-                                <p>Sub total</p>
-                                <p>{subTotal}Tk</p>
-                            </div>
-                            <div className="cartPriceBox shippingCostBox">
-                                <p>Shipping Cost </p>
-                                <p>{shippingCost}Tk</p>
-                            </div>
-                            <div className="cartPriceBox shippingCostBox">
-                                <p>Discuont </p>
-                                <p>{discount}Tk</p>
-                            </div>
-                            <div className="cartPriceBox totalCostBox">
-                                <p>TOTAL COST </p>
-                                <p>{totalCost}Tk</p>
-                            </div>
-                        </div>
+                    <div className="cartRightContent cartAmountDetails">
+                        <CartAmountDetails subTotal={subTotal} shippingCost={shippingCost} discount={discount} totalCost={totalCost} />
                     </div>
                 </div>
             </div>
             
-            <Footer />
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -163,7 +144,7 @@ const Checkout = () => {
                 pauseOnHover
                 theme="dark"
             />
-        </>
+        </AppLayout>
     );
 }
 

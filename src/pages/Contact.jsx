@@ -1,14 +1,13 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import AppLayout from '../layouts/AppLayout';
 
 const Contact = () => {
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div>
                 <h1>Contact</h1>
             </div>
-        </>
+        </AppLayout>
     );
 }
 

@@ -2,42 +2,40 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 // components
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-import ProfileSidebar from '../../components/profile/ProfileSidebar';
+import AppLayout from '../../layouts/AppLayout';
+import ProfileSidebar from '../../components/user/ProfileSidebar';
 
 const OrderDetails = () => {
     const location = useLocation();
     const orderDetails = location.state;
 
     return (
-        <>
-            <Navbar />
-            <div className="userDetails">
+        <AppLayout>
+            <div className="dashboardLayout">
                 <ProfileSidebar />
-                <div className="detailsInfo">
-                    <div className="myOrders">
+                <div className="dashboardDetails">
+                    <div className="dashboardTitle">
                         <h2>Order Details</h2>
                     </div>
 
-                    <div className="orderInfoBox">
-                        <div className="orderInfoHeader">
+                    <div className="dashboardDetailsBox">
+                        <div className="dashboardDetailsHeader">
                             <p>Order Info</p>
                         </div>
 
-                        <div className="orderInfo">
+                        <div className="dashboardDetailsInfo">
                             <p><span>Order Id</span><span>{orderDetails.orderId}</span></p>
                             <p><span>Order Date</span><span>{orderDetails.time}</span></p>
                             <p><span>Order Status</span><span>{orderDetails.status}</span></p>
                         </div>
                     </div>
 
-                    <div className="orderInfoBox">
-                        <div className="orderInfoHeader">
+                    <div className="dashboardDetailsBox">
+                        <div className="dashboardDetailsHeader">
                             <p>Shipping Info</p>
                         </div>
 
-                        <div className="orderInfo">
+                        <div className="dashboardDetailsInfo">
                             <p><span>Email</span><span>{orderDetails.shippingInfo.email}</span></p>
                             <p><span>Phone</span><span>{orderDetails.shippingInfo.phone}</span></p>
                             <p>
@@ -52,12 +50,12 @@ const OrderDetails = () => {
                         </div>
                     </div>
 
-                    <div className="orderInfoBox">
-                        <div className="orderInfoHeader">
+                    <div className="dashboardDetailsBox">
+                        <div className="dashboardDetailsHeader">
                             <p>Product Items</p>
                         </div>
 
-                        <div className="orderInfo">
+                        <div className="dashboardDetailsInfo">
                             {
                                 orderDetails.orderItems.map((elem, index) => {
                                     return (
@@ -80,12 +78,12 @@ const OrderDetails = () => {
                         </div>
                     </div>
 
-                    <div className="orderInfoBox">
-                        <div className="orderInfoHeader">
+                    <div className="dashboardDetailsBox">
+                        <div className="dashboardDetailsHeader">
                             <p>Amount Details</p>
                         </div>
 
-                        <div className="orderInfo">
+                        <div className="dashboardDetailsInfo">
                             <p><span>Sub Total</span><span>{orderDetails.subTotal} Tk</span></p>
                             
                             {orderDetails.isNewUserVoucherAdded &&
@@ -106,12 +104,12 @@ const OrderDetails = () => {
                         </div>
                     </div>
 
-                    <div className="orderInfoBox">
-                        <div className="orderInfoHeader">
+                    <div className="dashboardDetailsBox">
+                        <div className="dashboardDetailsHeader">
                             <p>Payment Info</p>
                         </div>
 
-                        <div className="orderInfo">
+                        <div className="dashboardDetailsInfo">
                             <p><span>Method</span><span>COD</span></p>
                         </div>
                     </div>
@@ -119,8 +117,7 @@ const OrderDetails = () => {
                     <button className="cancelOrderBtn">Cancel Order</button>
                 </div>
             </div>
-            <Footer />
-        </>
+        </AppLayout>
     );
 }
 

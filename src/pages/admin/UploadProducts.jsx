@@ -3,23 +3,25 @@ import React from 'react';
 // components
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import AddProductForm from '../../components/admin/AddProductForm';
+import AppLayout from '../../layouts/AppLayout';
 
 const UploadProducts = () => {
-
     return (
-        <div className="dashboardDetails">
-            <AdminSidebar />
+        <AppLayout>
+            <div className="dashboardLayout">
+                <AdminSidebar />
 
-            <div className="detailsInfo">
-                <div className="dashboardTitle">
-                    <h2>Upload Products</h2>
-                </div>
+                <div className="dashboardDetails">
+                    <div className="dashboardTitle">
+                        <h2>Upload Products</h2>
+                    </div>
 
-                <div className="dashboardContent">
-                    <AddProductForm />
+                    <div className="dashboardContent">
+                        <AddProductForm />
+                    </div>
                 </div>
             </div>
-        </div>
+        </AppLayout>
     );
 }
 

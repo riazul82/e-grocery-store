@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // components
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
+import AppLayout from '../../layouts/AppLayout';
 
+// images
 import celetrationImg from '../../assets/images/project/fireworks.png';
 
 const Review = () => {
@@ -38,14 +38,13 @@ const Review = () => {
     });
 
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div className="cart">
                 <div className="cartHeader">
-                    <Link to="/cart" className="cartLink link active">1. Cart</Link>
-                    <Link to="/checkout" className="cartLink link active">2. Details</Link>
-                    <Link to="/payment" className="cartLink link active">3. Payment</Link>
-                    <Link to="/review" className="cartLink link active">4. Review</Link>
+                    <div className="cartLink active">1. Cart</div>
+                    <div className="cartLink active">2. Details</div>
+                    <div className="cartLink active">3. Payment</div>
+                    <div className="cartLink active">4. Review</div>
                     <div className="darkLine"></div>
                     <div className="greenLine" style={{width: '90%'}}></div>
                 </div>
@@ -60,8 +59,7 @@ const Review = () => {
                     <p className="redirectMsg">You will be redirected to home in {countdown}s</p>
                 </div>
             </div>
-            <Footer />
-        </>
+        </AppLayout>
     );
 }
 

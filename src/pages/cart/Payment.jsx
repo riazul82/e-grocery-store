@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // components
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
+import AppLayout from '../../layouts/AppLayout';
+import CartAmountDetails from '../../components/cart/CartAmountDetails';
 
 // context
 import { CartContext } from '../../context/CartContextProvider';
@@ -91,8 +91,7 @@ const Payment = () => {
     }
 
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div className="cart">
                 <div className="cartHeader">
                     <Link to="/cart" className="cartLink link active">1. Cart</Link>
@@ -104,7 +103,7 @@ const Payment = () => {
                 </div>
 
                 <div className="cartContent">
-                    <div className="paymentMethods">
+                    <div className="cartLeftContent paymentMethods">
                         <p className="selectPaymentTitle">Select Payment Method</p>
                         <form className="selectPaymentMethod" onSubmit={handleSubmit}>
                             <label htmlFor="stripe">
@@ -125,29 +124,11 @@ const Payment = () => {
                         </form>
                     </div>
                     
-                    <div className="cartDetails">
-                        <div className="cartTotalPriceBox">
-                            <div className="cartPriceBox subTotalBox">
-                                <p>Sub total</p>
-                                <p>{subTotal}Tk</p>
-                            </div>
-                            <div className="cartPriceBox shippingCostBox">
-                                <p>Shipping Cost </p>
-                                <p>{shippingCost}Tk</p>
-                            </div>
-                            <div className="cartPriceBox shippingCostBox">
-                                <p>Discuont </p>
-                                <p>{discount}Tk</p>                          
-                            </div>
-                            <div className="cartPriceBox totalCostBox">
-                                <p>TOTAL COST </p>
-                                <p>{totalCost}Tk</p>
-                            </div>
-                        </div>
+                    <div className="cartRightContent cartAmountDetails">
+                        <CartAmountDetails subTotal={subTotal} shippingCost={shippingCost} discount={discount} totalCost={totalCost} />
                     </div>
                 </div>
             </div>
-            <Footer />
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -160,7 +141,7 @@ const Payment = () => {
                 pauseOnHover
                 theme="dark"
             />
-        </>
+        </AppLayout>
     );
 }
 

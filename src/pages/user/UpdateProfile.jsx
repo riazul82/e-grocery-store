@@ -2,9 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserDetailsContext } from '../../context/UserDetailsProvider';
 
 // components
-import Navbar from '../../components/Navbar';
-import ProfileSidebar from '../../components/profile/ProfileSidebar';
-import Footer from '../../components/Footer';
+import AppLayout from '../../layouts/AppLayout';
+import ProfileSidebar from '../../components/user/ProfileSidebar';
 
 // icons
 import { SlLocationPin } from 'react-icons/sl';
@@ -192,94 +191,92 @@ const UpdateProfile = () => {
     }
 
     return (
-        <>
-            <Navbar />
-            <div className="userDetails">
+        <AppLayout>
+            <div className="dashboardLayout">
                 <ProfileSidebar />
-                <div className="detailsInfo">
-                    <div className="myProfile">
+                <div className="dashboardDetails">
+                    <div className="dashboardTitle">
                         <h2>Update Profile</h2>
-                        <div className="profileContent">
-                            <div className="profileHeader">
-                                <div className="profileImage">
-                                    <img src={previewImage || user.imgUrl || profileImg} alt="profile" />
-                                </div>
-                                <div className="profileDesc">
-                                    <p className="name">{user.name}</p>
-                                    <p className="location"><SlLocationPin className="locationIcon" /><span>{user.address ? `${user.address.division}, ${user.address.country}` : user.address.country}</span></p>
-                                    <p className="joined"><FiCalendar className="locationIcon" /><span>{`Joined - ${user.joinedDate ? user.joinedDate : 'Month, YYYY'}`}</span></p>
-                                </div>
+                    </div>
+                    <div className="profileContent">
+                        <div className="profileHeader">
+                            <div className="profileImage">
+                                <img src={previewImage || user.imgUrl || profileImg} alt="profile" />
                             </div>
-
-                            <div className="uploadProfileImageInput">
-                                <div className="fileInputLabel">
-                                    <label htmlFor="profileImgInput">Upload an image</label>
-                                </div>
-                                <input type="file" id="profileImgInput" onChange={handleImageInput} />
+                            <div className="profileDesc">
+                                <p className="name">{user.name}</p>
+                                <p className="location"><SlLocationPin className="locationIcon" /><span>{user.address ? `${user.address.division}, ${user.address.country}` : user.address.country}</span></p>
+                                <p className="joined"><FiCalendar className="locationIcon" /><span>{`Joined - ${user.joinedDate ? user.joinedDate : 'Month, YYYY'}`}</span></p>
                             </div>
+                        </div>
 
-                            <div className="profileDetails">
-                                <form className="profileDetailsInfo" onSubmit={handleSubmit}>
-                                    <div className="inputField">
-                                        <label htmlFor="name">Full name</label>
-                                        <input type="text" name="name" id="name" value={user.name} onChange={handleChange} placeholder="Full name" required />
+                        <div className="uploadProfileImageInput">
+                            <div className="fileInputLabel">
+                                <label htmlFor="profileImgInput">Upload an image</label>
+                            </div>
+                            <input type="file" id="profileImgInput" onChange={handleImageInput} />
+                        </div>
+
+                        <div className="profileDetails">
+                            <form className="profileDetailsInfo" onSubmit={handleSubmit}>
+                                <div className="inputField">
+                                    <label htmlFor="name">Full name</label>
+                                    <input type="text" name="name" id="name" value={user.name} onChange={handleChange} placeholder="Full name" required />
+                                </div>
+                                <div className="inputField">
+                                    <label htmlFor="email">Email</label>
+                                    <input type="email" name="email" id="email" value={user.email} onChange={handleChange} placeholder="Email" disabled />
+                                </div>
+                                <div className="inputField">
+                                    <label htmlFor="phone">Phone</label>
+                                    <input type="text" name="phone" id="phone" value={user.phone} onChange={handleChange} placeholder="Phone (e.g +88-01XXXXXXXXX)" required />
+                                </div>
+                                <div className="genderInput">
+                                    <p>Gender</p>
+                                    <div className="genderInputField">
+                                        <label htmlFor="male">
+                                            <input type="radio" name="gender" id="male" value="male" onChange={handleChange} defaultChecked={userDetails.gender === 'male' ? true : false} required /> 
+                                            Male
+                                        </label>
+                                        <label htmlFor="female">
+                                            <input type="radio" name="gender" id="female" value="female" onChange={handleChange} defaultChecked={userDetails.gender === 'female' ? true : false} />
+                                            Female
+                                        </label>
                                     </div>
-                                    <div className="inputField">
-                                        <label htmlFor="email">Email</label>
-                                        <input type="email" name="email" id="email" value={user.email} onChange={handleChange} placeholder="Email" disabled />
-                                    </div>
-                                    <div className="inputField">
-                                        <label htmlFor="phone">Phone</label>
-                                        <input type="text" name="phone" id="phone" value={user.phone} onChange={handleChange} placeholder="Phone (e.g +88-01XXXXXXXXX)" required />
-                                    </div>
-                                    <div className="genderInput">
-                                        <p>Gender</p>
-                                        <div className="genderInputField">
-                                            <label htmlFor="male">
-                                                <input type="radio" name="gender" id="male" value="male" onChange={handleChange} defaultChecked={userDetails.gender === 'male' ? true : false} required /> 
-                                                Male
-                                            </label>
-                                            <label htmlFor="female">
-                                                <input type="radio" name="gender" id="female" value="female" onChange={handleChange} defaultChecked={userDetails.gender === 'female' ? true : false} />
-                                                Female
-                                            </label>
+                                </div>
+                                <div className="addressInput">
+                                    <p>Address:</p>
+                                    <div className="addressInputField">
+                                        <div className="inputField">                
+                                            <label htmlFor="street">Street</label>
+                                            <input type="text" name="street" id="street" value={user.address.street} onChange={handleChange} placeholder="Street address" required />                                        
+                                        </div>
+                                        <div className="inputField">
+                                            <label htmlFor="division">Division</label>
+                                            <input type="text" name="division" id="division" value={user.address.division} onChange={handleChange} placeholder="Division" required />                                        
+                                        </div>
+                                        <div className="inputField">
+                                            <label htmlFor="city">City</label>
+                                            <input type="text" name="city" id="city" value={user.address.city} onChange={handleChange} placeholder="City" required />                                        
+                                        </div>
+                                        <div className="inputField">
+                                            <label htmlFor="postcode">ZIP/Postcode</label>
+                                            <input type="text" name="postcode" id="postcode" value={user.address.postcode} onChange={handleChange} placeholder="ZIP/Postcode" required />                                        
+                                        </div>
+                                        <div className="inputField">
+                                            <label htmlFor="country">Country</label>
+                                            <input type="text" name="country" value={user.address.country} placeholder="Country" disabled />                                        
                                         </div>
                                     </div>
-                                    <div className="addressInput">
-                                        <p>Address:</p>
-                                        <div className="addressInputField">
-                                            <div className="inputField">                
-                                                <label htmlFor="street">Street</label>
-                                                <input type="text" name="street" id="street" value={user.address.street} onChange={handleChange} placeholder="Street address" required />                                        
-                                            </div>
-                                            <div className="inputField">
-                                                <label htmlFor="division">Division</label>
-                                                <input type="text" name="division" id="division" value={user.address.division} onChange={handleChange} placeholder="Division" required />                                        
-                                            </div>
-                                            <div className="inputField">
-                                                <label htmlFor="city">City</label>
-                                                <input type="text" name="city" id="city" value={user.address.city} onChange={handleChange} placeholder="City" required />                                        
-                                            </div>
-                                            <div className="inputField">
-                                                <label htmlFor="postcode">ZIP/Postcode</label>
-                                                <input type="text" name="postcode" id="postcode" value={user.address.postcode} onChange={handleChange} placeholder="ZIP/Postcode" required />                                        
-                                            </div>
-                                            <div className="inputField">
-                                                <label htmlFor="country">Country</label>
-                                                <input type="text" name="country" value={user.address.country} placeholder="Country" disabled />                                        
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="buttonField">
-                                        <button type="submit" className="profileUpdateBtn" disabled={btnDisabled}>Update account</button>
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+                                <div className="buttonField">
+                                    <button type="submit" className="profileUpdateBtn" disabled={btnDisabled}>Update account</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <Footer />
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -293,7 +290,7 @@ const UpdateProfile = () => {
                 theme="dark"
                 style={{zIndex: 999999}}
             />
-        </>
+        </AppLayout>
     );
 }
 

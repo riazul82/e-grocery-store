@@ -1,26 +1,25 @@
 import React from 'react';
+import AppLayout from '../../layouts/AppLayout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
-import Footer from '../../components/Footer';
 import AdminUsersList from '../../components/admin/AdminUsersList';
 
 const AdminUsers = () => {
     return (
-        <>
-        <div className="dashboardDetails">
-            <AdminSidebar />
+        <AppLayout>
+            <div className="dashboardLayout">
+                <AdminSidebar />
 
-            <div className="detailsInfo">
-                <div className="dashboardTitle">
-                    <h2>Dashboard</h2>
+                <div className="dashboardDetails">
+                    <div className="dashboardTitle">
+                        <h2>Dashboard</h2>
+                    </div>
+
+                    <AdminUsersList />
+
+                    {/* {orderList && (orderList.length > 0) && <MyOrdersTable orderList={orders} />} */}
                 </div>
-
-                <AdminUsersList />
-
-                {/* {orderList && (orderList.length > 0) && <MyOrdersTable orderList={orders} />} */}
             </div>
-        </div>
-        <Footer />
-        </>
+        </AppLayout>
     );
 }
 

@@ -3,10 +3,9 @@ import { useParams } from 'react-router-dom';
 import { ProductsContext } from '../context/ProductsContextProvider';
 
 // components
-import Navbar from '../components/Navbar';
+import AppLayout from '../layouts/AppLayout';
 import Product from '../components/products/Product';
 import CategoryProducts from '../components/products/CategoryProducts';
-import Footer from '../components/Footer';
 
 // icons
 import { GoSearch } from 'react-icons/go';
@@ -80,8 +79,7 @@ const Category = () => {
     }
 
     return (
-        <>
-            <Navbar />
+        <AppLayout>
             <div className="allProducts">
                 <div className="productsHeader">
                     <div className="searchBar">
@@ -114,8 +112,7 @@ const Category = () => {
                     }
                 </div>
             </div>
-            <Footer />
-        </>
+        </AppLayout>
     );
 }
 

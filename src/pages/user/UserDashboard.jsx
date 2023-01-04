@@ -1,24 +1,21 @@
 import React from 'react';
 
 // components
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-import ProfileSidebar from '../../components/profile/ProfileSidebar';
-import MyOrdersTable from '../../components/profile/MyOrdersTable';
+import AppLayout from '../../layouts/AppLayout';
+import ProfileSidebar from '../../components/user/ProfileSidebar';
+import MyOrdersList from '../../components/user/MyOrdersList';
 
 import useOrderDetails from '../../hooks/useOrderDetails';
 
 const UserDashboard = () => {
-
     const orderList = useOrderDetails();
 
     return (
-        <>
-            <Navbar />
-            <div className="userDetails">
+        <AppLayout>
+            <div className="dashboardLayout">
                 <ProfileSidebar />
-                <div className="detailsInfo">
-                    <div className="myOrders">
+                <div className="dashboardDetails">
+                    <div className="dashboardTitle">
                         <h2>Dashboard</h2>
                     </div>
 
@@ -41,11 +38,10 @@ const UserDashboard = () => {
                         </div>
                     </div>
 
-                    {orderList && (orderList.length > 0) && <MyOrdersTable />}
+                    {orderList && (orderList.length > 0) && <MyOrdersList />}
                 </div>
             </div>
-            <Footer />
-        </>
+        </AppLayout>
     );
 }
 
