@@ -18,7 +18,7 @@ const UserDetailsProvider = ({ children }) => {
                 onSnapshot(doc(fs, "users", currentUser.uid), (doc) => {
                     let userObj = {
                         id: currentUser.uid,
-                        name: 'Unknown',
+                        name: 'User',
                         phone: '',
                         gender: '',
                         address: {

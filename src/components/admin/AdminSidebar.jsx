@@ -15,7 +15,6 @@ import { BsShop } from 'react-icons/bs';
 import { BiCreditCard } from 'react-icons/bi';
 import { MdOutlineExitToApp } from 'react-icons/md';
 import { MdOutlineSwitchAccount } from 'react-icons/md';
-import { TbTruckDelivery } from 'react-icons/tb';
 
 const AdminSidebar = () => {
     const { dispatch } = useContext(LoginContext);
@@ -51,10 +50,6 @@ const AdminSidebar = () => {
                 <Link to="/admin/orders" className="link sidebarLink">
                     <BiCreditCard className="sidebarIcon"/>
                     <p>Orders</p>
-                </Link>
-                <Link to="/admin/delivery" className="link sidebarLink">
-                    <TbTruckDelivery className="sidebarIcon"/>
-                    <p>Delivery</p>
                 </Link>
                 <Link to="/user/login" className="link sidebarLink">
                     <MdOutlineSwitchAccount className="sidebarIcon"/>

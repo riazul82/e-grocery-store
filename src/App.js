@@ -41,6 +41,8 @@ import AdminOrders from './pages/admin/AdminOrders';
 import AdminOrderDetails from './pages/admin/AdminOrderDetails';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminUserDetails from './pages/admin/AdminUserDetails';
+import AdminProfile from './pages/admin/AdminProfile';
+import AdminUpdateProfile from './pages/admin/AdminUpdateProfile';
 
 import ScrollToTop from './effects/ScrollToTop';
 
@@ -105,6 +107,8 @@ const App = () => {
           <Route path="/admin/products/upload" element={<RequireAdminAuth><UploadProducts /></RequireAdminAuth>} />
           <Route path="/admin/orders" element={<RequireAdminAuth><AdminOrders /></RequireAdminAuth>} />
           <Route path="/admin/orders/:id" element={<RequireAdminAuth><AdminOrderDetails /></RequireAdminAuth>} />
+          <Route path="/admin/profile" element={<RequireAdminAuth><AdminProfile /></RequireAdminAuth>} />
+          <Route path="/admin/update-profile" element={<RequireAdminAuth><AdminUpdateProfile /></RequireAdminAuth>} />
           
           <Route path="*" element={<Error404/>} />
         </Routes>

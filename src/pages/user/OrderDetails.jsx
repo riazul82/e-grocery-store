@@ -85,21 +85,8 @@ const OrderDetails = () => {
 
                         <div className="dashboardDetailsInfo">
                             <p><span>Sub Total</span><span>{orderDetails.subTotal} Tk</span></p>
-                            
-                            {orderDetails.isNewUserVoucherAdded &&
-                            <p><span>Discount</span><span>{`${orderDetails.discount} + 250 Tk`}</span></p>}
-                            
-                            {orderDetails.isWinterVoucherAdded &&
-                            <p><span>Discount</span><span>{`${orderDetails.discount} + ${(orderDetails.subTotal / 4).toFixed(1)} Tk`}</span></p>}
-                            
-                            {!orderDetails.isNewUserVoucherAdded && !orderDetails.isWinterVoucherAdded &&
-                            <p><span>Discount</span><span>{orderDetails.discount} Tk</span></p>}
-                            
+                            <p><span>Discount</span><span>{orderDetails.discount} Tk</span></p>
                             <p><span>Shipping Cost</span><span>{orderDetails.shippingCost} Tk</span></p>
-                            <p>
-                                <span>Voucher Added</span>
-                                <span>{(orderDetails.isNewUserVoucherAdded || orderDetails.isWinterVoucherAdded) ? 'Yes' : 'No'}</span>
-                            </p>
                             <p><span>Total Amount</span><span>{orderDetails.totalCost} Tk</span></p>
                         </div>
                     </div>

@@ -10,6 +10,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 // icons
 import { AiFillWarning } from 'react-icons/ai';
 
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 const CreateAdmin = () => {
     const [admin, setUser] = useState({email: '', password: '', confirmPassword: ''});
     const [error, setError] = useState({flag: false, code: null, message: ''});
@@ -31,6 +33,26 @@ const CreateAdmin = () => {
         }
     }
 
+    const getCurrentTime = () => {
+        let dt = new Date();
+        let monthIndex = dt.getMonth();
+        let date = dt.getDate();
+        let year = dt.getFullYear();
+
+        let hh = dt.getHours();
+        let mm = dt.getMinutes();
+        let ss = dt.getSeconds();
+
+        let xm = hh >= 12 ? 'PM' : 'AM';
+
+        date = date < 10 ? '0' + date : date;
+        hh = hh < 10 ? '0' + hh : hh;
+        mm = mm < 10 ? '0' + mm : mm;
+        ss = ss < 10 ? '0' + ss : ss;
+
+        return `${monthNames[monthIndex]} ${date}, ${year} ${hh}:${mm}:${ss} ${xm}`;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -42,7 +64,8 @@ const CreateAdmin = () => {
         .then((userCredential) => {
             const admin = userCredential.user;
             dispatch({type: 'ADMIN_LOGIN', payload: admin});
-            addUserToFireStore('users', userCredential.user.uid, {email: admin.email, role: 'admin'});
+            let joinedDate = getCurrentTime();
+            addUserToFireStore('users', userCredential.user.uid, {email: admin.email, role: 'admin', joinedDate});
             setUser({email: '', password: '', confirmPassword: ''});
             setError({flag: false, code: null, message: ''});
             navigate('/admin/dashboard');

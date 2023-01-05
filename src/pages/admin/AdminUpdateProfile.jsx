@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { UserDetailsContext } from '../../context/UserDetailsProvider';
+import { AdminDetailsContext } from '../../context/AdminDetailsProvider';
 
 // components
 import AppLayout from '../../layouts/AppLayout';
-import ProfileSidebar from '../../components/user/ProfileSidebar';
+import AdminSidebar from '../../components/admin/AdminSidebar';
 
 // icons
 import { SlLocationPin } from 'react-icons/sl';
@@ -21,22 +21,22 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import profileImg from '../../assets/images/project/shopping.png';
 
-const UpdateProfile = () => {
-    const userDetails = useContext(UserDetailsContext);
+const AdminUpdateProfile = () => {
+    const adminDetails = useContext(AdminDetailsContext);
 
     // states
     const [profileImage, setProfileImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [btnDisabled, setBtnDisabled] = useState(false);
-    const [user, setUser] = useState(
-        JSON.parse(localStorage.getItem('userDetails')) ||
+    const [admin, setAdmin] = useState(
+        JSON.parse(localStorage.getItem('adminDetails')) ||
         {
             id: '',
-            name: 'User',
-            email: userDetails.email,
+            name: 'Admin',
+            email: adminDetails.email,
             phone: '',
             gender: '',
-            joinedDate: userDetails.joinedDate,
+            joinedDate: adminDetails.joinedDate,
             address: {
                 street: '',
                 division: '',
@@ -64,12 +64,12 @@ const UpdateProfile = () => {
         let name = e.target.name;
 
         if (name === 'street' || name === 'city' || name ==='division' || name ==='postcode') {
-            setUser({...user, address: {
-                ...user.address,
+            setAdmin({...admin, address: {
+                ...admin.address,
                 [name]: e.target.value
             }})
         } else {
-            setUser({...user, [name]: e.target.value});
+            setAdmin({...admin, [name]: e.target.value});
         }
     }
 
@@ -81,9 +81,9 @@ const UpdateProfile = () => {
     }
 
     // store profile details to firestore
-    const updateProfileData = async (user, hasImg) => {
+    const updateProfileData = async (admin, hasImg) => {
         try {
-            await setDoc(doc(fs, "users", userDetails.id), user);
+            await setDoc(doc(fs, "users", adminDetails.id), admin);
             if(!hasImg) {
                 toast.success('Profile updated!');
             }
@@ -103,12 +103,12 @@ const UpdateProfile = () => {
         const phoneRegex = /^(\+88)?-?01[1-9]\d{8}$/;
         const zipRegex = /^\d{4}$/;
 
-        if (!phoneRegex.test(user.phone)) {
+        if (!phoneRegex.test(admin.phone)) {
             toast.error('Phone is not valid!');
             return;
         }
 
-        if (!zipRegex.test(user.address.postcode)) {
+        if (!zipRegex.test(admin.address.postcode)) {
             toast.error('Postcode can contain only 4 digits');
             return;
         }
@@ -116,13 +116,13 @@ const UpdateProfile = () => {
         setBtnDisabled(true);
 
         if (profileImage === null || profileImage === undefined) {
-            user.id = userDetails.id;
-            updateProfileData(user, false);
+            admin.id = adminDetails.id;
+            updateProfileData(admin, false);
             setBtnDisabled(false);
         } else {
             // delete previous image from storage
-            if (userDetails.imgUrl) {
-                const desertRef = ref(storage, userDetails.imgUrl);
+            if (adminDetails.imgUrl) {
+                const desertRef = ref(storage, adminDetails.imgUrl);
 
                 deleteObject(desertRef).then(() => {
                     console.log('Previous image deleted!');
@@ -152,7 +152,7 @@ const UpdateProfile = () => {
                 },  (error) => {
                     switch (error.code) {
                         case 'storage/unauthorized':
-                            console.log('Unauthorized user');
+                            console.log('Unauthorized admin');
                             break;
                         case 'storage/canceled':
                             console.log('Upload canceled');
@@ -172,9 +172,9 @@ const UpdateProfile = () => {
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        user.imgUrl = downloadURL;
-                        user.id = userDetails.id;
-                        updateProfileData(user, true);
+                        admin.imgUrl = downloadURL;
+                        admin.id = adminDetails.id;
+                        updateProfileData(admin, true);
                         setBtnDisabled(false);
                         setProfileImage(null);
                         setPreviewImage(null);
@@ -192,15 +192,15 @@ const UpdateProfile = () => {
 
     let joinedDate = 'Month, YYYY';
 
-    if (userDetails.joinedDate) {
-        let dateArr = userDetails.joinedDate.split(' ');
+    if (adminDetails.joinedDate) {
+        let dateArr = adminDetails.joinedDate.split(' ');
         joinedDate = `${dateArr[0]}, ${dateArr[2]}`;
     }
 
     return (
         <AppLayout>
             <div className="dashboardLayout">
-                <ProfileSidebar />
+                <AdminSidebar />
                 <div className="dashboardDetails">
                     <div className="dashboardTitle">
                         <h2>Update Profile</h2>
@@ -208,11 +208,11 @@ const UpdateProfile = () => {
                     <div className="profileContent">
                         <div className="profileHeader">
                             <div className="profileImage">
-                                <img src={previewImage || user.imgUrl || profileImg} alt="profile" />
+                                <img src={previewImage || admin.imgUrl || profileImg} alt="profile" />
                             </div>
                             <div className="profileDesc">
-                                <p className="name">{user.name}</p>
-                                <p className="location"><SlLocationPin className="locationIcon" /><span>{user.address ? `${user.address.division}, ${user.address.country}` : user.address.country}</span></p>
+                                <p className="name">{admin.name}</p>
+                                <p className="location"><SlLocationPin className="locationIcon" /><span>{admin.address ? `${admin.address.division}, ${admin.address.country}` : admin.address.country}</span></p>
                                 <p className="joined"><FiCalendar className="locationIcon" /><span>Joined - {joinedDate}</span></p>
                             </div>
                         </div>
@@ -228,25 +228,25 @@ const UpdateProfile = () => {
                             <form className="profileDetailsInfo" onSubmit={handleSubmit}>
                                 <div className="inputField">
                                     <label htmlFor="name">Full name</label>
-                                    <input type="text" name="name" id="name" value={user.name} onChange={handleChange} placeholder="Full name" required />
+                                    <input type="text" name="name" id="name" value={admin.name} onChange={handleChange} placeholder="Full name" required />
                                 </div>
                                 <div className="inputField">
                                     <label htmlFor="email">Email</label>
-                                    <input type="email" name="email" id="email" value={user.email} onChange={handleChange} placeholder="Email" disabled />
+                                    <input type="email" name="email" id="email" value={admin.email} onChange={handleChange} placeholder="Email" disabled />
                                 </div>
                                 <div className="inputField">
                                     <label htmlFor="phone">Phone</label>
-                                    <input type="text" name="phone" id="phone" value={user.phone} onChange={handleChange} placeholder="Phone (e.g +88-01XXXXXXXXX)" required />
+                                    <input type="text" name="phone" id="phone" value={admin.phone} onChange={handleChange} placeholder="Phone (e.g +88-01XXXXXXXXX)" required />
                                 </div>
                                 <div className="genderInput">
                                     <p>Gender</p>
                                     <div className="genderInputField">
                                         <label htmlFor="male">
-                                            <input type="radio" name="gender" id="male" value="male" onChange={handleChange} defaultChecked={userDetails.gender === 'male' ? true : false} required /> 
+                                            <input type="radio" name="gender" id="male" value="male" onChange={handleChange} defaultChecked={adminDetails.gender === 'male' ? true : false} required /> 
                                             Male
                                         </label>
                                         <label htmlFor="female">
-                                            <input type="radio" name="gender" id="female" value="female" onChange={handleChange} defaultChecked={userDetails.gender === 'female' ? true : false} />
+                                            <input type="radio" name="gender" id="female" value="female" onChange={handleChange} defaultChecked={adminDetails.gender === 'female' ? true : false} />
                                             Female
                                         </label>
                                     </div>
@@ -256,23 +256,23 @@ const UpdateProfile = () => {
                                     <div className="addressInputField">
                                         <div className="inputField">                
                                             <label htmlFor="street">Street</label>
-                                            <input type="text" name="street" id="street" value={user.address.street} onChange={handleChange} placeholder="Street address" required />                                        
+                                            <input type="text" name="street" id="street" value={admin.address.street} onChange={handleChange} placeholder="Street address" required />                                        
                                         </div>
                                         <div className="inputField">
                                             <label htmlFor="division">Division</label>
-                                            <input type="text" name="division" id="division" value={user.address.division} onChange={handleChange} placeholder="Division" required />                                        
+                                            <input type="text" name="division" id="division" value={admin.address.division} onChange={handleChange} placeholder="Division" required />                                        
                                         </div>
                                         <div className="inputField">
                                             <label htmlFor="city">City</label>
-                                            <input type="text" name="city" id="city" value={user.address.city} onChange={handleChange} placeholder="City" required />                                        
+                                            <input type="text" name="city" id="city" value={admin.address.city} onChange={handleChange} placeholder="City" required />                                        
                                         </div>
                                         <div className="inputField">
                                             <label htmlFor="postcode">ZIP/Postcode</label>
-                                            <input type="text" name="postcode" id="postcode" value={user.address.postcode} onChange={handleChange} placeholder="ZIP/Postcode" required />                                        
+                                            <input type="text" name="postcode" id="postcode" value={admin.address.postcode} onChange={handleChange} placeholder="ZIP/Postcode" required />                                        
                                         </div>
                                         <div className="inputField">
                                             <label htmlFor="country">Country</label>
-                                            <input type="text" name="country" value={user.address.country} placeholder="Country" disabled />                                        
+                                            <input type="text" name="country" value={admin.address.country} placeholder="Country" disabled />                                        
                                         </div>
                                     </div>
                                 </div>
@@ -301,4 +301,4 @@ const UpdateProfile = () => {
     );
 }
 
-export default UpdateProfile;
+export default AdminUpdateProfile;

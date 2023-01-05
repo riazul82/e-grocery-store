@@ -33,6 +33,26 @@ const Signup = () => {
         }
     }
 
+    const getCurrentTime = () => {
+        let dt = new Date();
+        let monthIndex = dt.getMonth();
+        let date = dt.getDate();
+        let year = dt.getFullYear();
+
+        let hh = dt.getHours();
+        let mm = dt.getMinutes();
+        let ss = dt.getSeconds();
+
+        let xm = hh >= 12 ? 'PM' : 'AM';
+
+        date = date < 10 ? '0' + date : date;
+        hh = hh < 10 ? '0' + hh : hh;
+        mm = mm < 10 ? '0' + mm : mm;
+        ss = ss < 10 ? '0' + ss : ss;
+
+        return `${monthNames[monthIndex]} ${date}, ${year} ${hh}:${mm}:${ss} ${xm}`;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -44,12 +64,7 @@ const Signup = () => {
         .then((userCredential) => {
             const user = userCredential.user;
             dispatch({type: 'LOGIN', payload: user});
-
-            let dt = new Date();
-            let monthIndex = dt.getMonth();
-            let year = dt.getFullYear();
-            let joinedDate = `${monthNames[monthIndex]}, ${year}`;
-
+            let joinedDate = getCurrentTime();
             addUserToFireStore('users', userCredential.user.uid, {email: user.email, role: 'user', joinedDate });
             setUser({email: '', password: '', confirmPassword: ''});
             setError({flag: false, code: null, message: ''});
