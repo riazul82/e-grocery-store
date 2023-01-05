@@ -5,10 +5,10 @@ import AppLayout from '../../layouts/AppLayout';
 import ProfileSidebar from '../../components/user/ProfileSidebar';
 import MyOrdersList from '../../components/user/MyOrdersList';
 
-import useOrderDetails from '../../hooks/useOrderDetails';
+import useUserOrdersList from '../../hooks/useUserOrdersList';
 
 const UserDashboard = () => {
-    const orderList = useOrderDetails();
+    const ordersList = useUserOrdersList();
 
     return (
         <AppLayout>
@@ -21,11 +21,11 @@ const UserDashboard = () => {
 
                     <div className="dashboardCards">
                         <div className="dahsboardCard">
-                            <p className="cardCounter">{orderList.length < 10 ? `0${orderList.length}` : orderList.length}</p>
+                            <p className="cardCounter">{ordersList.length < 10 ? `0${ordersList.length}` : ordersList.length}</p>
                             <p className="cardText">Total Orders</p>
                         </div>
                         <div className="dahsboardCard">
-                            <p className="cardCounter">{orderList.length < 10 ? `0${orderList.length}` : orderList.length}</p>
+                            <p className="cardCounter">{ordersList.length < 10 ? `0${ordersList.length}` : ordersList.length}</p>
                             <p className="cardText">Pending Orders</p>
                         </div>
                         <div className="dahsboardCard">
@@ -33,12 +33,12 @@ const UserDashboard = () => {
                             <p className="cardText">Shipped Orders</p>
                         </div>
                         <div className="dahsboardCard">
-                            <p className="cardCounter">{orderList.length < 10 ? `0${orderList.length}` : orderList.length}</p>
+                            <p className="cardCounter">{ordersList.length < 10 ? `0${ordersList.length}` : ordersList.length}</p>
                             <p className="cardText">Payment Deu</p>
                         </div>
                     </div>
 
-                    {orderList && (orderList.length > 0) && <MyOrdersList />}
+                    {ordersList && (ordersList.length > 0) && <MyOrdersList ordersList={ordersList} />}
                 </div>
             </div>
         </AppLayout>

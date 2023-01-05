@@ -7,19 +7,19 @@ import { doc, onSnapshot } from "firebase/firestore";
 
 const useUserOrdersList = () => {
     const userDetails = useContext(UserDetailsContext);
-    let [orderList, setOrderList] = useState([]);
+    let [ordersList, setOrdersList] = useState([]);
 
     useEffect(() => {
         userDetails && userDetails.orderList && userDetails.orderList.forEach((elemId) => {
             onSnapshot(doc(fs, "orders", elemId), (doc) => {
-                setOrderList((prev) => [...prev, {orderId: elemId, ...doc.data()}]);
+                setOrdersList((prev) => [...prev, {orderId: elemId, ...doc.data()}]);
             });
         });
     }, [userDetails]);
 
-    orderList = [...new Set(orderList.map((elem) => JSON.stringify(elem)))].map((elem) => JSON.parse(elem));
+    ordersList = [...new Set(ordersList.map((elem) => JSON.stringify(elem)))].map((elem) => JSON.parse(elem));
 
-    return orderList;
+    return ordersList;
 }
 
 export default useUserOrdersList;
