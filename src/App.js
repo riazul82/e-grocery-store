@@ -36,7 +36,8 @@ import EmptyCart from './pages/cart/EmptyCart';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import UploadProducts from './pages/admin/UploadProducts';
-// import AdminOrdersList from './components/admin/AdminOrdersList';
+import AdminProductDetails from './pages/admin/AdminProductDetails';
+import AdminOrders from './pages/admin/AdminOrders';
 import AdminOrderDetails from './pages/admin/AdminOrderDetails';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminUserDetails from './pages/admin/AdminUserDetails';
@@ -100,8 +101,9 @@ const App = () => {
           <Route path="/admin/users" element={<RequireAdminAuth><AdminUsers /></RequireAdminAuth>} />
           <Route path="/admin/users/:id" element={<RequireAdminAuth><AdminUserDetails /></RequireAdminAuth>} />
           <Route path="/admin/products" element={<RequireAdminAuth><AdminProducts /></RequireAdminAuth>} />
+          <Route path="/admin/products/:id" element={<RequireAdminAuth><AdminProductDetails /></RequireAdminAuth>} />
           <Route path="/admin/products/upload" element={<RequireAdminAuth><UploadProducts /></RequireAdminAuth>} />
-          {/* <Route path="/admin/orders" element={<RequireAdminAuth><AdminOrdersList /></RequireAdminAuth>} /> */}
+          <Route path="/admin/orders" element={<RequireAdminAuth><AdminOrders /></RequireAdminAuth>} />
           <Route path="/admin/orders/:id" element={<RequireAdminAuth><AdminOrderDetails /></RequireAdminAuth>} />
           
           <Route path="*" element={<Error404/>} />

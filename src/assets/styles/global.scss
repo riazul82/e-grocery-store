@@ -38,21 +38,6 @@ body {
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    .titleImg {
-      width: 40px;
-      height: 40px;
-
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-      }
-
-      .imgLeft {
-        transform: scaleX(-1);
-      }
-    }
   }
 
   .titleDesc {
