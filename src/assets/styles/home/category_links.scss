@@ -8,6 +8,7 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
 
         .categoryLink {
+            position: relative;
             color: #fff;
             height: 6rem;
             box-sizing: border-box;
@@ -15,11 +16,14 @@
             overflow: hidden;
 
             .categoryLinkText {
+                position: absolute;
+                top: -0.4rem;
+                left: 0;
                 padding: 1rem;
                 display: flex;
                 flex-direction: column;
                 width: 80%;
-                height: 102%;
+                height: 110%;
                 align-items: flex-start;
                 justify-content: flex-start;
                 clip-path: polygon(0 0, 80% 0%, 60% 100%, 0% 100%);

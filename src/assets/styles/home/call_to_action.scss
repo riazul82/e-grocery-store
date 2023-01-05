@@ -1,0 +1,94 @@
+.callToAction {
+    margin-top: 1.8rem;
+    padding: 1rem;
+    display: flex;
+    height: auto;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    background-image: linear-gradient(45deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 50%,rgba(169, 169, 169,0.04) 50%, rgba(169, 169, 169,0.04) 71%,rgba(251, 251, 251,0.04) 71%, rgba(251, 251, 251,0.04) 100%),linear-gradient(45deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 56%,rgba(169, 169, 169,0.04) 56%, rgba(169, 169, 169,0.04) 67%,rgba(251, 251, 251,0.04) 67%, rgba(251, 251, 251,0.04) 100%),linear-gradient(135deg, rgba(86, 86, 86,0.04) 0%, rgba(86, 86, 86,0.04) 4%,rgba(169, 169, 169,0.04) 4%, rgba(169, 169, 169,0.04) 75%,rgba(251, 251, 251,0.04) 75%, rgba(251, 251, 251,0.04) 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));
+
+    .callToActionTimer {
+        display: flex;
+        width: auto;
+        height: auto;
+        align-items: center;
+        justify-content: flex-start;
+
+        .timerBox {
+            margin-right: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            height: 90px;
+            width: 90px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.1rem;
+            overflow: hidden;
+
+            .timeCount {
+                display: flex;
+                height: 70%;
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 1.6rem;
+                font-weight: 600;
+                letter-spacing: 1px;
+                background-image: linear-gradient(12deg, rgba(193, 193, 193,0.05) 0%, rgba(193, 193, 193,0.05) 2%,rgba(129, 129, 129,0.05) 2%, rgba(129, 129, 129,0.05) 27%,rgba(185, 185, 185,0.05) 27%, rgba(185, 185, 185,0.05) 66%,rgba(83, 83, 83,0.05) 66%, rgba(83, 83, 83,0.05) 100%),linear-gradient(321deg, rgba(240, 240, 240,0.05) 0%, rgba(240, 240, 240,0.05) 13%,rgba(231, 231, 231,0.05) 13%, rgba(231, 231, 231,0.05) 34%,rgba(139, 139, 139,0.05) 34%, rgba(139, 139, 139,0.05) 71%,rgba(112, 112, 112,0.05) 71%, rgba(112, 112, 112,0.05) 100%),linear-gradient(236deg, rgba(189, 189, 189,0.05) 0%, rgba(189, 189, 189,0.05) 47%,rgba(138, 138, 138,0.05) 47%, rgba(138, 138, 138,0.05) 58%,rgba(108, 108, 108,0.05) 58%, rgba(108, 108, 108,0.05) 85%,rgba(143, 143, 143,0.05) 85%, rgba(143, 143, 143,0.05) 100%),linear-gradient(96deg, rgba(53, 53, 53,0.05) 0%, rgba(53, 53, 53,0.05) 53%,rgba(44, 44, 44,0.05) 53%, rgba(44, 44, 44,0.05) 82%,rgba(77, 77, 77,0.05) 82%, rgba(77, 77, 77,0.05) 98%,rgba(8, 8, 8,0.05) 98%, rgba(8, 8, 8,0.05) 100%),linear-gradient(334deg, hsl(247,0%,2%),hsl(247,0%,2%));                
+            }
+
+            .timerText {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 1rem;
+                text-align: center;
+                width: 100%;
+                height: 30%;
+                padding: 0.2rem 0;
+                background: linear-gradient(45deg, #2d8142, #2b743d);
+            }
+        }
+    }
+
+    .callToActionText {
+        flex-basis: 640px;
+
+        p:nth-child(1) {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+
+            span {
+                color: #73ee75;
+            }
+        }
+
+        p:nth-child(2) {
+            margin-top: 0.4rem;
+            color: #ddd;
+            font-size: 1rem;
+        }
+    }
+
+    .callToActionBtn {
+        width: 8rem;
+        height: 2.4rem;
+        background: #369837;
+        border-radius: 0.1rem;
+
+        .callToActionLink {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+}

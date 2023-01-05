@@ -1,15 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useOrderDetails from '../../hooks/useOrderDetails';
-
 // icons
 import { RxDoubleArrowRight } from 'react-icons/rx';
 
-const MyOrdersList = () => {
+const MyOrdersList = ({ ordersList }) => {
     const navigate = useNavigate();
-    
-    const orderList = useOrderDetails();
 
     const handleViewDetails = (orderDetails) => {
         navigate(`/user/orders/${orderDetails.orderId}`, {state: orderDetails});
@@ -28,7 +24,7 @@ const MyOrdersList = () => {
             </thead>
             <tbody>
                 {
-                    orderList.map((elem) => {
+                    ordersList.map((elem) => {
                         return (
                             <tr className="myOrdersTableItem" key={elem.orderId}>
                                 <td>{`#${elem.orderId.slice(0, 6)}`}</td>

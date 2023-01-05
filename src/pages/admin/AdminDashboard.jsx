@@ -1,9 +1,14 @@
 import React from 'react';
+
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import AdminOrdersList from '../../components/admin/AdminOrdersList';
 import AppLayout from '../../layouts/AppLayout';
 
+import useAdminOrdersList from '../../hooks/useAdminOrdersList';
+
 const AdminDashboard = () => {
+    const ordersList = useAdminOrdersList();
+
     return (
         <AppLayout>
             <div className="dashboardLayout">
@@ -36,9 +41,7 @@ const AdminDashboard = () => {
                         </div>
                     </div>
 
-                    <AdminOrdersList />
-
-                    {/* {orderList && (orderList.length > 0) && <MyOrdersTable orderList={orders} />} */}
+                    <AdminOrdersList ordersList={ordersList} />
                 </div>
             </div>
         </AppLayout>

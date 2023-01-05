@@ -3,7 +3,11 @@ import AppLayout from '../../layouts/AppLayout';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import AdminUsersList from '../../components/admin/AdminUsersList';
 
+import useAdminUsersList from '../../hooks/useAdminUsersList';
+
 const AdminUsers = () => {
+    const usersList = useAdminUsersList();
+
     return (
         <AppLayout>
             <div className="dashboardLayout">
@@ -14,9 +18,7 @@ const AdminUsers = () => {
                         <h2>Dashboard</h2>
                     </div>
 
-                    <AdminUsersList />
-
-                    {/* {orderList && (orderList.length > 0) && <MyOrdersTable orderList={orders} />} */}
+                    <AdminUsersList usersList={usersList} />
                 </div>
             </div>
         </AppLayout>

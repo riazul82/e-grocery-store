@@ -4,33 +4,35 @@ import { useNavigate } from 'react-router-dom';
 // icons
 import { RxDoubleArrowRight } from 'react-icons/rx';
 
-const AdminUsersList = ({ usersList }) => {
+const AdminProductsList = ({ productsList }) => {
     const navigate = useNavigate();
 
-    const handleViewDetails = (userDetails) => {
-        navigate(`/admin/users/${userDetails.userId}`, {state: userDetails});
+    const handleViewDetails = (productDetails) => {
+        navigate(`/admin/products/${productDetails.productId}`, {state: productDetails});
     }
 
     return (
         <table className="dashboardList">
             <thead>
                 <tr>
-                    <th>User Id</th>
+                    <th>Product Id</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
+                    <th>Price</th>
+                    <th>Weight</th>
+                    <th>Discount</th>
                     <th>Details</th>
                 </tr>
             </thead>
             <tbody>
                 {
-                    usersList.map((elem) => {
+                    productsList.map((elem) => {
                         return (
-                            <tr className="ordersTableItem" key={elem.userId}>
-                                <td>{`#${elem.userId.slice(0, 6)}`}</td>
-                                <td>{elem.name ? elem.name : '--:--'}</td>
-                                <td>{elem.email}</td>
-                                <td>{elem.role}</td>
+                            <tr className="ordersTableItem" key={elem.productId}>
+                                <td>{`#${elem.productId.slice(0, 6)}`}</td>
+                                <td>{elem.name}</td>
+                                <td>{elem.price}Tk</td>
+                                <td>{`${elem.weight}${elem.unit === 'gram' ? 'gm' : elem.unit}`}</td>
+                                <td>{elem.discount}%</td>
                                 <td className="listDetailsBtn" onClick={() => handleViewDetails(elem)}>
                                     <span>view details</span>
                                     <RxDoubleArrowRight className="arrow" />
@@ -44,4 +46,4 @@ const AdminUsersList = ({ usersList }) => {
     );
 }
 
-export default AdminUsersList;
+export default AdminProductsList;

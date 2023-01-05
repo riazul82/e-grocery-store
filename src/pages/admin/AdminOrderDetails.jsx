@@ -56,25 +56,23 @@ const AdminOrderDetails = () => {
                         </div>
 
                         <div className="dashboardDetailsInfo">
-                            {
-                                orderDetails.orderItems.map((elem, index) => {
-                                    return (
-                                        <div className="orderItem" key={index}>
-                                            <div className="orderItemDetails">
-                                                <p><span>Name</span><span>{elem.name}</span></p>
-                                                <p><span>Category</span><span>{elem.category}</span></p>
-                                                <p><span>Price</span><span>{parseInt(elem.price - ((elem.price * elem.discount) / 100))} Tk</span></p>
-                                                <p><span>Discount</span><span>{elem.discount}%</span></p>
-                                                <p><span>Weight</span><span>{`${elem.weight}${elem.unit} * ${elem.cartQuantity}`}</span></p>
-                                                <p><span>Total Price</span><span>{parseInt(elem.price - ((elem.price * elem.discount) / 100)) * elem.cartQuantity} Tk</span></p>
-                                            </div>
-                                            <div className="orderItemImage">
-                                                <img src={elem.imgUrl} alt="" />
-                                            </div>
+                            {orderDetails.orderItems.map((elem, index) => {
+                                return (
+                                    <div className="orderItem" key={index}>
+                                        <div className="orderItemDetails">
+                                            <p><span>Name</span><span>{elem.name}</span></p>
+                                            <p><span>Category</span><span>{elem.category}</span></p>
+                                            <p><span>Price</span><span>{parseInt(elem.price - ((elem.price * elem.discount) / 100))} Tk</span></p>
+                                            <p><span>Discount</span><span>{elem.discount}%</span></p>
+                                            <p><span>Weight</span><span>{`${elem.weight}${elem.unit} * ${elem.cartQuantity}`}</span></p>
+                                            <p><span>Total Price</span><span>{parseInt(elem.price - ((elem.price * elem.discount) / 100)) * elem.cartQuantity} Tk</span></p>
                                         </div>
-                                    )
-                                })
-                            }
+                                        <div className="orderItemImage">
+                                            <img src={elem.imgUrl} alt="" />
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
 

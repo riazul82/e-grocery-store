@@ -11,7 +11,7 @@ import { CartContext } from '../../context/CartContextProvider';
 
 const Cart = () => {
     const { cartItems, subTotal, shippingCost, discount, totalCost } = useContext(CartContext);
-    
+
     return (
         <AppLayout>
             <div className="cart">

@@ -41,6 +41,8 @@ import AdminOrderDetails from './pages/admin/AdminOrderDetails';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminUserDetails from './pages/admin/AdminUserDetails';
 
+import ScrollToTop from './effects/ScrollToTop';
+
 const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
   const { cartItems, checkoutFormFilled, orderConfirmed } = useContext(CartContext);
@@ -69,6 +71,7 @@ const App = () => {
 
   return (
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

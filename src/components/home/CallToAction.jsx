@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const VoucherCard = ({ data }) => {
+const CallToAction = () => {
     const [days, setDays] = useState('00');
     const [hours, setHours] = useState('00');
     const [minutes, setMinutes] = useState('00');
@@ -31,8 +32,8 @@ const VoucherCard = ({ data }) => {
                 year = (monthIndex === 0) ? year + 1 : year;
 
                 // create new day and time
-                const day = (data.cardNo === '01') ? '20' : '10';
-                const time = (data.cardNo === '01') ? '12:00:00' : '10:10:20';
+                const day = '10';
+                const time = '12:00:00';
                 
                 const endDate = new Date(`${monthNames[monthIndex]} ${day}, ${year} ${time}`).getTime();
                 totalSeconds = (endDate - curntDate) / 1000;
@@ -64,22 +65,15 @@ const VoucherCard = ({ data }) => {
 
         // infinite countdown timer
         let timeCount = setInterval(() => {
-            createInfiniteCountdown(data.endDate);
+            createInfiniteCountdown('January 10, 2023 12:00:00');
         }, 1000);
 
         return (() => clearTimeout(timeCount));
     });
 
     return (
-        <div className="voucherCardWrap">
-            <p className="voucherCardTitle">{data.title}</p>
-            <p className="voucherCardSubTitle">Voucher Code</p>
-            <div className="voucherCodeBox">
-                {data.code.split('').map((ch, index) => {
-                    return <div className="codeBox" key={index}>{ch}</div>
-                })}
-            </div>
-            <div className="voucherTimer">
+        <div className="callToAction">
+            <div className="callToActionTimer">
                 <div className="timerBox day">
                     <p className="timeCount">{days}</p>
                     <p className="timerText">days</p>
@@ -98,9 +92,16 @@ const VoucherCard = ({ data }) => {
                 </div>
             </div>
 
-            <p className="voucherMessage">{data.require}</p>
+            <div className="callToActionText">
+                <p><span>Upto 50% Off</span> For Organic Products</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit voluptas fugiat numquam.</p>
+            </div>
+
+            <div className="callToActionBtn">
+                <Link to="/products" className="link callToActionLink">Shop now</Link>
+            </div>
         </div>
     );
 }
 
-export default VoucherCard;
+export default CallToAction;

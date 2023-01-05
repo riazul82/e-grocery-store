@@ -38,6 +38,18 @@
             }
         }
 
+        .profileImage {
+            height: 100px;
+            width: 100px;
+            
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 0.1rem;
+            }
+        }
+
         .orderItem {
             padding-bottom: 0.4rem;
             margin-top: 0.6rem;

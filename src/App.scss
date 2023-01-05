@@ -5,14 +5,15 @@
 @import './assets/styles/auth/auth.scss';
 
 @import './assets/styles/home/home.scss';
+@import './assets/styles/home/call_to_action.scss';
 @import './assets/styles/home/category_links.scss';
-@import './assets/styles/home/voucher_card.scss';
 
 @import './assets/styles/dashboard/dashboard_layout.scss';
 @import './assets/styles/dashboard/dashboard_cards.scss';
 @import './assets/styles/dashboard/dashboard_table.scss';
 @import './assets/styles/dashboard/dashboard_profile.scss';
 @import './assets/styles/dashboard/dashboard_sidebar.scss';
+@import './assets/styles/dashboard/dashboard_products.scss';
 @import './assets/styles/dashboard/dashboard_list_details.scss';
 
 @import './assets/styles/products/products_header.scss';
@@ -29,7 +30,6 @@
 @import './assets/styles/cart/cart_amount_details.scss';
 
 @import './assets/styles/admin/admin_dashboard_wrap.scss';
-@import './assets/styles/admin/admin_products.scss';
 @import './assets/styles/admin/admin_product_upload_preview.scss';
 @import './assets/styles/admin/admin_add_product_form.scss';
 @import './assets/styles/footer.scss';

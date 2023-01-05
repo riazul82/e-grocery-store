@@ -5,10 +5,10 @@ import AppLayout from '../../layouts/AppLayout';
 import ProfileSidebar from '../../components/user/ProfileSidebar';
 import MyOrdersList from '../../components/user/MyOrdersList';
 
-import useOrderDetails from '../../hooks/useOrderDetails';
+import useUserOrdersList from '../../hooks/useUserOrdersList';
 
 const MyOrders = () => {
-    const orderList = useOrderDetails();
+    const ordersList = useUserOrdersList();
 
     return (
         <AppLayout>
@@ -19,7 +19,7 @@ const MyOrders = () => {
                         <h2>My Orders</h2>
                     </div>
 
-                    {orderList && orderList.length > 0 ? <MyOrdersList /> :
+                    {ordersList && ordersList.length > 0 ? <MyOrdersList ordersList={ordersList} /> :
                     <p style={{marginTop: '0.8rem', color: '#fff', fontSize: '1.1rem'}}>No order item found!</p>}
                 </div>
             </div>

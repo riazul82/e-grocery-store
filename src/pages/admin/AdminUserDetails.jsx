@@ -23,7 +23,9 @@ const AdminUserDetails = () => {
                         </div>
 
                         <div className="dashboardDetailsInfo">
-                            
+                            <div className="profileImage">
+                                <img src={userDetails.imgUrl} alt="profile" />
+                            </div>
                         </div>
                     </div>
 

@@ -5,9 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import AppLayout from '../layouts/AppLayout';
 import Title from '../components/Title';
 import CategoryLinks from '../components/home/CategoryLinks';
-import VoucherCard from '../components/home/VoucherCard';
 import SubProducts from '../components/products/SubProducts';
-import ServiceCard from '../components/home/ServiceCard';
 
 // icons
 import { GoSearch } from 'react-icons/go';
@@ -16,20 +14,7 @@ import { ProductsContext } from '../context/ProductsContextProvider';
 
 // image
 import bannarImg from '../assets/images/project/bannar.jpg';
-
-const serviceCardData = [
-    {title: 'Fresh Products', desc: 'Illum qutem optio alias ducimus dignissimos conseture undeiurer sapiente explicabo dolore pariatur eligendite amet asperiores lorem ipsum dolor sit amet consect adipisicing elit.'},
-    {title: 'Fast Delivery', desc: 'Illum qutem optio alias ducimus dignissimos conseture undeiurer sapiente explicabo dolore pariatur eligendite amet asperiores lorem ipsum dolor sit amet consect adipisicing elit.'},
-    {title: 'Best Pricing', desc: 'Illum qutem optio alias ducimus dignissimos conseture undeiurer sapiente explicabo dolore pariatur eligendite amet asperiores lorem ipsum dolor sit amet consect adipisicing elit.'},
-    {title: 'Random Offers', desc: 'Illum qutem optio alias ducimus dignissimos conseture undeiurer sapiente explicabo dolore pariatur eligendite amet asperiores lorem ipsum dolor sit amet consect adipisicing elit.'},
-    {title: 'Easy Payment', desc: 'Illum qutem optio alias ducimus dignissimos conseture undeiurer sapiente explicabo dolore pariatur eligendite amet asperiores lorem ipsum dolor sit amet consect adipisicing elit.'},
-    {title: 'Customer Support', desc: 'Illum qutem optio alias ducimus dignissimos conseture undeiurer sapiente explicabo dolore pariatur eligendite amet asperiores lorem ipsum dolor sit amet consect adipisicing elit.'}
-];
-
-const voucherCardData = [
-    {cardNo: '01', title: '250tk off for new registered users', code: 'NEWUSER23', endDate: 'January, 20, 2023 12:00:00', require: 'Voucher only applicable for new users and purchase more than RS.500'},
-    {cardNo: '02', title: '25% off during winter season', code: 'WINTER01', endDate: 'January, 10, 2023 10:10:20', require: 'Voucher applicable for any users and only once'}
-];
+import CallToAction from '../components/home/CallToAction';
 
 const Home = () => {
     const {products, top, recent, popular, vegetables, fruits, meatFish, eggs, teaCoffe, spices, dryFruits, biscuitCake, jamJellie, breads} = useContext(ProductsContext);
@@ -38,9 +23,6 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // scroll to top
-        window.scrollTo(0, 0);
-
         // search when 'Enter' key press
         document.onkeydown = (e) => {
             if(e.keyCode === 13 && searchText !== '') {
@@ -86,6 +68,8 @@ const Home = () => {
                     </div>
                 </div>
 
+                <CallToAction />
+
                 <div className="homeCategories">
                     <Title title="categories" desc="Choose from the best product collections" />
                     <div className="categoryContent">
@@ -103,30 +87,12 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="voucherCards">
-                    <Title title="Latest Offers" desc="Exclusive offers for new and existing customers" />
-                    <div className="voucherCardsContent">
-                        {voucherCardData.map((data, index) => {
-                            return <VoucherCard data={data} key={index} />
-                        })}
-                    </div>
-                </div>
-
                 <div className="allProducts" style={{marginTop: '8rem'}}>
                     <Title title="Best Products" desc="Fresh and organic product collections" />
                     <div style={{marginTop: '5rem'}}></div>
                     <SubProducts title="Top Products" items={top} />
                     <SubProducts title="Recent Products" items={recent} />
                     <SubProducts title="Popular now" items={popular} />
-                </div>
-
-                <div className="services">
-                    <Title title="Quality Services" desc="Explore the best shopping experience" />
-                    <div className="serviceCards">
-                        {serviceCardData.map((data, index) => {
-                            return <ServiceCard data={data} cardNo={index + 1} key={index} />
-                        })}
-                    </div>
                 </div>
             </div>
         </AppLayout>
