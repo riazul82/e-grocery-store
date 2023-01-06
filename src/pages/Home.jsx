@@ -90,9 +90,9 @@ const Home = () => {
                 <div className="allProducts" style={{marginTop: '8rem'}}>
                     <Title title="Best Products" desc="Fresh and organic product collections" />
                     <div style={{marginTop: '5rem'}}></div>
-                    <SubProducts title="Top Products" items={top} />
-                    <SubProducts title="Recent Products" items={recent} />
-                    <SubProducts title="Popular now" items={popular} />
+                    <SubProducts title="Top Products" link="top" items={top} />
+                    <SubProducts title="Recent Products" link="recent" items={recent} />
+                    <SubProducts title="Popular now" link="popular" items={popular} />
                 </div>
             </div>
         </AppLayout>
