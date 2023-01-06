@@ -50,12 +50,10 @@ const App = () => {
   const { currentUser, currentAdmin } = useContext(LoginContext);
   const { cartItems, checkoutFormFilled, orderConfirmed } = useContext(CartContext);
 
-  // protect user login require routes
   const RequireAuth = ({children}) => {
     return currentUser ? (children) : <Navigate to="/user/login" replace />
   }
 
-  // protect admin login require routes
   const RequireAdminAuth = ({children}) => {
     return currentAdmin ? (children) : <Navigate to="/admin/login" replace />
   }
