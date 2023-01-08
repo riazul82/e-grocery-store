@@ -27,57 +27,8 @@
             }
         }
     
-        .voucherInputBox {
-            margin-top: 1rem;
-            display: flex;
-            width: 100%;
-            height: 42px;
-            align-items: center;
-            justify-content: space-between;
-            border: 2px dashed #4bb96a;
-            border-radius: 0.1rem;
-    
-            input {
-                padding-left: 0.6rem;
-                font-size: 1.1rem;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 0.8px;
-                height: 100%;
-                width: 70%;
-                border: none;
-                outline: none;
-                border-right: 2px dashed #4bb96a;
-                background: transparent;
-                box-sizing: border-box;
-                border-radius: 0.1rem;
-            }
-    
-            ::placeholder {
-                font-size: 1rem;
-                font-weight: 500;
-                letter-spacing: 0.8px;
-                text-transform: uppercase;
-            }
-    
-            button {
-                color: #4bb96a;
-                height: 100%;
-                width: 30%;
-                border: none;
-                outline: none;
-                font-size: 1.1rem;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 0.8px;
-                background: transparent;
-                border-radius: 0.1rem;
-                cursor: pointer;
-            }
-        }
-    
         .totalCostBox {
-            margin-top: 1.4rem;
+            margin-top: 0.8rem;
             padding-top: 1rem;
             border-top: 1px solid #333;
     

@@ -232,7 +232,7 @@ const AddProductForm = () => {
                             <span>Upload an image</span>
                         </label>
                     </div>
-                    <input type="file" id="productImgInput" onFocus={() => handleFocus('img')} onChange={handleImageInput} required />
+                    <input type="file" id="productImgInput" onFocus={() => handleFocus('img')} onChange={handleImageInput} accept="image/*" required />
                 </div>
 
                 <button type="submit" disabled={btnDisabled}>Add Product</button>

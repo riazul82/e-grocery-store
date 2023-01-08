@@ -221,7 +221,7 @@ const AdminUpdateProfile = () => {
                             <div className="fileInputLabel">
                                 <label htmlFor="profileImgInput">Upload an image</label>
                             </div>
-                            <input type="file" id="profileImgInput" onChange={handleImageInput} />
+                            <input type="file" id="profileImgInput" onChange={handleImageInput} accept="image/*" />
                         </div>
 
                         <div className="profileDetails">

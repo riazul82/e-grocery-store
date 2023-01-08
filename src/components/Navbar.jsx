@@ -29,14 +29,14 @@ const Navbar = () => {
                 </div>
                 
                 <div className="navIconLinks">
-                    { currentAdmin && <Link to="/admin/dashboard" className="link iconLink"><MdOutlineDashboardCustomize className="navIcon"/></Link>}
                     <Link to="/cart" className="link iconLink">
                         <AiOutlineShoppingCart className="navIcon"/>
                         <div className="cartCounter" style={(cartItems.length > 0) ? {display: 'flex'} : {display: 'none'}}>
                             <span>{cartItems.length}</span>
                         </div>
                     </Link>
-                    <Link to="/user/profile" className="link iconLink"><BiUser className="navIcon"/></Link>
+                    {currentAdmin && <Link to="/admin/dashboard" className="link iconLink"><MdOutlineDashboardCustomize className="navIcon"/></Link>}
+                    {!currentAdmin && <Link to="/user/profile" className="link iconLink"><BiUser className="navIcon"/></Link>}
                 </div>
             </nav>
         </div>
