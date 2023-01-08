@@ -10,6 +10,29 @@ import useUserOrdersList from '../../hooks/useUserOrdersList';
 const UserDashboard = () => {
     const ordersList = useUserOrdersList();
 
+    let totalOrders = 0;
+    let pendingOrders = 0;
+    let shippedOrders = 0;
+    let paymentDeu = 0;
+
+    for (let i = 0; i < ordersList.length; i ++) {
+        if (ordersList[i].status !== 'canceled') {
+            totalOrders ++;
+        }
+
+        if (ordersList[i].status === 'pending') {
+            pendingOrders ++;
+        }
+
+        if (ordersList[i].status === 'delivered') {
+            shippedOrders ++;
+        }
+
+        if (ordersList[i].status !== 'delivered' && ordersList[i].status !== 'canceled') {
+            paymentDeu ++;
+        }
+    }
+
     return (
         <AppLayout>
             <div className="dashboardLayout">
@@ -21,19 +44,19 @@ const UserDashboard = () => {
 
                     <div className="dashboardCards">
                         <div className="dahsboardCard">
-                            <p className="cardCounter">{ordersList.length < 10 ? `0${ordersList.length}` : ordersList.length}</p>
+                            <p className="cardCounter">{totalOrders < 10 ? `0${totalOrders}` : totalOrders}</p>
                             <p className="cardText">Total Orders</p>
                         </div>
                         <div className="dahsboardCard">
-                            <p className="cardCounter">{ordersList.length < 10 ? `0${ordersList.length}` : ordersList.length}</p>
+                            <p className="cardCounter">{pendingOrders < 10 ? `0${pendingOrders}` : pendingOrders}</p>
                             <p className="cardText">Pending Orders</p>
                         </div>
                         <div className="dahsboardCard">
-                            <p className="cardCounter">00</p>
+                            <p className="cardCounter">{shippedOrders < 10 ? `0${shippedOrders}` : shippedOrders}</p>
                             <p className="cardText">Shipped Orders</p>
                         </div>
                         <div className="dahsboardCard">
-                            <p className="cardCounter">{ordersList.length < 10 ? `0${ordersList.length}` : ordersList.length}</p>
+                            <p className="cardCounter">{paymentDeu < 10 ? `0${paymentDeu}` : paymentDeu}</p>
                             <p className="cardText">Payment Deu</p>
                         </div>
                     </div>
