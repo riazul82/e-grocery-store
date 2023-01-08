@@ -16,9 +16,7 @@ const UploadProducts = () => {
                         <h2>Upload Products</h2>
                     </div>
 
-                    <div className="dashboardContent">
-                        <AddProductForm />
-                    </div>
+                    <AddProductForm />
                 </div>
             </div>
         </AppLayout>

@@ -21,6 +21,8 @@
 @import './assets/styles/dashboard/dashboard_sidebar.scss';
 @import './assets/styles/dashboard/dashboard_products.scss';
 @import './assets/styles/dashboard/dashboard_list_details.scss';
+@import './assets/styles/dashboard/dashboard_product_upload_form.scss';
+@import './assets/styles/dashboard/dashboard_product_upload_preview.scss';
 
 @import './assets/styles/products/products_header.scss';
 @import './assets/styles/products/sub_products.scss';
@@ -34,9 +36,6 @@
 @import './assets/styles/cart/cart_review.scss';
 @import './assets/styles/cart/empty_cart.scss';
 @import './assets/styles/cart/cart_amount_details.scss';
-
-@import './assets/styles/admin/admin_product_upload_preview.scss';
-@import './assets/styles/admin/admin_add_product_form.scss';
 
 @import './assets/styles/alert_box.scss';
 @import './assets/styles/footer.scss';

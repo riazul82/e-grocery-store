@@ -7,6 +7,8 @@
     .dashboardDetails {
         flex: 4;
         margin-left: 2rem;
+        position: relative;
+        overflow: hidden;
 
         .dashboardTitle > h2 {
             padding-bottom: 0.8rem;
