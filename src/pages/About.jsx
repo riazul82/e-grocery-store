@@ -3,7 +3,7 @@ import AppLayout from '../layouts/AppLayout';
 import Title from '../components/Title';
 import ServiceCard from '../components/home/ServiceCard';
 
-import aboutImg1 from '../assets/images/project/bannar.jpg';
+import aboutImg from '../assets/images/project/about.jpg';
 
 const serviceCardData = [
     {title: 'Fresh Products', desc: 'Illum qutem optio alias ducimus dignissimos conseture undeiurer sapiente explicabo dolore pariatur eligendite amet asperiores lorem ipsum dolor sit amet consect adipisicing elit.'},
@@ -30,7 +30,7 @@ const About = () => {
                             <button className="readMoreBtn">Read More</button>
                         </div>
                         <div className="aboutImage">
-                            <img src={aboutImg1} alt="about" />
+                            <img src={aboutImg} alt="about" />
                         </div>
                     </div>
                 </div>
