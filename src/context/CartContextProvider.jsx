@@ -36,6 +36,9 @@ const reducer = (state, action) => {
 
         case 'ORDER_CONFIRMED':
             return {...state, orderConfirmed: true};
+
+        case 'MAKE_CART_EMPTY':
+            return {...state, cartItems: []};
         
         default:
             return state;

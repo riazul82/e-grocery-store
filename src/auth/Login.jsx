@@ -26,7 +26,6 @@ const Login = () => {
         signInWithEmailAndPassword(auth, user.email, user.password)
         .then((userCredential) => {
             const user = userCredential.user;
-            console.log(user);
             dispatch({type: 'LOGIN', payload: user});
             setUser({email: '', password: ''});
             setError({flag: false, code: null, message: ''});

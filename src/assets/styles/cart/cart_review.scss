@@ -28,12 +28,19 @@
         }
     }
 
-    .redirectMsg {
+    .redirectBox {
         padding: 0.4rem 1rem;
         margin-top: 1rem;
         color: #eee;
         font-size: 1.2rem;
-        border-radius: 0.1rem;
-        border-radius: 0.2rem;
+        
+        .redirectToHomeBtn {
+            color: #4bb96a;
+            text-decoration: underline;
+        }
+
+        span {
+            margin-left: 0.4rem;
+        }
     }
 }

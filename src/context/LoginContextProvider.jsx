@@ -9,10 +9,8 @@ const reducer = (state, action) => {
         case 'ADMIN_LOGIN':
             return {currentAdmin: action.payload, currentUser: null}
         case 'LOGOUT':
-            document.location.reload();
             return {currentUser: null, currentAdmin: null}
         case 'ADMIN_LOGOUT':
-            document.location.reload();
             return {currentUser: null, currentAdmin: null}
         default:
             return state;
@@ -45,6 +43,7 @@ const LoginContextProvider = ({ children }) => {
 
         if (state.currentAdmin === null) {
             localStorage.removeItem("admin");
+            localStorage.removeItem("adminDetails");
         }
         
     }, [state.currentUser, state.currentAdmin]);

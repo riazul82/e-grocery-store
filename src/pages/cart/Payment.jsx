@@ -58,6 +58,7 @@ const Payment = () => {
             dispatch({type: 'ORDER_CONFIRMED'});
             setTimeout(() => {
                 navigate('/review');
+                dispatch({type: 'MAKE_CART_EMPTY'});
             }, 3000);
         } catch (err) {
             toast.err('An error occured!');

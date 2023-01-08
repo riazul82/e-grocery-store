@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../../context/LoginContextProvider';
+import { CartContext } from '../../context/CartContextProvider';
 
 // firebase
 import { auth } from '../../firebase';
@@ -17,16 +18,28 @@ import { MdOutlineExitToApp } from 'react-icons/md';
 import { MdOutlineSwitchAccount } from 'react-icons/md';
 
 const AdminSidebar = () => {
-    const { dispatch } = useContext(LoginContext);
+    const loginContext = useContext(LoginContext);
+    const cartContext = useContext(CartContext);
 
     const navigate = useNavigate();
 
-    // logout function
     const handleLogout = async () => {
         try {
             await signOut(auth);
-            dispatch({type: 'ADMIN_LOGOUT'});
+            loginContext.dispatch({type: 'ADMIN_LOGOUT'});
+            cartContext.dispatch({type: 'MAKE_CART_EMPTY'});
             navigate('/');
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+    const handleRedirectUser = async () => {
+        try {
+            await signOut(auth);
+            loginContext.dispatch({type: 'LOGOUT'});
+            cartContext.dispatch({type: 'MAKE_CART_EMPTY'});
+            navigate('/user/login');
         } catch (err) {
             console.log(err.message);
         }
@@ -51,10 +64,6 @@ const AdminSidebar = () => {
                     <BiCreditCard className="sidebarIcon"/>
                     <p>Orders</p>
                 </Link>
-                <Link to="/user/login" className="link sidebarLink">
-                    <MdOutlineSwitchAccount className="sidebarIcon"/>
-                    <p>Switch to User</p>
-                </Link>
                 <Link to="/admin/profile" className="link sidebarLink">
                     <MdOutlineAdminPanelSettings className="sidebarIcon"/>
                     <p>Admin Profile</p>
@@ -63,6 +72,10 @@ const AdminSidebar = () => {
                     <IoSettingsOutline className="sidebarIcon"/>
                     <p>Update Profile</p>
                 </Link>
+                <div className="sidebarLink" onClick={handleRedirectUser}>
+                    <MdOutlineSwitchAccount className="sidebarIcon"/>
+                    <p>Switch to User</p>
+                </div>
                 <div className="link sidebarLink" onClick={handleLogout}>
                     <MdOutlineExitToApp className="sidebarIcon"/>
                     <p>Log out</p>

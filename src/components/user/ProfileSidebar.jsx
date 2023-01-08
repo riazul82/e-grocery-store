@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../../context/LoginContextProvider';
+import { CartContext } from '../../context/CartContextProvider';
 
 // firebase
 import { auth } from '../../firebase';
@@ -15,22 +16,16 @@ import { MdOutlineExitToApp } from 'react-icons/md';
 import { MdOutlineSwitchAccount } from 'react-icons/md';
 
 const ProfileSidebar = () => {
-    const { dispatch } = useContext(LoginContext);
+    const loginContext = useContext(LoginContext);
+    const cartContext = useContext(CartContext);
 
     const navigate = useNavigate();
-
-    const removeLocalStorageData = () => {
-        localStorage.removeItem("userDetails");
-        localStorage.removeItem("cartItems");
-        localStorage.removeItem("checkoutFormFilled");
-        localStorage.removeItem("checkoutUserDetails");
-    }
 
     const handleLogout = async () => {
         try {
             await signOut(auth);
-            dispatch({type: 'LOGOUT'});
-            removeLocalStorageData();
+            loginContext.dispatch({type: 'LOGOUT'});
+            cartContext.dispatch({type: 'MAKE_CART_EMPTY'});
             navigate('/');
         } catch (err) {
             console.log(err.message);
@@ -40,8 +35,8 @@ const ProfileSidebar = () => {
     const handleRedirectAdmin = async () => {
         try {
             await signOut(auth);
-            dispatch({type: 'LOGOUT'});
-            removeLocalStorageData();
+            loginContext.dispatch({type: 'LOGOUT'});
+            cartContext.dispatch({type: 'MAKE_CART_EMPTY'});
             navigate('/admin/login');
         } catch (err) {
             console.log(err.message);

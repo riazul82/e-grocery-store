@@ -13,29 +13,30 @@ const Review = () => {
 
     const navigate = useNavigate();
 
+    const removeLocalStorageData = () => {
+        localStorage.removeItem("checkoutUserDetails");
+        localStorage.removeItem("checkoutFormFilled");
+        localStorage.removeItem("orderConfirmed");
+    }
+
     useEffect(() => {
         let timerId = setInterval(() => {
             setCountdown((prev) => prev - 1);
         }, 1000);
 
-        const removeLocalStorageData = () => {
-            localStorage.removeItem("checkoutUserDetails");
-            localStorage.removeItem("checkoutFormFilled");
-            localStorage.removeItem("orderConfirmed");
-            localStorage.removeItem("cartItems");
-        }
-
         if (countdown === 0) {
             clearInterval(timerId);
             removeLocalStorageData();
             navigate('/');
-            setTimeout(() => {
-                document.location.reload();
-            }, 100);
         }
 
         return (() => clearInterval(timerId));
     });
+
+    const handleRedirectHome = () => {
+        removeLocalStorageData();
+        navigate('/');
+    }
 
     return (
         <AppLayout>
@@ -56,7 +57,10 @@ const Review = () => {
                         </div>
                         <p className="greetings">Thank you <strong>{checkoutUser.name}</strong>!! Your order have been receieved!</p>
                     </div>
-                    <p className="redirectMsg">You will be redirected to home in {countdown}s</p>
+                    <div className="redirectBox">
+                        <span onClick={handleRedirectHome} className="redirectToHomeBtn">Back to Home</span>
+                        <span>or auto redirected to home in {countdown}s</span>
+                    </div>
                 </div>
             </div>
         </AppLayout>
