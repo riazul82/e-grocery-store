@@ -53,7 +53,7 @@ const Products = () => {
         setSearchTimer(
             setTimeout(() => {
                 setSearchText(e.target.value);
-            }, 900)
+            }, 600)
         );
     }
 
