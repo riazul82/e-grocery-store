@@ -6,12 +6,17 @@ import { LoginContext } from '../context/LoginContextProvider';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
 
+// custom hook
+import useAdminUsersList from '../hooks/useAdminUsersList';
+
 // icons
 import { AiFillWarning } from 'react-icons/ai';
 
 const AdminLogin = () => {
     const [admin, setUser] = useState({email: '', password: ''});
     const [error, setError] = useState({flag: false, code: null, message: ''});
+
+    const usersList = useAdminUsersList();
 
     const navigate = useNavigate();
     const { dispatch } = useContext(LoginContext);
@@ -23,27 +28,39 @@ const AdminLogin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        signInWithEmailAndPassword(auth, admin.email, admin.password)
-        .then((userCredential) => {
-            const admin = userCredential.user;
-            console.log(admin);
-            dispatch({type: 'ADMIN_LOGIN', payload: admin});
-            setUser({email: '', password: ''});
-            setError({flag: false, code: null, message: ''});
-            navigate('/');
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setError({flag: true, code: errorCode, message: errorMessage});
-        });
+        let isValidAdmin = false;
+
+        for (let i = 0; i < usersList.length; i ++) {
+            if (admin.email === usersList[i].email && usersList[i].role === 'admin') {
+                isValidAdmin = true;
+                break;
+            }
+        }
+
+        if (isValidAdmin) {
+            signInWithEmailAndPassword(auth, admin.email, admin.password)
+            .then((userCredential) => {
+                const admin = userCredential.user;
+                dispatch({type: 'ADMIN_LOGIN', payload: admin});
+                setUser({email: '', password: ''});
+                setError({flag: false, code: null, message: ''});
+                navigate('/');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError({flag: true, code: errorCode, message: errorMessage});
+            });
+        } else {
+            setError({flag: true, code: 400, message: 'admin not found!'});
+        }
     }
 
     return (
         <div className="login">
             <div className="loginContent">
                 <div className="loginTitle">
-                    <h1>Login</h1>
+                    <h1>Admin Login</h1>
                 </div>
                 {error.flag && <div className="errorBox">
                     <div className="errorIcon">

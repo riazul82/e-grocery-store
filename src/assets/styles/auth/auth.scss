@@ -61,9 +61,10 @@
                 font-size: 1.2rem;
                 height: 45px;
                 width: 100%;
-                border: 2px dashed #333;
+                border: none;
                 outline: none;
-                background: none;
+                background: #222;
+                border-radius: 0.1rem;
             }
 
             .forgotPassLink {
@@ -82,7 +83,7 @@
                 border: none;
                 outline: none;
                 cursor: pointer;
-                background: #222;
+                background: #247e3a;
                 border-radius: 0.1rem;
             }
 

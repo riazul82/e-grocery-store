@@ -6,12 +6,17 @@ import { LoginContext } from '../context/LoginContextProvider';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
 
+// custom hook
+import useAdminUsersList from '../hooks/useAdminUsersList';
+
 // icons
 import { AiFillWarning } from 'react-icons/ai';
 
 const Login = () => {
     const [user, setUser] = useState({email: '', password: ''});
     const [error, setError] = useState({flag: false, code: null, message: ''});
+
+    const usersList = useAdminUsersList();
 
     const navigate = useNavigate();
     const { dispatch } = useContext(LoginContext);
@@ -23,19 +28,32 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        signInWithEmailAndPassword(auth, user.email, user.password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            dispatch({type: 'LOGIN', payload: user});
-            setUser({email: '', password: ''});
-            setError({flag: false, code: null, message: ''});
-            navigate('/');
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setError({flag: true, code: errorCode, message: errorMessage});
-        });
+        let isValidUser = false;
+
+        for (let i = 0; i < usersList.length; i ++) {
+            if (user.email === usersList[i].email && usersList[i].role === 'user') {
+                isValidUser = true;
+                break;
+            }
+        }
+
+        if (isValidUser) {
+            signInWithEmailAndPassword(auth, user.email, user.password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                dispatch({type: 'LOGIN', payload: user});
+                setUser({email: '', password: ''});
+                setError({flag: false, code: null, message: ''});
+                navigate('/');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError({flag: true, code: errorCode, message: errorMessage});
+            });
+        } else {
+            setError({flag: true, code: 400, message: 'user not found!'});
+        }
     }
 
     return (
