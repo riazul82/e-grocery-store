@@ -1,16 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // components
 import AppLayout from '../../layouts/AppLayout';
 import ProfileSidebar from '../../components/user/ProfileSidebar';
+import AlertBox from '../../effects/AlertBox';
+
+// firebase
+import { fs } from '../../firebase';
+import { doc, setDoc } from "firebase/firestore";
+
+// toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OrderDetails = () => {
+    const [cancleFlag, setCancelFlag] = useState(false);
     const location = useLocation();
     const orderDetails = location.state;
 
+    const getResponseData = (data) => {
+        if (data === 'cancle') {
+            setCancelFlag(false);
+        }
+        
+        if (data === 'confirm') {
+            try {   
+                const orderRef = doc(fs, 'orders', orderDetails.orderId);
+                setDoc(orderRef, { status: 'canceled' }, { merge: true });
+                orderDetails.status = 'canceled';
+                toast.success('Your order is successfully cancled!');
+            } catch (err) {
+                console.log(err.message);
+            }
+            setCancelFlag(false);
+        }
+    }
+
+    const handleCancleOrder = () => {
+        setCancelFlag(true);
+    }
+
     return (
         <AppLayout>
+            {console.log(cancleFlag)}
+            <AlertBox active={cancleFlag} msg="Are you sure to cancel this order?" getResponseData={getResponseData} />
             <div className="dashboardLayout">
                 <ProfileSidebar />
                 <div className="dashboardDetails">
@@ -101,9 +135,21 @@ const OrderDetails = () => {
                         </div>
                     </div>
 
-                    <button className="cancelOrderBtn">Cancel Order</button>
+                    <button className="cancelOrderBtn" onClick={handleCancleOrder} disabled={orderDetails.status === 'canceled' ? true : false}>{orderDetails.status === 'canceled' ? 'Order Canceled' : 'Cancel Order'}</button>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </AppLayout>
     );
 }

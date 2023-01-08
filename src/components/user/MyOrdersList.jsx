@@ -30,7 +30,9 @@ const MyOrdersList = ({ ordersList }) => {
                                 <td>{`#${elem.orderId.slice(0, 6)}`}</td>
                                 <td>{elem.time.split(' ').slice(1, 4).join(' ')}</td>
                                 <td>{elem.totalCost} Tk</td>
-                                <td>{elem.status}</td>
+                                <td>
+                                    <span className={`status ${elem.status}`}>{elem.status}</span>
+                                </td>
                                 <td className="listDetailsBtn" onClick={() => handleViewDetails(elem)}>
                                     <span>view details</span>
                                     <RxDoubleArrowRight className="arrow" />
