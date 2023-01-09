@@ -8,15 +8,16 @@ An E-Commerce Grocery Shopping Web application for buying and selling grocery pr
 
 ## Features
  - User & Admin Authentication
- - Update Profile
+ - Update user & admin Profile
  - Serching and Filtering Products
  - Add or remove product to cart
  - Increment/Decrement Product Quantity
- - Add discount voucher code
  - Placing order with payment
- - Order List and Order details view
- - Admin dashboard users, products & orders List view
- - Admin Product upload, update and delete
+ - Users List + Users details view
+ - Orders List + Orders details view
+ - Products List + Prouducts details view
+ - Track order status and order cancellation
+ - Product upload, update and delete
  - Reset Password and Logout
 
 
