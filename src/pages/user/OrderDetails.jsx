@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 // components
 import AppLayout from '../../layouts/AppLayout';
 import ProfileSidebar from '../../components/user/ProfileSidebar';
-import AlertBox from '../../effects/AlertBox';
+import AlertBox from '../../components/AlertBox';
 
 // firebase
 import { fs } from '../../firebase';
