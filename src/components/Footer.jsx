@@ -15,7 +15,7 @@ import stripe from '../assets/images/payment/stripe.png';
 const Footer = () => {
     return (
         <>
-        {/* <div className="footerContainer">
+        <div className="footerContainer">
             <div className="footerContent">
                 <div className="footerBox fBox1">
                     <div className="logo">
@@ -74,7 +74,7 @@ const Footer = () => {
         </div>
         <div className="copyrightBox">
             <p>Created by <a href="https://github.com/riazul82" target="_blank" rel="noreferrer">riazul82</a> | &copy;2022 all rights reserved</p>
-        </div> */}
+        </div>
         </>
     );
 }
