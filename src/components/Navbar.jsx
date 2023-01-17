@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 // context
@@ -14,6 +14,8 @@ const Navbar = () => {
     const { currentAdmin } = useContext(LoginContext);
     const { cartItems } = useContext(CartContext);
 
+    const [activeToggle, setActiveToggle] = useState(false);
+
     return (
         <div className="header">
             <nav className="navbar">
@@ -21,7 +23,7 @@ const Navbar = () => {
                     <Link to="/" className="brandName link">eBazar</Link>
                 </div>
 
-                <div className="navLinks">
+                <div className={`navLinks ${activeToggle && 'activeNavLinks'}`}>
                     <NavLink to="/" className="link navLink">Home</NavLink>
                     <NavLink to="/products" className="link navLink">Products</NavLink>
                     <NavLink to="/about" className="link navLink">About Us</NavLink>
@@ -37,6 +39,7 @@ const Navbar = () => {
                     </Link>
                     {currentAdmin && <Link to="/admin/dashboard" className="link iconLink"><MdOutlineDashboardCustomize className="navIcon"/></Link>}
                     {!currentAdmin && <Link to="/user/profile" className="link iconLink"><BiUser className="navIcon"/></Link>}
+                    <div className={`toggleBar iconLink ${activeToggle && 'activeToggler'}`} onClick={() => setActiveToggle(!activeToggle)}><span className="toggler"></span></div>
                 </div>
             </nav>
         </div>

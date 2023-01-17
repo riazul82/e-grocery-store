@@ -25,15 +25,17 @@
         text-decoration: none;
     }
 
-    .navLink {
-        color: #fff;
-        padding: 0 1.4rem;
-        font-size: 1.2rem;
-        font-weight: 500;
-    }
+    .navLinks {
+        .navLink {
+            color: #fff;
+            padding: 0 1.4rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
 
-    .navLink.active {
-        color: #4bb96a;
+        .navLink.active {
+            color: #4bb96a;
+        }
     }
 
     .navIconLinks {
@@ -64,6 +66,154 @@
                     color: #fff;
                     font-size: 0.9rem;
                 }
+            }
+        }
+
+        .toggleBar {
+            position: relative;
+            height: 1.6rem;
+            width: 1.4rem;
+            display: none;
+
+            .toggler {
+                position: absolute;
+                content: '';
+                height: 3px;
+                width: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #fff;
+                border-radius: 0.2rem;
+                transition: all 0.2s ease;
+
+                &::before {
+                    position: absolute;
+                    content: '';
+                    height: 3px;
+                    width: 100%;
+                    top: -8px;
+                    left: 0;
+                    background: #fff;
+                    border-radius: 0.2rem;
+                    transition: all 0.2s ease;
+                }
+
+                &::after {
+                    position: absolute;
+                    content: '';
+                    height: 3px;
+                    width: 100%;
+                    top: 8px;
+                    left: 0;
+                    background: #fff;
+                    border-radius: 0.2rem;
+                    transition: all 0.2s ease;
+                }
+            }
+        }
+
+        .toggleBar.activeToggler .toggler {
+            background: transparent;
+        }
+
+        .toggleBar.activeToggler .toggler::before {
+            top: 0;
+            transform: rotate(-45deg);
+        }
+        
+        .toggleBar.activeToggler .toggler::after {
+            top: 0;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+@media screen and (max-width: '1280px') {
+    .header {
+        padding: 1.2rem 1rem;
+    }
+}
+
+@media screen and (max-width: '800px') {
+    .header {
+        .navLink {
+            padding: 0 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: '720px') {
+    .header {
+        padding: 1.2rem 2rem;
+
+        .navLinks {
+            position: absolute;
+            top: 4rem;
+            right: 0;
+            height: auto;
+            width: 180px;
+            display: flex;
+            flex-direction: column;
+            background: #222;
+            border-radius: 0.1rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
+
+            .navLink {
+                color: #fff;
+                padding: 0.6rem 1rem;
+                font-size: 1.2rem;
+                font-weight: 500;
+                border-bottom: 1px solid #111;
+            }
+        }
+
+        .navLinks.activeNavLinks {
+            top: 4rem;
+            right: 2rem;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .navIconLinks {
+            .toggleBar {
+                display: block;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '340px') {
+    .header {
+        padding: 1.2rem 1rem;
+
+        .navLinks {
+            top: 4rem;
+            right: 0;
+
+            .navLink {
+                color: #fff;
+                font-size: 1.2rem;
+                font-weight: 500;
+                border-bottom: 1px solid #111;
+            }
+        }
+
+        .navLinks.activeNavLinks {
+            top: 4rem;
+            right: 1rem;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .navIconLinks {
+            .toggleBar {
+                display: block;
             }
         }
     }
