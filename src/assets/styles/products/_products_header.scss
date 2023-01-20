@@ -45,3 +45,21 @@
         }
     }
 }
+
+@media screen and (max-width: '500px') {
+    .productsHeader {
+        flex-direction: column;
+    
+        .productCountBox {
+            margin-top: 1.6rem;
+        }
+    }
+}
+
+@media screen and (max-width: '500px') {
+    .productsHeader {
+        .searchBar {
+            width: 100%;
+        }
+    }
+}

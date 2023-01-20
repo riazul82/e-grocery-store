@@ -35,3 +35,16 @@
         }
     }
 }
+
+@media screen and (max-width: '1180px') {
+    .allProducts {
+        padding: 0 1rem;
+
+        .filteredItems {
+            .filteredItemsWrap {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                justify-items: center;
+            }
+        }
+    }
+}
