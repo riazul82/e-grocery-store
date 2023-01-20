@@ -43,7 +43,7 @@ const Home = () => {
 
     return (
         <AppLayout>
-            {/* <div className="home">
+            <div className="home">
                 <div className="homeHeader">
                     <div className="contactInfo">
                         <FiPhoneCall className="contactIcon"/>
@@ -94,7 +94,7 @@ const Home = () => {
                     <SubProducts title="Recent Products" link="recent" items={recent} />
                     <SubProducts title="Popular now" link="popular" items={popular} />
                 </div>
-            </div> */}
+            </div>
         </AppLayout>
     );
 }

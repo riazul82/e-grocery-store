@@ -127,3 +127,143 @@
         }
     }
 }
+
+@media screen and (max-width: '1280px') {
+    .home {
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: '1020px') {
+    .home {
+        .homeBanner {
+            height: 260px;
+
+            .homeBannerTitle {
+                top: 2.4rem;
+                left: 2.4rem;
+    
+                .homeBannerText {
+                    font-size: 3rem;
+                }
+    
+                .homeBannerButton {
+                    margin-top: 1.2rem;
+                    font-size: 1.2rem;
+                    padding: 0.6rem 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '800px') {
+    .home {
+        .homeBanner {
+            .homeBannerTitle {
+                .homeBannerText {
+                    font-size: 2.4rem;
+                    letter-spacing: 5px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '680px') {
+    .home {
+        .homeHeader {
+            flex-direction: column;
+            justify-content: center;
+    
+            .contactInfo {
+                padding-bottom: 1rem;
+            }
+        }
+    
+        .homeBanner {
+            .homeBannerTitle {
+                top: 2rem;
+                left: 2rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '480px') {
+    .home {
+        .homeHeader {
+            flex-direction: column;
+            justify-content: center;
+    
+            .contactInfo {
+                padding-bottom: 1rem;
+            }
+        }
+    
+        .homeBanner {
+            height: 300px;
+        }
+    }
+}
+
+@media screen and (max-width: '420px') {
+    .home {
+        .homeHeader {
+            flex-direction: column;
+            justify-content: center;
+    
+            .contactInfo {
+                padding-bottom: 1rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '380px') {
+    .home {
+        .homeHeader {
+            .contactInfo {
+                .contactTitle {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '360px') {
+    .home {
+        .homeBanner {
+            height: 280px;
+
+            .homeBannerTitle {
+                left: 1rem;
+    
+                .homeBannerText {
+                    font-size: 2rem;
+                }
+
+                .homeBannerButton {
+                    padding: 0.5rem 0.8rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '340px') {
+    .home {
+        .homeHeader {
+            .contactInfo {
+                .contactTitle {
+                    font-size: 0.8rem;
+                }
+            }
+
+            .searchBox {
+                width: 100%;
+            }
+        }
+    }
+}

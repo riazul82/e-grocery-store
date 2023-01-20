@@ -92,3 +92,81 @@
         }
     }
 }
+
+@media screen and (max-width: '1180px') {
+    .callToAction {
+        padding: 2rem 0;
+        flex-direction: column;
+            
+        .callToActionTimer {
+            width: 480px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+    
+            .timerBox {
+                margin-right: 0;
+            }
+        }
+    
+        .callToActionText {
+            margin-top: 2rem;
+            flex-basis: 80px;
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width: '580px') {
+    .callToAction {
+        .callToActionTimer {
+            width: 100%;
+            justify-content: space-around;
+
+            .timerBox {
+                height: 70px;
+                width: 70px;
+    
+                .timeCount {
+                    font-size: 1.4rem;
+                }
+    
+                .timerText {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        .callToActionText {
+            margin-top: 1rem;
+            flex-basis: 100%;
+            
+            p:nth-child(1) {
+                font-size: 1rem;
+            }
+    
+            p:nth-child(2) {
+                font-size: 0.8rem;
+            }
+        }
+
+        .callToActionBtn {
+            margin-top: 1rem;
+            height: 2rem;
+    
+            .callToActionLink {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '340px') {
+    .callToAction {
+        .callToActionTimer {
+            .timerBox {
+                height: 60px;
+                width: 60px;
+            }
+        }
+    }
+}

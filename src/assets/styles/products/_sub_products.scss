@@ -41,3 +41,12 @@
         grid-column-gap: 1.2rem;
     }
 }
+
+@media screen and (max-width: '1180px') {
+    .subProducts {
+        .subProductsWrap {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            justify-items: center;
+        }
+    }
+}
