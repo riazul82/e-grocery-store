@@ -63,3 +63,29 @@
         }
     }
 }
+
+@media screen and (max-width: '1120px') {
+    .contact {
+        .contactWrap {
+            padding: 0.8rem;
+
+            .contactAddress {
+                width: 40%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: '760px') {
+    .contact {
+        .contactWrap {
+            flex-direction: column;
+
+            .contactAddress {
+                margin: 0 auto;
+                width: 100%;
+                max-width: 380px;
+            }
+        }
+    }
+}
