@@ -90,9 +90,9 @@ const Signup = () => {
                     <p className="errorMsg">{error.message}</p>
                 </div>}
                 <form onSubmit={handleSubmit}>
-                    <input type="email" name="email" value={user.email} onChange={handleChange} placeholder="Enter your email" />
-                    <input type="password" name="password" value={user.password} onChange={handleChange} placeholder="Password" />
-                    <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} placeholder="Confirm password" />
+                    <input type="email" name="email" value={user.email} onChange={handleChange} placeholder="Enter your email" required />
+                    <input type="password" name="password" value={user.password} onChange={handleChange} placeholder="Password" required />
+                    <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} placeholder="Confirm password" required />
                     <button type="submit" className="signupBtn">Signup</button>
                 </form>
                 <p className="loginLinkText">

@@ -69,8 +69,8 @@ const AdminLogin = () => {
                     <p className="errorMsg">{error.message}</p>
                 </div>}
                 <form onSubmit={handleSubmit}>
-                    <input type="email" name="email" value={admin.email} onChange={handleChange} placeholder="Enter your email" />
-                    <input type="password" name="password" value={admin.password} onChange={handleChange} placeholder="Enter your password" />
+                    <input type="email" name="email" value={admin.email} onChange={handleChange} placeholder="Enter your email" required />
+                    <input type="password" name="password" value={admin.password} onChange={handleChange} placeholder="Enter your password" required />
                     <Link to="/forgot-password" className="forgotPassLink link">Forgot password?</Link>
                     <button type="submit" className="loginBtn">Login</button>
                 </form>

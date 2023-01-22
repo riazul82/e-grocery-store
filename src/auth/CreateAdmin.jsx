@@ -91,9 +91,9 @@ const CreateAdmin = () => {
                     <p className="errorMsg">{error.message}</p>
                 </div>}
                 <form onSubmit={handleSubmit}>
-                    <input type="email" name="email" value={admin.email} onChange={handleChange} placeholder="Enter your email" />
-                    <input type="password" name="password" value={admin.password} onChange={handleChange} placeholder="Password" />
-                    <input type="password" name="confirmPassword" value={admin.confirmPassword} onChange={handleChange} placeholder="Confirm password" />
+                    <input type="email" name="email" value={admin.email} onChange={handleChange} placeholder="Enter your email" required />
+                    <input type="password" name="password" value={admin.password} onChange={handleChange} placeholder="Password" required />
+                    <input type="password" name="confirmPassword" value={admin.confirmPassword} onChange={handleChange} placeholder="Confirm password" required />
                     <button type="submit" className="signupBtn">Submit</button>
                 </form>
                 <p className="loginLinkText">
